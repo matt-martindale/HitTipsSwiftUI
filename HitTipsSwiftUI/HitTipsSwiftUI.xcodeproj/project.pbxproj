@@ -33,6 +33,7 @@
 		C84FC46A2E6A1B6700E13B7A /* Exceptions for "HitTipsSwiftUI" folder in "HitTipsSwiftUITests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Views/ContentView.swift,
 				Views/HomeView.swift,
 			);
 			target = C84FC4442E6A13AA00E13B7A /* HitTipsSwiftUITests */;
@@ -40,6 +41,7 @@
 		C84FC46B2E6A1B6700E13B7A /* Exceptions for "HitTipsSwiftUI" folder in "HitTipsSwiftUIUITests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Views/ContentView.swift,
 				Views/HomeView.swift,
 			);
 			target = C84FC44E2E6A13AA00E13B7A /* HitTipsSwiftUIUITests */;

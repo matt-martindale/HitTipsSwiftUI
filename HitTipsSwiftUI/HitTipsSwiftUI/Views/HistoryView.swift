@@ -13,23 +13,25 @@ struct HistoryView: View {
     @Query private var tip: [Tip]
 
     var body: some View {
-        List {
-            ForEach(tip) { tip in
-                NavigationLink {
-                    Text("Item at \(tip.date)")
-                } label: {
-                    Text("\(tip.billAmount)")
+        NavigationStack {
+            List {
+                ForEach(tip) { tip in
+                    NavigationLink {
+                        Text("Item at \(tip.date)")
+                    } label: {
+                        Text("\(tip.billAmount)")
+                    }
                 }
+                .onDelete(perform: deleteItems)
             }
-            .onDelete(perform: deleteItems)
-        }
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                EditButton()
-            }
-            ToolbarItem {
-                Button(action: addItem) {
-                    Label("Add Item", systemImage: "plus")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    EditButton()
+                }
+                ToolbarItem {
+                    Button(action: addItem) {
+                        Label("Add Item", systemImage: "plus")
+                    }
                 }
             }
         }
