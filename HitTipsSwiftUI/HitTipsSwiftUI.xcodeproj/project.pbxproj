@@ -29,9 +29,30 @@
 		C84FC44F2E6A13AA00E13B7A /* HitTipsSwiftUIUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HitTipsSwiftUIUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		C84FC46A2E6A1B6700E13B7A /* Exceptions for "HitTipsSwiftUI" folder in "HitTipsSwiftUITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Views/HomeView.swift,
+			);
+			target = C84FC4442E6A13AA00E13B7A /* HitTipsSwiftUITests */;
+		};
+		C84FC46B2E6A1B6700E13B7A /* Exceptions for "HitTipsSwiftUI" folder in "HitTipsSwiftUIUITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Views/HomeView.swift,
+			);
+			target = C84FC44E2E6A13AA00E13B7A /* HitTipsSwiftUIUITests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		C84FC4352E6A13A900E13B7A /* HitTipsSwiftUI */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				C84FC46A2E6A1B6700E13B7A /* Exceptions for "HitTipsSwiftUI" folder in "HitTipsSwiftUITests" target */,
+				C84FC46B2E6A1B6700E13B7A /* Exceptions for "HitTipsSwiftUI" folder in "HitTipsSwiftUIUITests" target */,
+			);
 			path = HitTipsSwiftUI;
 			sourceTree = "<group>";
 		};
