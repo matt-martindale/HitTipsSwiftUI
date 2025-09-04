@@ -39,7 +39,7 @@ struct HistoryView: View {
 
     private func addItem() {
         withAnimation {
-            let newItem = Tip(billAmount: 1, totalBill: 2, date: Date(), party: 1, pricePerPerson: 3, tipPerPerson: 4, tipAmount: 5, tipPercentage: 20)
+            let newItem = Tip(billAmount: "1", totalBill: 2, date: Date(), party: 1, pricePerPerson: 3, tipPerPerson: 4, tipAmount: 5, tipPercentage: 20)
             modelContext.insert(newItem)
         }
     }

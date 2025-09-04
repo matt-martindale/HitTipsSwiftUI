@@ -5,13 +5,13 @@
 //  Created by Matt Martindale on 9/4/25.
 //
 
-import Foundation
 import SwiftData
+import Foundation
 
 @Model
 final class Tip {
-    var id: UUID
-    var billAmount: Double
+    @Attribute(.unique) var id: UUID = UUID()
+    var billAmount: String
     var totalBill: Double
     var date: Date
     var party: Int
@@ -19,19 +19,17 @@ final class Tip {
     var tipPerPerson: Double
     var tipAmount: Double
     var tipPercentage: Int
-//    var tipTier: TipTier
-    
-    init(billAmount: Double,
-         totalBill: Double,
-         date: Date,
-         party: Int,
-         pricePerPerson: Double,
-         tipPerPerson: Double,
-         tipAmount: Double,
-         tipPercentage: Int
-//         tipTier: TipTier
+
+    init(
+        billAmount: String = "",
+        totalBill: Double = 0,
+        date: Date = Date(),
+        party: Int = 0,
+        pricePerPerson: Double = 0,
+        tipPerPerson: Double = 0,
+        tipAmount: Double = 0,
+        tipPercentage: Int = 5
     ) {
-        self.id = UUID()
         self.billAmount = billAmount
         self.totalBill = totalBill
         self.date = date
@@ -40,6 +38,7 @@ final class Tip {
         self.tipPerPerson = tipPerPerson
         self.tipAmount = tipAmount
         self.tipPercentage = tipPercentage
-//        self.tipTier = tipTier
     }
 }
+
+

@@ -32,13 +32,9 @@ struct SplashScreen: View {
                 }
                 .onAppear {
                     Task {
-                        // Initial animation (scale in)
-//                        withAnimation(.easeInOut(duration: 1.0)) {
-//                            logoScale = 1.0
-//                        }
                         
                         // Simulate loading work (replace with real data fetch)
-                        try? await Task.sleep(nanoseconds: 3_000_000_000)
+                        try? await Task.sleep(nanoseconds: 1_000_000_000)
                         
                         // Fade out smoothly
                         withAnimation(.easeInOut(duration: 0.5)) {

@@ -8,25 +8,21 @@
 import SwiftUI
 import SwiftData
 
+// Top-level shared ModelContainer
+var sharedModelContainer: ModelContainer = {
+    do {
+        return try ModelContainer(for: Tip.self)
+    } catch {
+        fatalError("Could not create ModelContainer: \(error)")
+    }
+}()
+
 @main
 struct HitTipsSwiftUIApp: App {
-    var sharedModelContainer: ModelContainer = {
-        let schema = Schema([
-            Tip.self,
-        ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
-
-        do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
-        } catch {
-            fatalError("Could not create ModelContainer: \(error)")
-        }
-    }()
-
     var body: some Scene {
         WindowGroup {
             SplashScreen()
+                .modelContainer(sharedModelContainer)
         }
-        .modelContainer(sharedModelContainer)
     }
 }

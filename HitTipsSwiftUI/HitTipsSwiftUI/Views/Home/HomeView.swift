@@ -8,11 +8,14 @@
 import SwiftUI
 
 struct HomeView: View {
+    let viewModel = HomeViewModel()
+    
     var body: some View {
         NavigationStack {
-            NavigationLink("Go to history") {
-                HistoryView()
+            VStack {
+                TipCalculationView()
             }
+            .navigationTitle(Text(viewModel.navigationTitle))
         }
     }
 }
