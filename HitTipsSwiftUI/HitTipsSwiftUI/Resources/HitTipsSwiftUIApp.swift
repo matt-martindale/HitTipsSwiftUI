@@ -25,7 +25,7 @@ struct HitTipsSwiftUIApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            SplashScreen()
         }
         .modelContainer(sharedModelContainer)
     }

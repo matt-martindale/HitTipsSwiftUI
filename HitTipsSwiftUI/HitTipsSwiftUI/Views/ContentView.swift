@@ -16,7 +16,7 @@ struct ContentView: View {
     
     var body: some View {
         TabView(selection: $currentTab) {
-            Tab("Home", systemImage: "house", value: TabIdentifier.home) {
+            Tab("HitTips", systemImage: "house", value: TabIdentifier.home) {
                 HomeView()
             }
             Tab("History", systemImage: "gear", value: TabIdentifier.history) {
