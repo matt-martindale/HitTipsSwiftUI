@@ -9,4 +9,4 @@ typings/
 node_modules/
 *.local
 
-HitTipsSwiftUI/functions/.runtimeconfig.json
+.runtimeconfig.json
