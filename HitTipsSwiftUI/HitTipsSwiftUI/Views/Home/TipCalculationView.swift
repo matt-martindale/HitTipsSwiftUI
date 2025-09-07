@@ -7,14 +7,13 @@
 
 import SwiftUI
 import SwiftData
+import FirebaseFunctions
 
 struct TipCalculationView: View {
+    
     @Environment(\.modelContext) private var context
-    @Query(
-        filter: nil,
-        sort: \Tip.date,
-        order: .reverse
-    ) private var tips: [Tip]
+    @Query(filter: nil, sort: \Tip.date, order: .reverse) private var tips: [Tip]
+    @StateObject var apiService = APIService()
 
     @State private var billAmount = ""
     @State private var party = 1
@@ -32,6 +31,11 @@ struct TipCalculationView: View {
                         Stepper("Tip %: \(tipPercent)", value: $tipPercent, in: 0...100)
 
                         Button("Add Tip") {
+//                            apiService.callFirebaseApi { response in
+//                                if let response = response {
+//                                    responseMessage = response
+//                                }
+//                            }
                             addTip()
                         }
                         .buttonStyle(.borderedProminent)
@@ -51,7 +55,6 @@ struct TipCalculationView: View {
                     }
                 }
             }
-            .navigationTitle("Tip Calculator")
         }
     }
 
@@ -82,3 +85,6 @@ struct TipCalculationView: View {
     }
 }
 
+#Preview {
+    TipCalculationView()
+}

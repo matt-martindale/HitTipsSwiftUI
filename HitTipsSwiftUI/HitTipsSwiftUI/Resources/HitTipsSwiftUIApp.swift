@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import Firebase
 
 // Top-level shared ModelContainer
 var sharedModelContainer: ModelContainer = {
@@ -19,6 +20,11 @@ var sharedModelContainer: ModelContainer = {
 
 @main
 struct HitTipsSwiftUIApp: App {
+    
+    init() {
+        FirebaseApp.configure()
+    }
+    
     var body: some Scene {
         WindowGroup {
             SplashScreen()
