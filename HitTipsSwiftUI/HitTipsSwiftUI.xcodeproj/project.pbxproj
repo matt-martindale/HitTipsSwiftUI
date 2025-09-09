@@ -46,6 +46,15 @@
 		C852C28B2E6FACD400168117 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C852C28A2E6FACD400168117 /* Color+.swift */; };
 		C852C28C2E6FACD400168117 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C852C28A2E6FACD400168117 /* Color+.swift */; };
 		C852C28D2E6FACD400168117 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C852C28A2E6FACD400168117 /* Color+.swift */; };
+		C852C28F2E6FAF5900168117 /* HTPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C852C28E2E6FAF5900168117 /* HTPickerView.swift */; };
+		C852C2902E6FAF5900168117 /* HTPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C852C28E2E6FAF5900168117 /* HTPickerView.swift */; };
+		C852C2912E6FAF5900168117 /* HTPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C852C28E2E6FAF5900168117 /* HTPickerView.swift */; };
+		C852C2932E6FB53400168117 /* Font+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C852C2922E6FB53400168117 /* Font+.swift */; };
+		C852C2942E6FB53400168117 /* Font+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C852C2922E6FB53400168117 /* Font+.swift */; };
+		C852C2952E6FB53400168117 /* Font+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C852C2922E6FB53400168117 /* Font+.swift */; };
+		C852C2972E6FBD0100168117 /* CustomPickerWheel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C852C2962E6FBD0100168117 /* CustomPickerWheel.swift */; };
+		C852C2982E6FBD0100168117 /* CustomPickerWheel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C852C2962E6FBD0100168117 /* CustomPickerWheel.swift */; };
+		C852C2992E6FBD0100168117 /* CustomPickerWheel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C852C2962E6FBD0100168117 /* CustomPickerWheel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +93,9 @@
 		C852C2822E6E0AF200168117 /* TipCalculationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipCalculationViewModel.swift; sourceTree = "<group>"; };
 		C852C2862E6E0EA700168117 /* HTTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTextField.swift; sourceTree = "<group>"; };
 		C852C28A2E6FACD400168117 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
+		C852C28E2E6FAF5900168117 /* HTPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTPickerView.swift; sourceTree = "<group>"; };
+		C852C2922E6FB53400168117 /* Font+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+.swift"; sourceTree = "<group>"; };
+		C852C2962E6FBD0100168117 /* CustomPickerWheel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPickerWheel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -220,6 +232,7 @@
 			isa = PBXGroup;
 			children = (
 				C852C28A2E6FACD400168117 /* Color+.swift */,
+				C852C2922E6FB53400168117 /* Font+.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -230,6 +243,8 @@
 				C84FC47A2E6A232500E13B7A /* HomeView.swift */,
 				C84FC4942E6A3E3600E13B7A /* TipCalculationView.swift */,
 				C852C2862E6E0EA700168117 /* HTTextField.swift */,
+				C852C28E2E6FAF5900168117 /* HTPickerView.swift */,
+				C852C2962E6FBD0100168117 /* CustomPickerWheel.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -396,6 +411,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C84FC47D2E6A232500E13B7A /* Tip.swift in Sources */,
+				C852C2992E6FBD0100168117 /* CustomPickerWheel.swift in Sources */,
 				C852C28B2E6FACD400168117 /* Color+.swift in Sources */,
 				C84FC47E2E6A232500E13B7A /* HitTipsSwiftUIApp.swift in Sources */,
 				C84FC4972E6A3E3600E13B7A /* TipCalculationView.swift in Sources */,
@@ -403,10 +419,12 @@
 				C84FC47F2E6A232500E13B7A /* ContentView.swift in Sources */,
 				C84FC4802E6A232500E13B7A /* HistoryView.swift in Sources */,
 				C84FC4812E6A232500E13B7A /* HomeView.swift in Sources */,
+				C852C2952E6FB53400168117 /* Font+.swift in Sources */,
 				C852C27F2E6BD2E700168117 /* APIService.swift in Sources */,
 				C852C2832E6E0AF200168117 /* TipCalculationViewModel.swift in Sources */,
 				C84FC48D2E6A2F7200E13B7A /* SplashScreenView.swift in Sources */,
 				C852C2892E6E0EA700168117 /* HTTextField.swift in Sources */,
+				C852C2912E6FAF5900168117 /* HTPickerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -414,6 +432,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C852C2932E6FB53400168117 /* Font+.swift in Sources */,
 				C852C2882E6E0EA700168117 /* HTTextField.swift in Sources */,
 				C852C28D2E6FACD400168117 /* Color+.swift in Sources */,
 				C852C2852E6E0AF200168117 /* TipCalculationViewModel.swift in Sources */,
@@ -421,7 +440,9 @@
 				C852C27D2E6BD2E700168117 /* APIService.swift in Sources */,
 				C84FC4952E6A3E3600E13B7A /* TipCalculationView.swift in Sources */,
 				C84FC4852E6A232500E13B7A /* ContentView.swift in Sources */,
+				C852C2902E6FAF5900168117 /* HTPickerView.swift in Sources */,
 				C84FC4922E6A32A400E13B7A /* HomeViewModel.swift in Sources */,
+				C852C2972E6FBD0100168117 /* CustomPickerWheel.swift in Sources */,
 				C84FC48F2E6A2F7200E13B7A /* SplashScreenView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -433,11 +454,14 @@
 				C84FC4862E6A232500E13B7A /* HomeView.swift in Sources */,
 				C84FC4932E6A32A400E13B7A /* HomeViewModel.swift in Sources */,
 				C852C2842E6E0AF200168117 /* TipCalculationViewModel.swift in Sources */,
+				C852C2982E6FBD0100168117 /* CustomPickerWheel.swift in Sources */,
 				C84FC4872E6A232500E13B7A /* ContentView.swift in Sources */,
+				C852C2942E6FB53400168117 /* Font+.swift in Sources */,
 				C84FC48E2E6A2F7200E13B7A /* SplashScreenView.swift in Sources */,
 				C84FC4962E6A3E3600E13B7A /* TipCalculationView.swift in Sources */,
 				C852C27E2E6BD2E700168117 /* APIService.swift in Sources */,
 				C852C28C2E6FACD400168117 /* Color+.swift in Sources */,
+				C852C28F2E6FAF5900168117 /* HTPickerView.swift in Sources */,
 				C852C2872E6E0EA700168117 /* HTTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

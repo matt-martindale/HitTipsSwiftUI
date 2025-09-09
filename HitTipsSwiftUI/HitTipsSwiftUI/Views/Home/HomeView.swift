@@ -13,8 +13,11 @@ struct HomeView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                TipCalculationView()
+                HStack {
+                    TipCalculationView()
+                }
             }
+            .padding()
             .navigationTitle(Text(viewModel.navigationTitle))
         }
     }
