@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HTPickerView: View {
-    @State private var selectedNumber: Int
+    @State private var selectedNumber: Int?
     @State private var textFieldValue: String
     @State private var oldTextFieldValue: String
     @FocusState private var isTextFieldFocused: Bool
@@ -30,18 +30,23 @@ struct HTPickerView: View {
     
     var body: some View {
         VStack {
-            Picker("Select a number", selection: $selectedNumber) {
+            Picker("", selection: $selectedNumber) {
+                Text(" ")
+                    .tag(nil as Int?)
                 ForEach(numbers, id: \.self) { number in
-                    Text("\(number)").tag(number)
+                    Text("\(number)")
                         .font(.HTBody20)
+                        .tag(number as Int?)
                 }
             }
             .pickerStyle(.wheel)
             .frame(height: 100)
             .onChange(of: selectedNumber) { newValue in
-                textFieldValue = "\(newValue)"
-                let generator = UIImpactFeedbackGenerator(style: .medium)
-                generator.impactOccurred()
+                if let newValue = newValue {
+                    textFieldValue = "\(newValue)"
+                    let generator = UIImpactFeedbackGenerator(style: .medium)
+                    generator.impactOccurred()
+                }
             }
             
             HStack {
@@ -73,8 +78,12 @@ struct HTPickerView: View {
                         if textFieldValue.count > 2 {
                                     textFieldValue = String(textFieldValue.prefix(2))
                                 }
-                        if let number = Int(newValue), number >= 1, number <= upperLimit {
-                            selectedNumber = number
+                        if let number = Int(newValue) {
+                            if number >= 1, number <= upperLimit {
+                                selectedNumber = number
+                            } else if number > upperLimit {
+                                selectedNumber = nil
+                            }
                         }
                     }
                 
