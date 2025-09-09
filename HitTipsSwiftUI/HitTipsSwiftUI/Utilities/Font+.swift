@@ -10,4 +10,5 @@ import SwiftUI
 extension Font {
     static let HTBody24 = Font.system(size: 24)
     static let HTBody20 = Font.system(size: 20)
+    static let HTBody12 = Font.system(size: 12)
 }

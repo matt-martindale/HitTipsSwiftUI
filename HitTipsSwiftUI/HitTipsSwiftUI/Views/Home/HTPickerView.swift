@@ -30,12 +30,11 @@ struct HTPickerView: View {
             Picker("Select a number", selection: $selectedNumber) {
                 ForEach(numbers, id: \.self) { number in
                     Text("\(number)").tag(number)
-                        .font(.HTBody24)
+                        .font(.HTBody20)
                 }
             }
             .pickerStyle(.wheel)
             .frame(height: 100)
-            .padding(.vertical, -10)
             .onChange(of: selectedNumber) { newValue in
                 textFieldValue = "\(newValue)"
                 let generator = UIImpactFeedbackGenerator(style: .medium)
@@ -48,18 +47,22 @@ struct HTPickerView: View {
                         .padding(.horizontal, -6)
                 }
                 TextField("", text: $textFieldValue)
+                    .frame(width: 30, height: 40)
                     .keyboardType(.numberPad)
+                    .multilineTextAlignment(iconLeading ? .leading : .trailing)
                     .padding(.horizontal, 12)
-                    .font(.HTBody24)
+                    .font(.HTBody20)
                     .background(.htGray)
-                    .clipShape(.buttonBorder)
-                    .frame(width: 70)
+                    .clipShape(.capsule)
                     .onChange(of: textFieldValue) { newValue in
-                        if textFieldValue.count > 3 {
-                                    textFieldValue = String(textFieldValue.prefix(3))
+                        if textFieldValue.count > 2 {
+                                    textFieldValue = String(textFieldValue.prefix(2))
                                 }
                         if let number = Int(newValue), number >= 1, number <= upperLimit {
                             selectedNumber = number
+                        }
+                        if newValue.isEmpty {
+                            selectedNumber = 1
                         }
                     }
                 

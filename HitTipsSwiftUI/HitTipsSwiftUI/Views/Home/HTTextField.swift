@@ -24,9 +24,10 @@ struct HTTextField<T: LosslessStringConvertible>: View {
                         }
                     }
                 ))
+                .frame(height: 40)
                 .keyboardType(keyboardType)
                 .multilineTextAlignment(.center)
-                .font(Font.system(size: 24))
+                .font(.HTBody20)
                 .tint(.green)
                 .background(.htGray)
                 .clipShape(.capsule)
@@ -35,7 +36,7 @@ struct HTTextField<T: LosslessStringConvertible>: View {
             }
             
             Text(title)
-                .font(Font.system(size: 12))
+                .font(.HTBody12)
         }
     }
 }

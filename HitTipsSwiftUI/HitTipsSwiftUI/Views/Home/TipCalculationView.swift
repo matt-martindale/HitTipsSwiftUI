@@ -25,7 +25,11 @@ struct TipCalculationView: View {
             VStack {
                 
                 HTTextField(title: "BILL AMOUNT", value: $billAmount, keyboardType: .numberPad)
-                HTTextField(title: "TIP AMOUNT", value: $tipAmount, keyboardType: .numberPad)
+                HStack {
+                    HTPickerView(upperLimit: 20, icon: "person.2.fill", iconLeading: true)
+                    HTTextField(title: "TIP AMOUNT", value: $tipAmount, keyboardType: .numberPad)
+                    HTPickerView(upperLimit: 20, icon: "percent", iconLeading: false)
+                }
                 Spacer()
                 
 //                Form {
