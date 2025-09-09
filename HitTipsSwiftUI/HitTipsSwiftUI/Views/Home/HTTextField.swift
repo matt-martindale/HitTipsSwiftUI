@@ -7,10 +7,18 @@
 
 import SwiftUI
 
+enum HTField: Hashable {
+    case field1
+    case field2
+    case field3
+}
+
 struct HTTextField<T: LosslessStringConvertible>: View {
     let title: String
     @Binding var value: T
     var keyboardType: UIKeyboardType = .default
+    @FocusState var focusedField: HTField?  // external focus binding
+    let fieldID: HTField
     
     var body: some View {
         VStack {
@@ -28,9 +36,18 @@ struct HTTextField<T: LosslessStringConvertible>: View {
                 .keyboardType(keyboardType)
                 .multilineTextAlignment(.center)
                 .font(.HTBody20)
-                .tint(.green)
+                .tint(.htGreen)
                 .background(.htGray)
                 .clipShape(.capsule)
+                .focused($focusedField, equals: fieldID)
+                .onChange(of: focusedField) { newFocus in
+                    if newFocus == fieldID {
+                        // Clear value when this field becomes focused
+                        if let emptyValue = T("") {
+                            value = emptyValue
+                        }
+                    }
+                }
                 
                 Spacer()
             }
@@ -48,10 +65,10 @@ struct HTTextField_Previews: PreviewProvider {
     static var previews: some View {
         VStack(spacing: 20) {
             // Preview with String
-            HTTextField(title: "BILL AMOUNT", value: $previewName)
+            HTTextField(title: "BILL AMOUNT", value: $previewName, fieldID: .field1)
 
             // Preview with Int
-            HTTextField(title: "TIP AMOUNT", value: $previewAge, keyboardType: .numberPad)
+            HTTextField(title: "TIP AMOUNT", value: $previewAge, keyboardType: .numberPad, fieldID: .field2)
         }
         .padding()
         .previewLayout(.sizeThatFits)

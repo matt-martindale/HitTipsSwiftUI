@@ -10,6 +10,8 @@ import SwiftUI
 struct HTPickerView: View {
     @State private var selectedNumber: Int
     @State private var textFieldValue: String
+    @State private var oldTextFieldValue: String
+    @FocusState private var isTextFieldFocused: Bool
     
     let upperLimit: Int
     let icon: String
@@ -17,12 +19,13 @@ struct HTPickerView: View {
     
     private var numbers: [Int] { Array(1...upperLimit).reversed() }
     
-    init(upperLimit: Int, icon: String, iconLeading: Bool) {
+    init(upperLimit: Int, icon: String, iconLeading: Bool, initialValue: Int = 1) {
         self.upperLimit = upperLimit
         self.icon = icon
         self.iconLeading = iconLeading
-        _selectedNumber = State(initialValue: 1)
-        _textFieldValue = State(initialValue: "1")
+        _selectedNumber = State(initialValue: initialValue)
+        _textFieldValue = State(initialValue: "\(initialValue)")
+        _oldTextFieldValue = State(initialValue: "\(initialValue)")
     }
     
     var body: some View {
@@ -53,16 +56,25 @@ struct HTPickerView: View {
                     .padding(.horizontal, 12)
                     .font(.HTBody20)
                     .background(.htGray)
+                    .tint(.htGreen)
                     .clipShape(.capsule)
+                    .focused($isTextFieldFocused)
+                    .onChange(of: isTextFieldFocused, { oldFocus, newFocus in
+                        if newFocus {
+                            oldTextFieldValue = textFieldValue
+                            textFieldValue = ""
+                        } else if oldFocus {
+                            if textFieldValue.isEmpty {
+                                textFieldValue = "\(oldTextFieldValue)"
+                            }
+                        }
+                    })
                     .onChange(of: textFieldValue) { newValue in
                         if textFieldValue.count > 2 {
                                     textFieldValue = String(textFieldValue.prefix(2))
                                 }
                         if let number = Int(newValue), number >= 1, number <= upperLimit {
                             selectedNumber = number
-                        }
-                        if newValue.isEmpty {
-                            selectedNumber = 1
                         }
                     }
                 

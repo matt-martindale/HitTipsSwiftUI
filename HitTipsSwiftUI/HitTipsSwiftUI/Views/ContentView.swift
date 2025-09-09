@@ -23,6 +23,9 @@ struct ContentView: View {
                 HistoryView()
             }
         }
+        .onTapGesture {
+            hideKeyboard()
+        }
     }
 }
 
