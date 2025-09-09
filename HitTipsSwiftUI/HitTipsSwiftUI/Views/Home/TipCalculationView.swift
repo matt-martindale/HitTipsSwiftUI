@@ -14,7 +14,6 @@ struct TipCalculationView: View {
     @Environment(\.modelContext) private var context
     @Query(filter: nil, sort: \Tip.date, order: .reverse) private var tips: [Tip]
     @StateObject var apiService = APIService()
-    @FocusState private var focusedField: HTField?
 
     @State private var billAmount = "0.00"
     @State private var tipAmount = 15
@@ -25,12 +24,12 @@ struct TipCalculationView: View {
         NavigationStack {
             VStack {
                 
-                HTTextField(title: "BILL AMOUNT", value: $billAmount, keyboardType: .numberPad, focusedField: _focusedField, fieldID: .field1)
+                HTTextField(title: "BILL AMOUNT", value: $billAmount, keyboardType: .decimalPad)
                 HStack {
                     HTPickerView(upperLimit: 20, icon: "person.2.fill", iconLeading: true)
                     VStack {
-                        HTTextField(title: "TIP AMOUNT", value: $tipAmount, keyboardType: .numberPad, focusedField: _focusedField, fieldID: .field2)
-                        HTTextField(title: "TIP/PERSON", value: $tipAmount, keyboardType: .numberPad, focusedField: _focusedField, fieldID: .field3)
+                        HTTextField(title: "TIP AMOUNT", value: $tipAmount, isDisabled: true)
+                        HTTextField(title: "TIP/PERSON", value: $tipAmount, isDisabled: true)
                     }
                     HTPickerView(upperLimit: 40, icon: "percent", iconLeading: false, initialValue: 15)
                 }
