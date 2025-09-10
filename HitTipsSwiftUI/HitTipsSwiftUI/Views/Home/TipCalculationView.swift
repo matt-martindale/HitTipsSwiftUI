@@ -9,12 +9,19 @@ import SwiftUI
 import SwiftData
 import FirebaseFunctions
 
+enum FocusedField {
+    case billAmount
+    case party
+    case tipPercent
+}
+
 struct TipCalculationView: View {
     
     @Environment(\.modelContext) private var context
     @Query(filter: nil, sort: \Tip.date, order: .reverse) private var tips: [Tip]
     @StateObject var apiService = APIService()
-    @FocusState private var isInputFocused: Bool
+    
+    @FocusState private var focusedField: FocusedField?
 
     @State private var billAmount = "0.00"
     @State private var tipAmount = "0.00"
@@ -28,15 +35,27 @@ struct TipCalculationView: View {
         NavigationStack {
             VStack {
                 HTTextField(title: UIStrings.billAmount, value: $billAmount, keyboardType: .decimalPad)
+                    .focused($focusedField, equals: .billAmount) // 👈 bind focus
+                    .onChange(of: focusedField) { newFocus in
+                        if newFocus == .billAmount && billAmount == "0.00" {
+                            // 👈 Clear when user first taps into the field
+                            billAmount = ""
+                        } else if newFocus != .billAmount && billAmount.isEmpty {
+                            // 👈 Restore when user leaves it blank
+                            billAmount = "0.00"
+                        }
+                    }
                     .padding(.top)
                     .padding(.horizontal)
                 HStack {
                     HTPickerView(selectedNumber: $party, upperLimit: 99, icon: "person.2.fill", iconLeading: true, initialValue: 1)
+                        .focused($focusedField, equals: .party)
                         .onChange(of: party) {
                             calculateTip()
                         }
                     HTTextField(title: UIStrings.tipAmount, value: $tipAmount, isDisabled: true)
                     HTPickerView(selectedNumber: $tipPercent, upperLimit: 99, icon: "percent", iconLeading: false, initialValue: 15)
+                        .focused($focusedField, equals: .tipPercent)
                         .onChange(of: tipPercent) {
                             calculateTip()
                         }
@@ -59,7 +78,7 @@ struct TipCalculationView: View {
                         .appCornerRadius()
                 }
                 .padding()
-
+                
                 
                 //                Form {
                 //                    Section("Add Tip") {
@@ -95,12 +114,11 @@ struct TipCalculationView: View {
                 //                }
             }
             .appCornerRadius()
-            .focused($isInputFocused)
             .toolbar {
                 ToolbarItemGroup(placement: .keyboard) {
                     Spacer()
                     Button(UIStrings.done) {
-                        isInputFocused = false
+                        focusedField = nil
                         calculateTip()
                     }
                 }
