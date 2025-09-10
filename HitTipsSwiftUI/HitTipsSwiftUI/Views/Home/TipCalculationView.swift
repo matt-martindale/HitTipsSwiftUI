@@ -19,55 +19,56 @@ struct TipCalculationView: View {
     @State private var tipAmount = 15
     @State private var party = 1
     @State private var tipPercent = 15
+    @State private var tipPerPerson = "12.34"
+    @State private var pricePerPerson = "98.76"
+    @State private var totalBill = "123.45"
 
     var body: some View {
         NavigationStack {
             VStack {
-                
                 HTTextField(title: UIStrings.billAmount, value: $billAmount, keyboardType: .decimalPad)
                 HStack {
                     HTPickerView(upperLimit: 20, icon: "person.2.fill", iconLeading: true)
-                    VStack {
-                        HTTextField(title: UIStrings.tipAmount, value: $tipAmount, isDisabled: true)
-                            .padding()
-                        HTTextField(title: UIStrings.tipPerPerson, value: $tipAmount, isDisabled: true)
-                    }
+                    HTTextField(title: UIStrings.tipAmount, value: $tipAmount, isDisabled: true)
                     HTPickerView(upperLimit: 40, icon: "percent", iconLeading: false, initialValue: 15)
                 }
+                .padding()
+                BillOutputView(tipPerPerson: $tipPerPerson, pricePerPerson: $pricePerPerson, totalBill: $totalBill)
+                    .padding()
                 Spacer()
                 
-//                Form {
-//                    Section("Add Tip") {
-//                        TextField("Bill Amount", text: $billAmount)
-//                            .keyboardType(.decimalPad)
-//
-//                        Stepper("Party: \(party)", value: $party, in: 1...20)
-//                        Stepper("Tip %: \(tipPercent)", value: $tipPercent, in: 0...100)
-//
-//                        Button("Add Tip") {
-//                            apiService.callFirebaseApi { response in
-//                                if let response = response {
-//                                    responseMessage = response
-//                                }
-//                            }
-//                            addTip()
-//                        }
-//                        .buttonStyle(.borderedProminent)
-//                    }
-//
-//                    Section("Tips") {
-//                        List(tips, id: \.id) { tip in
-//                            VStack(alignment: .leading) {
-//                                Text("Bill: \(tip.billAmount)")
-//                                Text("Tip: \(String(format: "%.2f", tip.tipAmount))")
-//                                Text("Total: \(String(format: "%.2f", tip.totalBill))")
-//                                Text("Price/Person: \(String(format: "%.2f", tip.pricePerPerson))")
-//                                Text("Tip/Person: \(String(format: "%.2f", tip.tipPerPerson))")
-//                            }
-//                            .padding(4)
-//                        }
-//                    }
-//                }
+                //                Form {
+                //                    Section("Add Tip") {
+                //                        TextField("Bill Amount", text: $billAmount)
+                //                            .keyboardType(.decimalPad)
+                //
+                //                        Stepper("Party: \(party)", value: $party, in: 1...20)
+                //                        Stepper("Tip %: \(tipPercent)", value: $tipPercent, in: 0...100)
+                //
+                //                        Button("Add Tip") {
+                //                            apiService.callFirebaseApi { response in
+                //                                if let response = response {
+                //                                    responseMessage = response
+                //                                }
+                //                            }
+                //                            addTip()
+                //                        }
+                //                        .buttonStyle(.borderedProminent)
+                //                    }
+                //
+                //                    Section("Tips") {
+                //                        List(tips, id: \.id) { tip in
+                //                            VStack(alignment: .leading) {
+                //                                Text("Bill: \(tip.billAmount)")
+                //                                Text("Tip: \(String(format: "%.2f", tip.tipAmount))")
+                //                                Text("Total: \(String(format: "%.2f", tip.totalBill))")
+                //                                Text("Price/Person: \(String(format: "%.2f", tip.pricePerPerson))")
+                //                                Text("Tip/Person: \(String(format: "%.2f", tip.tipPerPerson))")
+                //                            }
+                //                            .padding(4)
+                //                        }
+                //                    }
+                //                }
             }
         }
     }

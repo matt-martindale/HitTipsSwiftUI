@@ -64,6 +64,9 @@
 		C852C2A32E71229200168117 /* UIStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C852C2A22E71229200168117 /* UIStrings.swift */; };
 		C852C2A42E71229200168117 /* UIStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C852C2A22E71229200168117 /* UIStrings.swift */; };
 		C852C2A52E71229200168117 /* UIStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C852C2A22E71229200168117 /* UIStrings.swift */; };
+		C852C2A72E71234F00168117 /* BillOutputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C852C2A62E71234F00168117 /* BillOutputView.swift */; };
+		C852C2A82E71234F00168117 /* BillOutputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C852C2A62E71234F00168117 /* BillOutputView.swift */; };
+		C852C2A92E71234F00168117 /* BillOutputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C852C2A62E71234F00168117 /* BillOutputView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +111,7 @@
 		C852C29A2E70977100168117 /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
 		C852C29E2E70DFE300168117 /* UIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIConstants.swift; sourceTree = "<group>"; };
 		C852C2A22E71229200168117 /* UIStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStrings.swift; sourceTree = "<group>"; };
+		C852C2A62E71234F00168117 /* BillOutputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillOutputView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -260,6 +264,7 @@
 				C852C2862E6E0EA700168117 /* HTTextField.swift */,
 				C852C28E2E6FAF5900168117 /* HTPickerView.swift */,
 				C852C2962E6FBD0100168117 /* CustomPickerWheel.swift */,
+				C852C2A62E71234F00168117 /* BillOutputView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -425,6 +430,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C852C2A72E71234F00168117 /* BillOutputView.swift in Sources */,
 				C84FC47D2E6A232500E13B7A /* Tip.swift in Sources */,
 				C852C2992E6FBD0100168117 /* CustomPickerWheel.swift in Sources */,
 				C852C28B2E6FACD400168117 /* Color+.swift in Sources */,
@@ -460,6 +466,7 @@
 				C84FC4842E6A232500E13B7A /* HomeView.swift in Sources */,
 				C852C27D2E6BD2E700168117 /* APIService.swift in Sources */,
 				C84FC4952E6A3E3600E13B7A /* TipCalculationView.swift in Sources */,
+				C852C2A82E71234F00168117 /* BillOutputView.swift in Sources */,
 				C84FC4852E6A232500E13B7A /* ContentView.swift in Sources */,
 				C852C2902E6FAF5900168117 /* HTPickerView.swift in Sources */,
 				C84FC4922E6A32A400E13B7A /* HomeViewModel.swift in Sources */,
@@ -476,6 +483,7 @@
 				C84FC4932E6A32A400E13B7A /* HomeViewModel.swift in Sources */,
 				C852C2842E6E0AF200168117 /* TipCalculationViewModel.swift in Sources */,
 				C852C2982E6FBD0100168117 /* CustomPickerWheel.swift in Sources */,
+				C852C2A92E71234F00168117 /* BillOutputView.swift in Sources */,
 				C84FC4872E6A232500E13B7A /* ContentView.swift in Sources */,
 				C852C2942E6FB53400168117 /* Font+.swift in Sources */,
 				C84FC48E2E6A2F7200E13B7A /* SplashScreenView.swift in Sources */,
