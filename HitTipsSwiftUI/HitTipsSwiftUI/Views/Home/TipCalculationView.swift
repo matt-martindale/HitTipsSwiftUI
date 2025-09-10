@@ -176,6 +176,12 @@ struct TipCalculationView: View {
             tipPercentage: tipPercent
         )
         
+        apiService.callFirebaseApi { response in
+            if let response = response {
+                print(response)
+            }
+        }
+            
         context.insert(newTip)
         
         // Reset input fields
