@@ -41,7 +41,8 @@ struct BillOutputView: View {
                     }
                 }
             }
-            .padding()
+            .padding(.vertical)
+            .padding(.horizontal, 8)
             .background(.htGray2)
             .appCornerRadius()
         }

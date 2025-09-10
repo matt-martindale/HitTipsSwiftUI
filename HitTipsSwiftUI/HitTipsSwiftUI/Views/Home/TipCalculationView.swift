@@ -19,25 +19,40 @@ struct TipCalculationView: View {
     @State private var tipAmount = 15
     @State private var party = 1
     @State private var tipPercent = 15
-    @State private var tipPerPerson = "12.34"
-    @State private var pricePerPerson = "98.76"
-    @State private var totalBill = "123.45"
+    @State private var tipPerPerson = "0.00"
+    @State private var pricePerPerson = "0.00"
+    @State private var totalBill = "0.00"
 
     var body: some View {
         NavigationStack {
             VStack {
                 HTTextField(title: UIStrings.billAmount, value: $billAmount, keyboardType: .decimalPad)
-                    .padding(.top, 12)
-                    .padding(.horizontal, 12)
+                    .padding(.top)
+                    .padding(.horizontal)
                 HStack {
                     HTPickerView(upperLimit: 20, icon: "person.2.fill", iconLeading: true)
                     HTTextField(title: UIStrings.tipAmount, value: $tipAmount, isDisabled: true)
                     HTPickerView(upperLimit: 40, icon: "percent", iconLeading: false, initialValue: 15)
                 }
-                .padding()
+                .padding(.horizontal)
                 BillOutputView(tipPerPerson: $tipPerPerson, pricePerPerson: $pricePerPerson, totalBill: $totalBill)
-                    .padding()
+                    .padding(.horizontal)
                 Spacer()
+                Button {
+                    print("Calculate tip")
+                    addTip()
+                } label: {
+                    Text("Confirm Tip")
+                        .font(.HTBody20)
+                        .fontWeight(.medium)
+                        .padding(.vertical, 8)
+                        .padding(.horizontal)
+                        .foregroundStyle(Color(.systemBackground))
+                        .background(.htGreen)
+                        .appCornerRadius()
+                }
+                .padding()
+
                 
                 //                Form {
                 //                    Section("Add Tip") {
@@ -72,7 +87,7 @@ struct TipCalculationView: View {
                 //                    }
                 //                }
             }
-            .background(.htGray)
+//            .background(.htGray)
             .appCornerRadius()
         }
     }

@@ -8,5 +8,5 @@
 import Foundation
 
 struct UIConstants {
-    static let cornerRadius: CGFloat = 12
+    static let cornerRadius: CGFloat = 10
 }

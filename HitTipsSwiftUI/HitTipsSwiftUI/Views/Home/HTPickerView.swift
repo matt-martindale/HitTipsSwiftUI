@@ -61,7 +61,7 @@ struct HTPickerView: View {
                         .multilineTextAlignment(iconLeading ? .leading : .trailing)
                         .padding(.horizontal, 12)
                         .font(.HTBody20)
-                        .background(Color(.systemBackground))
+                        .background(Color(.htGray))
                         .tint(.htGreen)
                         .appCornerRadius()
                         .focused($isTextFieldFocused)
@@ -94,9 +94,9 @@ struct HTPickerView: View {
                     }
                 }
             }
-            .padding(.vertical, 12)
+            .padding(.bottom, 12)
             .padding(.horizontal, 12)
-            .background(.htGray)
+            .background(.htGray2)
         }
         .appCornerRadius()
     }
