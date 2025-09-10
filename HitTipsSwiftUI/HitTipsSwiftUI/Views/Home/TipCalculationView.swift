@@ -24,13 +24,13 @@ struct TipCalculationView: View {
         NavigationStack {
             VStack {
                 
-                HTTextField(title: "BILL AMOUNT", value: $billAmount, keyboardType: .decimalPad)
+                HTTextField(title: UIStrings.billAmount, value: $billAmount, keyboardType: .decimalPad)
                 HStack {
                     HTPickerView(upperLimit: 20, icon: "person.2.fill", iconLeading: true)
                     VStack {
-                        HTTextField(title: "TIP AMOUNT", value: $tipAmount, isDisabled: true)
+                        HTTextField(title: UIStrings.tipAmount, value: $tipAmount, isDisabled: true)
                             .padding()
-                        HTTextField(title: "TIP/PERSON", value: $tipAmount, isDisabled: true)
+                        HTTextField(title: UIStrings.tipPerPerson, value: $tipAmount, isDisabled: true)
                     }
                     HTPickerView(upperLimit: 40, icon: "percent", iconLeading: false, initialValue: 15)
                 }

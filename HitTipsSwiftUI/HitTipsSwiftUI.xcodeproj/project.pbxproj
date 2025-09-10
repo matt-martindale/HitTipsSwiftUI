@@ -61,6 +61,9 @@
 		C852C29F2E70DFE300168117 /* UIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C852C29E2E70DFE300168117 /* UIConstants.swift */; };
 		C852C2A02E70DFE300168117 /* UIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C852C29E2E70DFE300168117 /* UIConstants.swift */; };
 		C852C2A12E70DFE300168117 /* UIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C852C29E2E70DFE300168117 /* UIConstants.swift */; };
+		C852C2A32E71229200168117 /* UIStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C852C2A22E71229200168117 /* UIStrings.swift */; };
+		C852C2A42E71229200168117 /* UIStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C852C2A22E71229200168117 /* UIStrings.swift */; };
+		C852C2A52E71229200168117 /* UIStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C852C2A22E71229200168117 /* UIStrings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -104,6 +107,7 @@
 		C852C2962E6FBD0100168117 /* CustomPickerWheel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPickerWheel.swift; sourceTree = "<group>"; };
 		C852C29A2E70977100168117 /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
 		C852C29E2E70DFE300168117 /* UIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIConstants.swift; sourceTree = "<group>"; };
+		C852C2A22E71229200168117 /* UIStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStrings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -243,6 +247,7 @@
 				C852C2922E6FB53400168117 /* Font+.swift */,
 				C852C29A2E70977100168117 /* View+.swift */,
 				C852C29E2E70DFE300168117 /* UIConstants.swift */,
+				C852C2A22E71229200168117 /* UIStrings.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -426,6 +431,7 @@
 				C84FC47E2E6A232500E13B7A /* HitTipsSwiftUIApp.swift in Sources */,
 				C84FC4972E6A3E3600E13B7A /* TipCalculationView.swift in Sources */,
 				C84FC4912E6A32A400E13B7A /* HomeViewModel.swift in Sources */,
+				C852C2A32E71229200168117 /* UIStrings.swift in Sources */,
 				C84FC47F2E6A232500E13B7A /* ContentView.swift in Sources */,
 				C84FC4802E6A232500E13B7A /* HistoryView.swift in Sources */,
 				C852C2A02E70DFE300168117 /* UIConstants.swift in Sources */,
@@ -446,6 +452,7 @@
 			files = (
 				C852C2932E6FB53400168117 /* Font+.swift in Sources */,
 				C852C2882E6E0EA700168117 /* HTTextField.swift in Sources */,
+				C852C2A42E71229200168117 /* UIStrings.swift in Sources */,
 				C852C29F2E70DFE300168117 /* UIConstants.swift in Sources */,
 				C852C28D2E6FACD400168117 /* Color+.swift in Sources */,
 				C852C2852E6E0AF200168117 /* TipCalculationViewModel.swift in Sources */,
@@ -474,6 +481,7 @@
 				C84FC48E2E6A2F7200E13B7A /* SplashScreenView.swift in Sources */,
 				C852C2A12E70DFE300168117 /* UIConstants.swift in Sources */,
 				C84FC4962E6A3E3600E13B7A /* TipCalculationView.swift in Sources */,
+				C852C2A52E71229200168117 /* UIStrings.swift in Sources */,
 				C852C27E2E6BD2E700168117 /* APIService.swift in Sources */,
 				C852C28C2E6FACD400168117 /* Color+.swift in Sources */,
 				C852C28F2E6FAF5900168117 /* HTPickerView.swift in Sources */,
