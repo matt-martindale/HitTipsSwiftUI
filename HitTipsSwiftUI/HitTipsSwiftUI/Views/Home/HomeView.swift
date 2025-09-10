@@ -9,7 +9,6 @@ import SwiftUI
 
 struct HomeView: View {
     let viewModel = HomeViewModel()
-    @FocusState private var isInputFocused: Bool
     
     var body: some View {
         NavigationStack {
@@ -31,18 +30,9 @@ struct HomeView: View {
                 }
                 HStack {
                     TipCalculationView()
-                        .focused($isInputFocused)
                 }
             }
             .padding()
-            .toolbar {
-                ToolbarItemGroup(placement: .keyboard) {
-                    Spacer()
-                    Button(UIStrings.done) {
-                        isInputFocused = false
-                    }
-                }
-            }
         }
     }
 }

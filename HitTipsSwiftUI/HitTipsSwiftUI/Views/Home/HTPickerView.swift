@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HTPickerView: View {
-    @State private var selectedNumber: Int?
+    @Binding private var selectedNumber: Int?
     @State private var textFieldValue: String
     @State private var oldTextFieldValue: String
     @FocusState private var isTextFieldFocused: Bool
@@ -19,13 +19,19 @@ struct HTPickerView: View {
     
     private var numbers: [Int] { Array(1...upperLimit).reversed() }
     
-    init(upperLimit: Int, icon: String, iconLeading: Bool, initialValue: Int = 1) {
+    init(selectedNumber: Binding<Int?>,
+         upperLimit: Int,
+         icon: String,
+         iconLeading: Bool,
+         initialValue: Int? = nil) {
+        self._selectedNumber = selectedNumber
         self.upperLimit = upperLimit
         self.icon = icon
         self.iconLeading = iconLeading
-        _selectedNumber = State(initialValue: initialValue)
-        _textFieldValue = State(initialValue: "\(initialValue)")
-        _oldTextFieldValue = State(initialValue: "\(initialValue)")
+        
+        let initialText = initialValue.map { "\($0)" } ?? ""
+        _textFieldValue = State(initialValue: "\(initialText)")
+        _oldTextFieldValue = State(initialValue: "\(initialText)")
     }
     
     var body: some View {
@@ -105,7 +111,7 @@ struct HTPickerView: View {
 
 #Preview {
     HStack {
-        HTPickerView(upperLimit: 20, icon: "person.2.fill", iconLeading: true)
-        HTPickerView(upperLimit: 40, icon: "percent", iconLeading: false)
+        HTPickerView(selectedNumber: .constant(15), upperLimit: 20, icon: "person.2.fill", iconLeading: true)
+        HTPickerView(selectedNumber: .constant(1), upperLimit: 40, icon: "percent", iconLeading: false)
     }
 }
