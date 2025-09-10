@@ -32,7 +32,7 @@ struct HTTextField<T: LosslessStringConvertible>: View {
                 .multilineTextAlignment(.center)
                 .font(.HTBody20)
                 .tint(.htGreen)
-                .background(isDisabled ? .htGray3 : .htGray)
+                .background(hasBackground ? .htGray : Color(.systemBackground))
                 .appCornerRadius()
                 
                 Spacer()

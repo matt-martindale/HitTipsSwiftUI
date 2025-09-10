@@ -27,6 +27,8 @@ struct TipCalculationView: View {
         NavigationStack {
             VStack {
                 HTTextField(title: UIStrings.billAmount, value: $billAmount, keyboardType: .decimalPad)
+                    .padding(.top, 12)
+                    .padding(.horizontal, 12)
                 HStack {
                     HTPickerView(upperLimit: 20, icon: "person.2.fill", iconLeading: true)
                     HTTextField(title: UIStrings.tipAmount, value: $tipAmount, isDisabled: true)
@@ -70,6 +72,8 @@ struct TipCalculationView: View {
                 //                    }
                 //                }
             }
+            .background(.htGray)
+            .appCornerRadius()
         }
     }
 

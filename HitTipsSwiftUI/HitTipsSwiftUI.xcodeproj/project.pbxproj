@@ -67,6 +67,9 @@
 		C852C2A72E71234F00168117 /* BillOutputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C852C2A62E71234F00168117 /* BillOutputView.swift */; };
 		C852C2A82E71234F00168117 /* BillOutputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C852C2A62E71234F00168117 /* BillOutputView.swift */; };
 		C852C2A92E71234F00168117 /* BillOutputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C852C2A62E71234F00168117 /* BillOutputView.swift */; };
+		C852C2AB2E713C3C00168117 /* ViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C852C2AA2E713C3C00168117 /* ViewModifiers.swift */; };
+		C852C2AC2E713C3C00168117 /* ViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C852C2AA2E713C3C00168117 /* ViewModifiers.swift */; };
+		C852C2AD2E713C3C00168117 /* ViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C852C2AA2E713C3C00168117 /* ViewModifiers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -112,6 +115,7 @@
 		C852C29E2E70DFE300168117 /* UIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIConstants.swift; sourceTree = "<group>"; };
 		C852C2A22E71229200168117 /* UIStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStrings.swift; sourceTree = "<group>"; };
 		C852C2A62E71234F00168117 /* BillOutputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillOutputView.swift; sourceTree = "<group>"; };
+		C852C2AA2E713C3C00168117 /* ViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModifiers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -252,6 +256,7 @@
 				C852C29A2E70977100168117 /* View+.swift */,
 				C852C29E2E70DFE300168117 /* UIConstants.swift */,
 				C852C2A22E71229200168117 /* UIStrings.swift */,
+				C852C2AA2E713C3C00168117 /* ViewModifiers.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -445,6 +450,7 @@
 				C852C2952E6FB53400168117 /* Font+.swift in Sources */,
 				C852C27F2E6BD2E700168117 /* APIService.swift in Sources */,
 				C852C2832E6E0AF200168117 /* TipCalculationViewModel.swift in Sources */,
+				C852C2AB2E713C3C00168117 /* ViewModifiers.swift in Sources */,
 				C852C29B2E70977100168117 /* View+.swift in Sources */,
 				C84FC48D2E6A2F7200E13B7A /* SplashScreenView.swift in Sources */,
 				C852C2892E6E0EA700168117 /* HTTextField.swift in Sources */,
@@ -459,6 +465,7 @@
 				C852C2932E6FB53400168117 /* Font+.swift in Sources */,
 				C852C2882E6E0EA700168117 /* HTTextField.swift in Sources */,
 				C852C2A42E71229200168117 /* UIStrings.swift in Sources */,
+				C852C2AD2E713C3C00168117 /* ViewModifiers.swift in Sources */,
 				C852C29F2E70DFE300168117 /* UIConstants.swift in Sources */,
 				C852C28D2E6FACD400168117 /* Color+.swift in Sources */,
 				C852C2852E6E0AF200168117 /* TipCalculationViewModel.swift in Sources */,
@@ -482,6 +489,7 @@
 				C84FC4862E6A232500E13B7A /* HomeView.swift in Sources */,
 				C84FC4932E6A32A400E13B7A /* HomeViewModel.swift in Sources */,
 				C852C2842E6E0AF200168117 /* TipCalculationViewModel.swift in Sources */,
+				C852C2AC2E713C3C00168117 /* ViewModifiers.swift in Sources */,
 				C852C2982E6FBD0100168117 /* CustomPickerWheel.swift in Sources */,
 				C852C2A92E71234F00168117 /* BillOutputView.swift in Sources */,
 				C84FC4872E6A232500E13B7A /* ContentView.swift in Sources */,
