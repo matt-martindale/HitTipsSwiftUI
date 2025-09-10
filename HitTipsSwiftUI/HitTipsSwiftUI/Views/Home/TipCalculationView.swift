@@ -18,8 +18,8 @@ struct TipCalculationView: View {
 
     @State private var billAmount = "0.00"
     @State private var tipAmount = "0.00"
-    @State private var party: Int?
-    @State private var tipPercent: Int?
+    @State private var party = 1
+    @State private var tipPercent = 15
     @State private var tipPerPerson = "0.00"
     @State private var pricePerPerson = "0.00"
     @State private var totalBill = "0.00"
@@ -31,12 +31,12 @@ struct TipCalculationView: View {
                     .padding(.top)
                     .padding(.horizontal)
                 HStack {
-                    HTPickerView(selectedNumber: $party, upperLimit: 20, icon: "person.2.fill", iconLeading: true)
+                    HTPickerView(selectedNumber: $party, upperLimit: 99, icon: "person.2.fill", iconLeading: true, initialValue: 1)
                         .onChange(of: party) {
                             calculateTip()
                         }
                     HTTextField(title: UIStrings.tipAmount, value: $tipAmount, isDisabled: true)
-                    HTPickerView(selectedNumber: $tipPercent, upperLimit: 40, icon: "percent", iconLeading: false, initialValue: 15)
+                    HTPickerView(selectedNumber: $tipPercent, upperLimit: 99, icon: "percent", iconLeading: false, initialValue: 15)
                         .onChange(of: tipPercent) {
                             calculateTip()
                         }
@@ -110,9 +110,7 @@ struct TipCalculationView: View {
     
     private func calculateTip() {
         // Run any calculation or validation here
-        guard let bill = Double(billAmount),
-        let tipPercent = tipPercent,
-        let party = party else { return }
+        guard let bill = Double(billAmount) else { return }
         let tipAmountValue = bill * Double(tipPercent) / 100
         let total = bill + tipAmountValue
         let pricePerPersonValue = total / Double(party)
@@ -125,9 +123,7 @@ struct TipCalculationView: View {
     }
 
     private func addTip() {
-        guard let bill = Double(billAmount),
-              let tipPercent = tipPercent,
-              let party = party else { return }
+        guard let bill = Double(billAmount) else { return }
         let tipAmount = bill * Double(tipPercent) / 100
         let total = bill + tipAmount
         let pricePerPerson = total / Double(party)

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HTPickerView: View {
-    @Binding private var selectedNumber: Int?
+    @Binding private var selectedNumber: Int
     @State private var textFieldValue: String
     @State private var oldTextFieldValue: String
     @FocusState private var isTextFieldFocused: Bool
@@ -19,7 +19,7 @@ struct HTPickerView: View {
     
     private var numbers: [Int] { Array(1...upperLimit).reversed() }
     
-    init(selectedNumber: Binding<Int?>,
+    init(selectedNumber: Binding<Int>,
          upperLimit: Int,
          icon: String,
          iconLeading: Bool,
@@ -38,8 +38,6 @@ struct HTPickerView: View {
         VStack {
             VStack {
                 Picker("", selection: $selectedNumber) {
-                    Text(" ")
-                        .tag(nil as Int?)
                     ForEach(numbers, id: \.self) { number in
                         Text("\(number)")
                             .font(.HTBody20)
@@ -49,11 +47,9 @@ struct HTPickerView: View {
                 .pickerStyle(.wheel)
                 .frame(width: 60, height: 100)
                 .onChange(of: selectedNumber) { newValue in
-                    if let newValue = newValue {
-                        textFieldValue = "\(newValue)"
-                        let generator = UIImpactFeedbackGenerator(style: .medium)
-                        generator.impactOccurred()
-                    }
+                    textFieldValue = "\(newValue)"
+                    let generator = UIImpactFeedbackGenerator(style: .medium)
+                    generator.impactOccurred()
                 }
                 
                 HStack {
@@ -89,7 +85,7 @@ struct HTPickerView: View {
                                 if number >= 1, number <= upperLimit {
                                     selectedNumber = number
                                 } else if number > upperLimit {
-                                    selectedNumber = nil
+                                    selectedNumber = 99
                                 }
                             }
                         }
