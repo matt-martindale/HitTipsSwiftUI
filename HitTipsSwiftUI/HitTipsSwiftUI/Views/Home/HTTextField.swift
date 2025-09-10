@@ -32,7 +32,7 @@ struct HTTextField<T: LosslessStringConvertible>: View {
                 .font(.HTBody20)
                 .tint(.htGreen)
                 .background(.htGray)
-                .clipShape(.capsule)
+                .appCornerRadius()
                 
                 Spacer()
             }

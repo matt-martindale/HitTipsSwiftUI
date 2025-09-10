@@ -14,4 +14,8 @@ extension View {
                                             from: nil,
                                             for: nil)
         }
+    
+    func appCornerRadius(_ radius: CGFloat = UIConstants.cornerRadius) -> some View {
+            self.clipShape(RoundedRectangle(cornerRadius: radius, style: .continuous))
+        }
 }

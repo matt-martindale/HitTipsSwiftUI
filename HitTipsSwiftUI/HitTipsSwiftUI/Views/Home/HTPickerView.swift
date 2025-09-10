@@ -30,70 +30,75 @@ struct HTPickerView: View {
     
     var body: some View {
         VStack {
-            Picker("", selection: $selectedNumber) {
-                Text(" ")
-                    .tag(nil as Int?)
-                ForEach(numbers, id: \.self) { number in
-                    Text("\(number)")
-                        .font(.HTBody20)
-                        .tag(number as Int?)
-                }
-            }
-            .pickerStyle(.wheel)
-            .frame(height: 100)
-            .onChange(of: selectedNumber) { newValue in
-                if let newValue = newValue {
-                    textFieldValue = "\(newValue)"
-                    let generator = UIImpactFeedbackGenerator(style: .medium)
-                    generator.impactOccurred()
-                }
-            }
-            
-            HStack {
-                if iconLeading {
-                    Image(systemName: icon)
-                        .padding(.horizontal, -6)
-                }
-                TextField("", text: $textFieldValue)
-                    .frame(width: 30, height: 40)
-                    .keyboardType(.numberPad)
-                    .multilineTextAlignment(iconLeading ? .leading : .trailing)
-                    .padding(.horizontal, 12)
-                    .font(.HTBody20)
-                    .background(.htGray)
-                    .tint(.htGreen)
-                    .clipShape(.capsule)
-                    .focused($isTextFieldFocused)
-                    .onChange(of: isTextFieldFocused, { oldFocus, newFocus in
-                        if newFocus {
-                            oldTextFieldValue = textFieldValue
-                            textFieldValue = ""
-                        } else if oldFocus {
-                            if textFieldValue.isEmpty {
-                                textFieldValue = "\(oldTextFieldValue)"
-                            }
-                        }
-                    })
-                    .onChange(of: textFieldValue) { newValue in
-                        if textFieldValue.count > 2 {
-                                    textFieldValue = String(textFieldValue.prefix(2))
-                                }
-                        if let number = Int(newValue) {
-                            if number >= 1, number <= upperLimit {
-                                selectedNumber = number
-                            } else if number > upperLimit {
-                                selectedNumber = nil
-                            }
-                        }
+            VStack {
+                Picker("", selection: $selectedNumber) {
+                    Text(" ")
+                        .tag(nil as Int?)
+                    ForEach(numbers, id: \.self) { number in
+                        Text("\(number)")
+                            .font(.HTBody20)
+                            .tag(number as Int?)
                     }
+                }
+                .pickerStyle(.wheel)
+                .frame(width: 60, height: 100)
+                .onChange(of: selectedNumber) { newValue in
+                    if let newValue = newValue {
+                        textFieldValue = "\(newValue)"
+                        let generator = UIImpactFeedbackGenerator(style: .medium)
+                        generator.impactOccurred()
+                    }
+                }
                 
-                if !iconLeading {
-                    Image(systemName: icon)
-                        .padding(.horizontal, -6)
+                HStack {
+                    if iconLeading {
+                        Image(systemName: icon)
+                            .padding(.horizontal, -6)
+                    }
+                    TextField("", text: $textFieldValue)
+                        .frame(width: 30, height: 40)
+                        .keyboardType(.numberPad)
+                        .multilineTextAlignment(iconLeading ? .leading : .trailing)
+                        .padding(.horizontal, 12)
+                        .font(.HTBody20)
+                        .background(.htGray2)
+                        .tint(.htGreen)
+                        .appCornerRadius()
+                        .focused($isTextFieldFocused)
+                        .onChange(of: isTextFieldFocused, { oldFocus, newFocus in
+                            if newFocus {
+                                oldTextFieldValue = textFieldValue
+                                textFieldValue = ""
+                            } else if oldFocus {
+                                if textFieldValue.isEmpty {
+                                    textFieldValue = "\(oldTextFieldValue)"
+                                }
+                            }
+                        })
+                        .onChange(of: textFieldValue) { newValue in
+                            if textFieldValue.count > 2 {
+                                textFieldValue = String(textFieldValue.prefix(2))
+                            }
+                            if let number = Int(newValue) {
+                                if number >= 1, number <= upperLimit {
+                                    selectedNumber = number
+                                } else if number > upperLimit {
+                                    selectedNumber = nil
+                                }
+                            }
+                        }
+                    
+                    if !iconLeading {
+                        Image(systemName: icon)
+                            .padding(.horizontal, -6)
+                    }
                 }
             }
+            .padding(.vertical, 12)
+            .padding(.horizontal, 12)
+            .background(.htGray)
         }
-        .padding()
+        .appCornerRadius()
     }
 }
 

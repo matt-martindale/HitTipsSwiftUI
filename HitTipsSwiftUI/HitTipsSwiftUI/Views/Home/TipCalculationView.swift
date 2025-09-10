@@ -29,6 +29,7 @@ struct TipCalculationView: View {
                     HTPickerView(upperLimit: 20, icon: "person.2.fill", iconLeading: true)
                     VStack {
                         HTTextField(title: "TIP AMOUNT", value: $tipAmount, isDisabled: true)
+                            .padding()
                         HTTextField(title: "TIP/PERSON", value: $tipAmount, isDisabled: true)
                     }
                     HTPickerView(upperLimit: 40, icon: "percent", iconLeading: false, initialValue: 15)

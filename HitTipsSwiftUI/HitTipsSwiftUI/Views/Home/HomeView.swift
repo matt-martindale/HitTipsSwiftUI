@@ -13,15 +13,33 @@ struct HomeView: View {
     var body: some View {
         NavigationStack {
             VStack {
+                HStack(spacing: 8) {
+                    Text(viewModel.navigationTitle)
+                        .font(.largeTitle) // system inline nav title font
+                        .bold()
+                    
+                    Button {
+                        print("Tapped me")
+                    } label: {
+                        Text("😈")
+                            .font(.largeTitle)
+                            .padding(2)
+                            .contentShape(Rectangle())
+                    }
+                    Spacer()
+                }
                 HStack {
                     TipCalculationView()
                 }
             }
             .padding()
-            .navigationTitle(Text(viewModel.navigationTitle))
+        }
+        .onTapGesture {
+            hideKeyboard()
         }
     }
 }
+
 
 #Preview {
     HomeView()

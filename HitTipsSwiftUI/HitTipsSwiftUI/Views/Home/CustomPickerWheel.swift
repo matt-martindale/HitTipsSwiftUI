@@ -21,7 +21,7 @@ struct CustomPickerWheel: View {
                             .frame(maxWidth: .infinity)
                             .padding()
                             .background(selectedNumber == number ? Color.blue.opacity(0.3) : Color.clear)
-                            .cornerRadius(8)
+                            .appCornerRadius()
                             .id(number)
                     }
                 }
