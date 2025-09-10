@@ -11,6 +11,7 @@ struct HTTextField<T: LosslessStringConvertible>: View {
     let title: String
     @Binding var value: T
     var isDisabled: Bool = false
+    var hasBackground: Bool = false
     var keyboardType: UIKeyboardType = .default
     
     var body: some View {
@@ -31,7 +32,7 @@ struct HTTextField<T: LosslessStringConvertible>: View {
                 .multilineTextAlignment(.center)
                 .font(.HTBody20)
                 .tint(.htGreen)
-                .background(.htGray2)
+                .background(isDisabled ? .htGray3 : .htGray)
                 .appCornerRadius()
                 
                 Spacer()

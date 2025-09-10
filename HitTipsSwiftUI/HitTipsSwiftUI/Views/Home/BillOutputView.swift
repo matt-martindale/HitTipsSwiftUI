@@ -16,11 +16,11 @@ struct BillOutputView: View {
         HStack {
             VStack {
                 HStack {
-                    HTTextField(title: UIStrings.tipPerPerson, value: $tipPerPerson, isDisabled: true)
-                    HTTextField(title: UIStrings.pricerPerPerson, value: $pricePerPerson, isDisabled: true)
+                    HTTextField(title: UIStrings.tipPerPerson, value: $tipPerPerson, isDisabled: true, hasBackground: true)
+                    HTTextField(title: UIStrings.pricerPerPerson, value: $pricePerPerson, isDisabled: true, hasBackground: true)
                 }
                 HStack {
-                    HTTextField(title: UIStrings.totalBill, value: $totalBill, isDisabled: true)
+                    HTTextField(title: UIStrings.totalBill, value: $totalBill, isDisabled: true, hasBackground: true)
                     VStack(spacing: 4) {
                         Button(action: {
                             print("Round up")
@@ -42,7 +42,7 @@ struct BillOutputView: View {
                 }
             }
             .padding()
-            .background(.htGray)
+            .background(.htGray2)
             .appCornerRadius()
         }
     }
