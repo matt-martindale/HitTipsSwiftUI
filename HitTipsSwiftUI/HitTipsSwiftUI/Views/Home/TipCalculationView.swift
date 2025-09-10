@@ -23,15 +23,15 @@ struct TipCalculationView: View {
     
     @FocusState private var focusedField: FocusedField?
     @State private var showInvalidAmountAlert = false
-
+    
     @State private var billAmount = "0.00"
-    @State private var tipAmount = "0.00"
+    @State private var tipAmount: Double = 0.0
     @State private var party = 1
     @State private var tipPercent = 15
-    @State private var tipPerPerson = "0.00"
-    @State private var pricePerPerson = "0.00"
-    @State private var totalBill = "0.00"
-
+    @State private var tipPerPerson: Double = 0.0
+    @State private var pricePerPerson: Double = 0.0
+    @State private var totalBill: Double = 0.0
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -54,7 +54,7 @@ struct TipCalculationView: View {
                         .onChange(of: party) {
                             calculateTip()
                         }
-                    HTTextField(title: UIStrings.tipAmount, value: $tipAmount, isDisabled: true)
+                    AnimatedNumberView(value: tipAmount, title: UIStrings.tipAmount, hasBackground: false)
                     HTPickerView(selectedNumber: $tipPercent, upperLimit: 99, icon: "percent", iconLeading: false, initialValue: 15)
                         .focused($focusedField, equals: .tipPercent)
                         .onChange(of: tipPercent) {
@@ -62,8 +62,15 @@ struct TipCalculationView: View {
                         }
                 }
                 .padding(.horizontal)
-                BillOutputView(tipPerPerson: $tipPerPerson, pricePerPerson: $pricePerPerson, totalBill: $totalBill)
-                    .padding(.horizontal)
+                BillOutputView(tipPerPerson: $tipPerPerson,
+                               pricePerPerson: $pricePerPerson,
+                               totalBill: $totalBill
+                ) { action in
+                    applyRounding(action)
+                }
+                .padding(.horizontal)
+                
+                // Add Tip roasting level here
                 Spacer()
                 Button {
                     print("Calculate tip")
@@ -79,40 +86,6 @@ struct TipCalculationView: View {
                         .appCornerRadius()
                 }
                 .padding()
-                
-                
-                //                Form {
-                //                    Section("Add Tip") {
-                //                        TextField("Bill Amount", text: $billAmount)
-                //                            .keyboardType(.decimalPad)
-                //
-                //                        Stepper("Party: \(party)", value: $party, in: 1...20)
-                //                        Stepper("Tip %: \(tipPercent)", value: $tipPercent, in: 0...100)
-                //
-                //                        Button("Add Tip") {
-                //                            apiService.callFirebaseApi { response in
-                //                                if let response = response {
-                //                                    responseMessage = response
-                //                                }
-                //                            }
-                //                            addTip()
-                //                        }
-                //                        .buttonStyle(.borderedProminent)
-                //                    }
-                //
-                //                    Section("Tips") {
-                //                        List(tips, id: \.id) { tip in
-                //                            VStack(alignment: .leading) {
-                //                                Text("Bill: \(tip.billAmount)")
-                //                                Text("Tip: \(String(format: "%.2f", tip.tipAmount))")
-                //                                Text("Total: \(String(format: "%.2f", tip.totalBill))")
-                //                                Text("Price/Person: \(String(format: "%.2f", tip.pricePerPerson))")
-                //                                Text("Tip/Person: \(String(format: "%.2f", tip.tipPerPerson))")
-                //                            }
-                //                            .padding(4)
-                //                        }
-                //                    }
-                //                }
             }
             .appCornerRadius()
             .toolbar {
@@ -123,7 +96,9 @@ struct TipCalculationView: View {
                             billAmount = String(format: "%.2f", bill)
                         }
                         focusedField = nil
-                        calculateTip()
+                        withAnimation(.easeInOut(duration: 0.3)) {
+                            calculateTip()
+                        }
                     }
                 }
             }
@@ -142,22 +117,61 @@ struct TipCalculationView: View {
         let total = bill + tipAmountValue
         let pricePerPersonValue = total / Double(party)
         let tipPerPersonValue = tipAmountValue / Double(party)
-
-        totalBill = String(format: "%.2f", total)
-        tipAmount = String(format: "%.2f", tipAmountValue)
-        pricePerPerson = String(format: "%.2f", pricePerPersonValue)
-        tipPerPerson = String(format: "%.2f", tipPerPersonValue)
+        
+        if true {
+            withAnimation(.easeInOut(duration: 1.0)) {
+                tipAmount = tipAmountValue
+                tipPerPerson = tipPerPersonValue
+                pricePerPerson = pricePerPersonValue
+                totalBill = total
+            }
+        } else {
+            tipAmount = tipAmountValue
+            tipPerPerson = tipPerPersonValue
+            pricePerPerson = pricePerPersonValue
+            totalBill = total
+        }
     }
     
-    private func validateAndAddTip() {
-            // Try converting to Double
-            if Double(billAmount) == nil {
-                showInvalidAmountAlert = true
-                return
-            }
-            addTip()
+    private func roundBillAmount() {
+        if let bill = Double(billAmount) {
+            billAmount = String(format: "%.2f", bill)
+        }
+    }
+    
+    private func applyRounding(_ action: ButtonAction) {
+        guard let bill = Double(billAmount) else { return }
+        let tipAmountValue = bill * Double(tipPercent) / 100
+
+        let roundedTipPerPerson: Double
+        switch action {
+        case .roundUp:
+            roundedTipPerPerson = ceil(tipAmountValue / Double(party))
+        case .roundDown:
+            roundedTipPerPerson = floor(tipAmountValue / Double(party))
         }
 
+        let roundedTotal = bill + (roundedTipPerPerson * Double(party))
+        let roundedPricePerPerson = roundedTotal / Double(party)
+
+        withAnimation(.easeInOut(duration: 1.0)) {
+            tipAmount = tipAmountValue
+            tipPerPerson = roundedTipPerPerson
+            pricePerPerson = roundedPricePerPerson
+            totalBill = roundedTotal
+        }
+    }
+
+    
+    private func validateAndAddTip() {
+        // Try converting to Double
+        if Double(billAmount) == nil {
+            showInvalidAmountAlert = true
+            return
+        }
+        addTip()
+    }
+    
     private func addTip() {
         guard let bill = Double(billAmount) else { return }
         let tipAmount = bill * Double(tipPercent) / 100
@@ -181,7 +195,7 @@ struct TipCalculationView: View {
                 print(response)
             }
         }
-            
+        
         context.insert(newTip)
         
         // Reset input fields

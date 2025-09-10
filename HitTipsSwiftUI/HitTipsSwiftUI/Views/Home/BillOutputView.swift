@@ -7,32 +7,43 @@
 
 import SwiftUI
 
+enum ButtonAction {
+    case roundUp
+    case roundDown
+}
+
 struct BillOutputView: View {
-    @Binding var tipPerPerson: String
-    @Binding var pricePerPerson: String
-    @Binding var totalBill: String
+    @Binding var tipPerPerson: Double
+    @Binding var pricePerPerson: Double
+    @Binding var totalBill: Double
+    
+    var onAction: ((ButtonAction) -> Void)?
     
     var body: some View {
         HStack {
-            VStack {
-                HStack {
-                    HTTextField(title: UIStrings.tipPerPerson, value: $tipPerPerson, isDisabled: true, hasBackground: true)
-                    HTTextField(title: UIStrings.pricerPerPerson, value: $pricePerPerson, isDisabled: true, hasBackground: true)
+            VStack(spacing: 8) {
+                // Tip / Price per person
+                HStack(spacing: 16) {
+                    AnimatedNumberView(value: tipPerPerson, title: UIStrings.tipPerPerson)
+                    AnimatedNumberView(value: pricePerPerson, title: UIStrings.pricePerPerson)
                 }
-                HStack {
-                    HTTextField(title: UIStrings.totalBill, value: $totalBill, isDisabled: true, hasBackground: true)
+                
+                // Total and rounding buttons
+                HStack(spacing: 8) {
+                    AnimatedNumberView(value: totalBill, title: UIStrings.totalBill)
+                    
                     VStack(spacing: 4) {
-                        Button(action: {
-                            print("Round up")
-                        }) {
+                        Button {
+                            onAction?(.roundUp)
+                        } label: {
                             Image(systemName: "arrow.up.square")
                                 .font(.HTBody30)
                                 .symbolRenderingMode(.palette)
                                 .foregroundStyle(Color(.label), .htGreen)
                         }
-                        Button(action: {
-                            print("Round down")
-                        }) {
+                        Button {
+                            onAction?(.roundDown)
+                        } label: {
                             Image(systemName: "arrow.down.square")
                                 .font(.HTBody30)
                                 .symbolRenderingMode(.palette)
@@ -41,14 +52,68 @@ struct BillOutputView: View {
                     }
                 }
             }
-            .padding(.vertical)
-            .padding(.horizontal, 8)
+            .padding(.vertical, 12)
+            .padding(.horizontal, 12)
             .background(.htGray2)
             .appCornerRadius()
         }
     }
 }
 
+/// Animatable numeric display
+struct AnimatedNumberView: View {
+    var value: Double
+    var title: String
+    var hasBackground: Bool = true
+    
+    @State private var displayedValue: Double = 0.0
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 2) {
+            Text(String(format: "%.2f", displayedValue))
+                .frame(maxWidth: .infinity)
+                .font(.HTBody20)
+                .padding(.horizontal, 20)
+                .padding(.vertical, 8)
+                .background(hasBackground ? .htGray : .htGray2)
+                .appCornerRadius()
+                .onChange(of: value) { newValue in
+                    animateValueChange(to: newValue)
+                }
+            Text(title)
+                .frame(maxWidth: .infinity)
+                .padding(4)
+                .font(.HTBody12)
+        }
+        .frame(minWidth: 80)
+        .background(hasBackground ? .htGray2 : .clear)
+        .appCornerRadius()
+        .onAppear {
+            displayedValue = value
+        }
+    }
+    
+    private func animateValueChange(to newValue: Double) {
+        // Use a timer to increment or decrement displayedValue gradually
+        let duration: Double = 0.3
+        let steps: Int = 30
+        let current = displayedValue
+        let delta = (newValue - current) / Double(steps)
+        var stepCount = 0
+        
+        Timer.scheduledTimer(withTimeInterval: duration / Double(steps), repeats: true) { timer in
+            stepCount += 1
+            displayedValue += delta
+            if stepCount >= steps {
+                displayedValue = newValue
+                timer.invalidate()
+            }
+        }
+    }
+}
+
+
 #Preview {
-    BillOutputView(tipPerPerson: .constant("12.34"), pricePerPerson: .constant("98.76"), totalBill: .constant("123.45"))
+    BillOutputView(tipPerPerson: .constant(12.34), pricePerPerson: .constant(98.76), totalBill: .constant(123.45))
+    AnimatedNumberView(value: 3.4, title: "Value", hasBackground: false)
 }
