@@ -22,6 +22,7 @@ struct TipCalculationView: View {
     @StateObject var apiService = APIService()
     
     @FocusState private var focusedField: FocusedField?
+    @State private var showInvalidAmountAlert = false
 
     @State private var billAmount = "0.00"
     @State private var tipAmount = "0.00"
@@ -66,7 +67,7 @@ struct TipCalculationView: View {
                 Spacer()
                 Button {
                     print("Calculate tip")
-                    addTip()
+                    validateAndAddTip()
                 } label: {
                     Text("Confirm Tip")
                         .font(.HTBody20)
@@ -118,10 +119,18 @@ struct TipCalculationView: View {
                 ToolbarItemGroup(placement: .keyboard) {
                     Spacer()
                     Button(UIStrings.done) {
+                        if let bill = Double(billAmount) {
+                            billAmount = String(format: "%.2f", bill)
+                        }
                         focusedField = nil
                         calculateTip()
                     }
                 }
+            }
+            .alert("Invalid Amount", isPresented: $showInvalidAmountAlert) {
+                Button("OK", role: .cancel) { }
+            } message: {
+                Text("Please enter a valid bill amount.")
             }
         }
     }
@@ -139,6 +148,15 @@ struct TipCalculationView: View {
         pricePerPerson = String(format: "%.2f", pricePerPersonValue)
         tipPerPerson = String(format: "%.2f", tipPerPersonValue)
     }
+    
+    private func validateAndAddTip() {
+            // Try converting to Double
+            if Double(billAmount) == nil {
+                showInvalidAmountAlert = true
+                return
+            }
+            addTip()
+        }
 
     private func addTip() {
         guard let bill = Double(billAmount) else { return }
@@ -161,7 +179,6 @@ struct TipCalculationView: View {
         context.insert(newTip)
         
         // Reset input fields
-        billAmount = ""
     }
 }
 
