@@ -6,8 +6,12 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct HomeView: View {
+    @Environment(\.modelContext) private var context
+    @Query(sort: \Tip.date, order: .reverse) private var tips: [Tip]
+    
     let viewModel = HomeViewModel()
     
     var body: some View {
@@ -29,7 +33,7 @@ struct HomeView: View {
                     Spacer()
                 }
                 HStack {
-                    TipCalculationView()
+                    TipCalculationView(context: context)
                 }
             }
             .padding()

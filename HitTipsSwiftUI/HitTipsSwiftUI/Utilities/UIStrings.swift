@@ -13,5 +13,6 @@ struct UIStrings {
     static let tipPerPerson = "TIP/PERSON"
     static let pricePerPerson = "PRICE/PERSON"
     static let totalBill = "TOTAL BILL"
+    static let confirmTip = "Confirm tip"
     static let done = "Done"
 }

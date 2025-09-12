@@ -205,21 +205,12 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		C84FC4772E6A232500E13B7A /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				C84FC4902E6A32A400E13B7A /* HomeViewModel.swift */,
-				C852C2822E6E0AF200168117 /* TipCalculationViewModel.swift */,
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
 		C84FC47B2E6A232500E13B7A /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				C84FC48C2E6A2F7200E13B7A /* SplashScreenView.swift */,
 				C84FC4782E6A232500E13B7A /* ContentView.swift */,
-				C84FC48A2E6A23A400E13B7A /* Home */,
+				C84FC48A2E6A23A400E13B7A /* Home Page */,
 				C84FC48B2E6A23AD00E13B7A /* History */,
 			);
 			path = Views;
@@ -229,7 +220,6 @@
 			isa = PBXGroup;
 			children = (
 				C84FC47B2E6A232500E13B7A /* Views */,
-				C84FC4772E6A232500E13B7A /* ViewModels */,
 				C84FC4712E6A232500E13B7A /* Models */,
 				C84FC4892E6A235B00E13B7A /* Utilities */,
 				C84FC4882E6A234E00E13B7A /* Services */,
@@ -261,17 +251,17 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
-		C84FC48A2E6A23A400E13B7A /* Home */ = {
+		C84FC48A2E6A23A400E13B7A /* Home Page */ = {
 			isa = PBXGroup;
 			children = (
-				C84FC47A2E6A232500E13B7A /* HomeView.swift */,
-				C84FC4942E6A3E3600E13B7A /* TipCalculationView.swift */,
+				C852C2BC2E74A92000168117 /* Home */,
+				C852C2BB2E74A90900168117 /* TipCalculation */,
 				C852C2862E6E0EA700168117 /* HTTextField.swift */,
 				C852C28E2E6FAF5900168117 /* HTPickerView.swift */,
 				C852C2962E6FBD0100168117 /* CustomPickerWheel.swift */,
 				C852C2A62E71234F00168117 /* BillOutputView.swift */,
 			);
-			path = Home;
+			path = "Home Page";
 			sourceTree = "<group>";
 		};
 		C84FC48B2E6A23AD00E13B7A /* History */ = {
@@ -280,6 +270,24 @@
 				C84FC4792E6A232500E13B7A /* HistoryView.swift */,
 			);
 			path = History;
+			sourceTree = "<group>";
+		};
+		C852C2BB2E74A90900168117 /* TipCalculation */ = {
+			isa = PBXGroup;
+			children = (
+				C84FC4942E6A3E3600E13B7A /* TipCalculationView.swift */,
+				C852C2822E6E0AF200168117 /* TipCalculationViewModel.swift */,
+			);
+			path = TipCalculation;
+			sourceTree = "<group>";
+		};
+		C852C2BC2E74A92000168117 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				C84FC47A2E6A232500E13B7A /* HomeView.swift */,
+				C84FC4902E6A32A400E13B7A /* HomeViewModel.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
