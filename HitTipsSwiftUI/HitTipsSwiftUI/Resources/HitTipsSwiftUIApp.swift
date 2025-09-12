@@ -9,14 +9,14 @@ import SwiftUI
 import SwiftData
 import Firebase
 
-// Top-level shared ModelContainer
 var sharedModelContainer: ModelContainer = {
     do {
-        return try ModelContainer(for: Tip.self)
+        return try ModelContainer(for: Tip.self, AppSettings.self) // ✅ modern API
     } catch {
         fatalError("Could not create ModelContainer: \(error)")
     }
 }()
+
 
 @main
 struct HitTipsSwiftUIApp: App {

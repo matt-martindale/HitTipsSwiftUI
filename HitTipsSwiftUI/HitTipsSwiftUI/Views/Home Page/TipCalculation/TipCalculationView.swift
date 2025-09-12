@@ -41,13 +41,13 @@ struct TipCalculationView: View {
                         .padding(.horizontal)
                     
                     HStack {
-                        HTPickerView(selectedNumber: $viewModel.party, upperLimit: 99, icon: "person.2.fill", iconLeading: true, initialValue: 1)
+                        HTPickerView(selectedNumber: $viewModel.party, upperLimit: 99, icon: "person.2.fill", iconLeading: true)
                             .focused($focusedField, equals: .party)
                             .onChange(of: viewModel.party) { _ in viewModel.calculateTip() }
                         
                         AnimatedNumberView(value: viewModel.tipAmount, title: UIStrings.tipAmount, hasBackground: false)
                         
-                        HTPickerView(selectedNumber: $viewModel.tipPercent, upperLimit: 99, icon: "percent", iconLeading: false, initialValue: 15)
+                        HTPickerView(selectedNumber: $viewModel.tipPercent, upperLimit: 99, icon: "percent", iconLeading: false)
                             .focused($focusedField, equals: .tipPercent)
                             .onChange(of: viewModel.tipPercent) { _ in viewModel.calculateTip() }
                     }

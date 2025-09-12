@@ -73,6 +73,7 @@
 		C852C2BE2E74B08D00168117 /* LoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C852C2BD2E74B08D00168117 /* LoaderView.swift */; };
 		C852C2BF2E74B08D00168117 /* LoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C852C2BD2E74B08D00168117 /* LoaderView.swift */; };
 		C852C2C02E74B08D00168117 /* LoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C852C2BD2E74B08D00168117 /* LoaderView.swift */; };
+		C852C2C22E74B62500168117 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C852C2C12E74B62500168117 /* AppSettings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -120,6 +121,7 @@
 		C852C2A62E71234F00168117 /* BillOutputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillOutputView.swift; sourceTree = "<group>"; };
 		C852C2AA2E713C3C00168117 /* ViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModifiers.swift; sourceTree = "<group>"; };
 		C852C2BD2E74B08D00168117 /* LoaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderView.swift; sourceTree = "<group>"; };
+		C852C2C12E74B62500168117 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -188,6 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				C84FC4702E6A232500E13B7A /* Tip.swift */,
+				C852C2C12E74B62500168117 /* AppSettings.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -466,6 +469,7 @@
 				C852C2AB2E713C3C00168117 /* ViewModifiers.swift in Sources */,
 				C852C29B2E70977100168117 /* View+.swift in Sources */,
 				C852C2BE2E74B08D00168117 /* LoaderView.swift in Sources */,
+				C852C2C22E74B62500168117 /* AppSettings.swift in Sources */,
 				C84FC48D2E6A2F7200E13B7A /* SplashScreenView.swift in Sources */,
 				C852C2892E6E0EA700168117 /* HTTextField.swift in Sources */,
 				C852C2912E6FAF5900168117 /* HTPickerView.swift in Sources */,

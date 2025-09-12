@@ -16,8 +16,10 @@ struct HTPickerView: View {
     let upperLimit: Int
     let icon: String
     let iconLeading: Bool
+    var initialValue: Int? = nil
     
     private var numbers: [Int] { Array(1...upperLimit).reversed() }
+    @State private var initialized = false
     
     init(selectedNumber: Binding<Int>,
          upperLimit: Int,
@@ -28,10 +30,11 @@ struct HTPickerView: View {
         self.upperLimit = upperLimit
         self.icon = icon
         self.iconLeading = iconLeading
+        self.initialValue = initialValue
         
-        let initialText = initialValue.map { "\($0)" } ?? ""
-        _textFieldValue = State(initialValue: "\(initialText)")
-        _oldTextFieldValue = State(initialValue: "\(initialText)")
+        let startValue = initialValue ?? selectedNumber.wrappedValue
+        _textFieldValue = State(initialValue: "\(startValue)")
+        _oldTextFieldValue = State(initialValue: "\(startValue)")
     }
     
     var body: some View {
@@ -101,6 +104,16 @@ struct HTPickerView: View {
             .background(.htGray2)
         }
         .appCornerRadius()
+        .onAppear {
+                    // Apply initialValue once if provided
+                    if !initialized {
+                        initialized = true
+                        if let initialValue {
+                            selectedNumber = initialValue
+                            textFieldValue = "\(initialValue)"
+                        }
+                    }
+                }
     }
 }
 

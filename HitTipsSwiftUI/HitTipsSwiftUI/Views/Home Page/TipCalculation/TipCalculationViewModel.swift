@@ -11,6 +11,7 @@ import SwiftUI
 
 @MainActor
 class TipCalculationViewModel: ObservableObject {
+    // Existing published properties
     @Published var billAmount = "0.00"
     @Published var tipAmount: Double = 0.0
     @Published var tipPerPerson: Double = 0.0
@@ -22,19 +23,24 @@ class TipCalculationViewModel: ObservableObject {
     @Published var showTipDetailScreen = false
     @Published var isLoading = false
     @Published var loaderMessage = UIStrings.loading
-    
+
     private let apiService: APIService
     private let context: ModelContext
-    
+
     init(apiService: APIService = APIService(), context: ModelContext) {
         self.apiService = apiService
         self.context = context
+        
+        loadLastTipPercentage()  // <-- load saved value on init
     }
     
+    // MARK: - Tip Calculation
     func calculateTip() {
         guard let bill = Double(billAmount) else { return }
         let tipValue = bill * Double(tipPercent) / 100
         let total = bill + tipValue
+        
+        saveLastTipPercentage()
         
         tipAmount = tipValue
         totalBill = total
@@ -60,12 +66,44 @@ class TipCalculationViewModel: ObservableObject {
         pricePerPerson = roundedTotal / Double(party)
     }
     
+    // MARK: - Save/Load Last Tip Percentage
+    private func loadLastTipPercentage() {
+        let request = FetchDescriptor<AppSettings>()
+        do {
+            if let settings = try context.fetch(request).first {
+                tipPercent = settings.lastTipPercentage
+            } else {
+                tipPercent = 15
+            }
+        } catch {
+            print("Failed to fetch last tip percentage:", error)
+            tipPercent = 15
+        }
+    }
+    
+    private func saveLastTipPercentage() {
+        let request = FetchDescriptor<AppSettings>()
+        do {
+            if let existing = try context.fetch(request).first {
+                existing.lastTipPercentage = tipPercent
+            } else {
+                let settings = AppSettings(lastTipPercentage: tipPercent)
+                context.insert(settings)
+            }
+            try context.save()
+        } catch {
+            print("Failed to save last tip percentage:", error)
+        }
+    }
+    
+    // MARK: - Validate & Add Tip
     func validateAndAddTip() {
         guard Double(billAmount) != nil else {
             showInvalidAmountAlert = true
             return
         }
         isLoading = true
+        saveLastTipPercentage()
         addTip()
     }
     
@@ -104,4 +142,5 @@ class TipCalculationViewModel: ObservableObject {
         }
     }
 }
+
 
