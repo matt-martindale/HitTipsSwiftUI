@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct TipDetailView: View {
+    @Environment(\.colorScheme) var colorScheme
     private var tip: Tip?
     
     init(tip: Tip?) {
@@ -15,24 +16,37 @@ struct TipDetailView: View {
     }
     
     var body: some View {
-        VStack {
-            ScrollView {
-                Text(tip?.roast ?? "")
-                    .padding()
-                    .font(.HTBody24)
+        ZStack {
+            GeometryReader { geo in
+                        let width = geo.size.width
+                Image("HitTipsLogoTransparent")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: width)
+                    .rotationEffect(.degrees(15))
+                    .opacity(colorScheme == .dark ? 0.1 : 0.05)
+                    }
+            VStack {
+                Spacer()
+                    .frame(height: 20)
+                ScrollView {
+                    Text(tip?.roast ?? "")
+                        .padding()
+                        .font(.HTBody24)
+                }
+                Spacer()
+                Group {
+                    ReceiptRow(title: UIStrings.billAmountLowercase, value: "$\(tip?.billAmount ?? "")")
+                    ReceiptRow(title: UIStrings.tipAmountLowercase, value: "$\(String(format: "%.2f", tip?.tipAmount ?? ""))")
+                    ReceiptRow(title: UIStrings.tipPercentLowercase, value: "\(tip?.tipPercentage ?? 0)%")
+                    ReceiptRow(title: UIStrings.partyLowercase, value: "\(tip?.party ?? 0)")
+                    ReceiptRow(title: UIStrings.tipPerPersonLowercase, value: "$\(String(format: "%.2f", tip?.tipPerPerson ?? ""))")
+                    ReceiptRow(title: UIStrings.pricePerPersonLowercase, value: "$\(String(format: "%.2f", tip?.pricePerPerson ?? ""))")
+                    ReceiptRow(title: UIStrings.totalBill, value: "$\(String(format: "%.2f", tip?.totalBill ?? ""))")
+                }
             }
-            Spacer()
-            Group {
-                ReceiptRow(title: UIStrings.billAmountLowercase, value: "$\(tip?.billAmount ?? "")")
-                ReceiptRow(title: UIStrings.tipAmountLowercase, value: "$\(String(format: "%.2f", tip?.tipAmount ?? ""))")
-                ReceiptRow(title: UIStrings.tipPercentLowercase, value: "\(tip?.tipPercentage ?? 0)%")
-                ReceiptRow(title: UIStrings.partyLowercase, value: "\(tip?.party ?? 0)")
-                ReceiptRow(title: UIStrings.tipPerPersonLowercase, value: "$\(String(format: "%.2f", tip?.tipPerPerson ?? ""))")
-                ReceiptRow(title: UIStrings.pricePerPersonLowercase, value: "$\(String(format: "%.2f", tip?.pricePerPerson ?? ""))")
-                ReceiptRow(title: UIStrings.totalBill, value: "$\(String(format: "%.2f", tip?.totalBill ?? ""))")
-            }
+            .padding()
         }
-        .padding()
     }
 }
 
