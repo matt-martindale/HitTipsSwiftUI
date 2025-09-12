@@ -105,7 +105,7 @@ struct TipCalculationView: View {
                 }
             }
             .sheet(isPresented: $viewModel.showTipDetailScreen) {
-                HistoryView()
+                TipDetailView(tip: viewModel.tip)
             }
         }
     }

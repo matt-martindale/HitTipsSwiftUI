@@ -11,6 +11,8 @@ import SwiftUI
 
 @MainActor
 class TipCalculationViewModel: ObservableObject {
+    var tip: Tip?
+    var roast: String?
     // Existing published properties
     @Published var billAmount = "0.00"
     @Published var tipAmount: Double = 0.0
@@ -105,15 +107,32 @@ class TipCalculationViewModel: ObservableObject {
         }
         isLoading = true
         saveLastTipPercentage()
-        addTip()
+        fetchRoast()
+    }
+    
+    private func fetchRoast() {
+        loaderMessage = UIStrings.thinkingOfGoodRoast
+        apiService.callFirebaseApi { [weak self] response in
+            if let response = response,
+               let self = self {
+                self.loaderMessage = UIStrings.processingResponse
+                self.roast = response
+                self.addTip()
+                self.isLoading = false
+                self.showTipDetailScreen = true
+                print(response)
+            }
+        }
     }
     
     private func addTip() {
-        guard let bill = Double(billAmount) else { return }
+        guard let bill = Double(billAmount),
+        let roast = roast else { return }
         let tipValue = bill * Double(tipPercent) / 100
         let total = bill + tipValue
         
         let newTip = Tip(
+            roast: roast,
             billAmount: String(format: "%.2f", bill),
             totalBill: total,
             date: Date(),
@@ -123,16 +142,7 @@ class TipCalculationViewModel: ObservableObject {
             tipAmount: tipValue,
             tipPercentage: tipPercent
         )
-        
-        loaderMessage = UIStrings.thinkingOfGoodRoast
-        apiService.callFirebaseApi { [weak self] response in
-            if let response = response {
-                self?.loaderMessage = UIStrings.processingResponse
-                self?.isLoading = false
-                self?.showTipDetailScreen = true
-                print(response)
-            }
-        }
+        self.tip = newTip
         
         context.insert(newTip)
     }

@@ -11,6 +11,7 @@ import Foundation
 @Model
 final class Tip {
     @Attribute(.unique) var id: UUID = UUID()
+    var roast: String
     var billAmount: String
     var totalBill: Double
     var date: Date
@@ -22,6 +23,7 @@ final class Tip {
     var isFavorite: Bool
 
     init(
+        roast: String,
         billAmount: String,
         totalBill: Double,
         date: Date = Date(),
@@ -32,6 +34,7 @@ final class Tip {
         tipPercentage: Int,
         isFavorite: Bool = false
     ) {
+        self.roast = roast
         self.billAmount = billAmount
         self.totalBill = totalBill
         self.date = date

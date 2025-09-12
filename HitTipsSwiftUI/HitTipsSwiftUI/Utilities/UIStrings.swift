@@ -8,9 +8,15 @@
 import Foundation
 
 struct UIStrings {
+    // Loader view
+    static let loading = "Loading..."
+    static let thinkingOfGoodRoast = "Thinking of good roast..."
+    static let processingResponse = "Processing response..."
+    
     // Home page
     static let billAmount = "BILL AMOUNT"
     static let tipAmount = "TIP AMOUNT"
+    static let tipPercent = "TIP PERCENT"
     static let tipPerPerson = "TIP/PERSON"
     static let pricePerPerson = "PRICE/PERSON"
     static let totalBill = "TOTAL BILL"
@@ -20,8 +26,11 @@ struct UIStrings {
     static let invalidAmount = "Invalid Amount"
     static let enterValidAmount = "Please enter a valid bill amount."
     
-    // Loader view
-    static let loading = "Loading..."
-    static let thinkingOfGoodRoast = "Thinking of good roast..."
-    static let processingResponse = "Processing response..."
+    // Tip detail
+    static let billAmountLowercase = "Bill Amount"
+    static let tipAmountLowercase = "Tip Amount"
+    static let tipPercentLowercase = "Tip %"
+    static let partyLowercase = "Party"
+    static let tipPerPersonLowercase = "Tip/Person"
+    static let pricePerPersonLowercase = "Price/Person"
 }

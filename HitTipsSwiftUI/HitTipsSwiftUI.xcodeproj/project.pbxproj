@@ -82,6 +82,9 @@
 		C852C2D22E74D28800168117 /* TipDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C852C2D12E74D28800168117 /* TipDetailView.swift */; };
 		C852C2D32E74D28800168117 /* TipDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C852C2D12E74D28800168117 /* TipDetailView.swift */; };
 		C852C2D42E74D28800168117 /* TipDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C852C2D12E74D28800168117 /* TipDetailView.swift */; };
+		C852C2D62E74D4FB00168117 /* ReceiptRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C852C2D52E74D4FB00168117 /* ReceiptRow.swift */; };
+		C852C2D72E74D4FB00168117 /* ReceiptRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C852C2D52E74D4FB00168117 /* ReceiptRow.swift */; };
+		C852C2D82E74D4FB00168117 /* ReceiptRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C852C2D52E74D4FB00168117 /* ReceiptRow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -133,6 +136,7 @@
 		C852C2C82E74CA8600168117 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C852C2CC2E74CB7F00168117 /* BannerAdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerAdView.swift; sourceTree = "<group>"; };
 		C852C2D12E74D28800168117 /* TipDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipDetailView.swift; sourceTree = "<group>"; };
+		C852C2D52E74D4FB00168117 /* ReceiptRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptRow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -325,6 +329,7 @@
 			isa = PBXGroup;
 			children = (
 				C852C2D12E74D28800168117 /* TipDetailView.swift */,
+				C852C2D52E74D4FB00168117 /* ReceiptRow.swift */,
 			);
 			path = "Tip Detail";
 			sourceTree = "<group>";
@@ -496,6 +501,7 @@
 				C852C2A32E71229200168117 /* UIStrings.swift in Sources */,
 				C84FC47F2E6A232500E13B7A /* ContentView.swift in Sources */,
 				C84FC4802E6A232500E13B7A /* HistoryView.swift in Sources */,
+				C852C2D72E74D4FB00168117 /* ReceiptRow.swift in Sources */,
 				C852C2A02E70DFE300168117 /* UIConstants.swift in Sources */,
 				C84FC4812E6A232500E13B7A /* HomeView.swift in Sources */,
 				C852C2952E6FB53400168117 /* Font+.swift in Sources */,
@@ -531,6 +537,7 @@
 				C852C2CE2E74CB7F00168117 /* BannerAdView.swift in Sources */,
 				C84FC4952E6A3E3600E13B7A /* TipCalculationView.swift in Sources */,
 				C852C2A82E71234F00168117 /* BillOutputView.swift in Sources */,
+				C852C2D82E74D4FB00168117 /* ReceiptRow.swift in Sources */,
 				C84FC4852E6A232500E13B7A /* ContentView.swift in Sources */,
 				C852C2902E6FAF5900168117 /* HTPickerView.swift in Sources */,
 				C84FC4922E6A32A400E13B7A /* HomeViewModel.swift in Sources */,
@@ -546,6 +553,7 @@
 				C84FC4862E6A232500E13B7A /* HomeView.swift in Sources */,
 				C84FC4932E6A32A400E13B7A /* HomeViewModel.swift in Sources */,
 				C852C2842E6E0AF200168117 /* TipCalculationViewModel.swift in Sources */,
+				C852C2D62E74D4FB00168117 /* ReceiptRow.swift in Sources */,
 				C852C2CD2E74CB7F00168117 /* BannerAdView.swift in Sources */,
 				C852C2AC2E713C3C00168117 /* ViewModifiers.swift in Sources */,
 				C852C2982E6FBD0100168117 /* CustomPickerWheel.swift in Sources */,
