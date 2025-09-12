@@ -8,6 +8,7 @@
 import SwiftUI
 import SwiftData
 import Firebase
+import GoogleMobileAds
 
 var sharedModelContainer: ModelContainer = {
     do {
@@ -22,6 +23,7 @@ var sharedModelContainer: ModelContainer = {
 struct HitTipsSwiftUIApp: App {
     
     init() {
+        MobileAds.shared.start()
         FirebaseApp.configure()
     }
     
