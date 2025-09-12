@@ -70,6 +70,9 @@
 		C852C2AB2E713C3C00168117 /* ViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C852C2AA2E713C3C00168117 /* ViewModifiers.swift */; };
 		C852C2AC2E713C3C00168117 /* ViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C852C2AA2E713C3C00168117 /* ViewModifiers.swift */; };
 		C852C2AD2E713C3C00168117 /* ViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C852C2AA2E713C3C00168117 /* ViewModifiers.swift */; };
+		C852C2BE2E74B08D00168117 /* LoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C852C2BD2E74B08D00168117 /* LoaderView.swift */; };
+		C852C2BF2E74B08D00168117 /* LoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C852C2BD2E74B08D00168117 /* LoaderView.swift */; };
+		C852C2C02E74B08D00168117 /* LoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C852C2BD2E74B08D00168117 /* LoaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -116,6 +119,7 @@
 		C852C2A22E71229200168117 /* UIStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStrings.swift; sourceTree = "<group>"; };
 		C852C2A62E71234F00168117 /* BillOutputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillOutputView.swift; sourceTree = "<group>"; };
 		C852C2AA2E713C3C00168117 /* ViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModifiers.swift; sourceTree = "<group>"; };
+		C852C2BD2E74B08D00168117 /* LoaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -212,6 +216,7 @@
 				C84FC4782E6A232500E13B7A /* ContentView.swift */,
 				C84FC48A2E6A23A400E13B7A /* Home Page */,
 				C84FC48B2E6A23AD00E13B7A /* History */,
+				C852C2BD2E74B08D00168117 /* LoaderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -460,6 +465,7 @@
 				C852C2832E6E0AF200168117 /* TipCalculationViewModel.swift in Sources */,
 				C852C2AB2E713C3C00168117 /* ViewModifiers.swift in Sources */,
 				C852C29B2E70977100168117 /* View+.swift in Sources */,
+				C852C2BE2E74B08D00168117 /* LoaderView.swift in Sources */,
 				C84FC48D2E6A2F7200E13B7A /* SplashScreenView.swift in Sources */,
 				C852C2892E6E0EA700168117 /* HTTextField.swift in Sources */,
 				C852C2912E6FAF5900168117 /* HTPickerView.swift in Sources */,
@@ -477,6 +483,7 @@
 				C852C29F2E70DFE300168117 /* UIConstants.swift in Sources */,
 				C852C28D2E6FACD400168117 /* Color+.swift in Sources */,
 				C852C2852E6E0AF200168117 /* TipCalculationViewModel.swift in Sources */,
+				C852C2C02E74B08D00168117 /* LoaderView.swift in Sources */,
 				C852C29D2E70977100168117 /* View+.swift in Sources */,
 				C84FC4842E6A232500E13B7A /* HomeView.swift in Sources */,
 				C852C27D2E6BD2E700168117 /* APIService.swift in Sources */,
@@ -509,6 +516,7 @@
 				C852C27E2E6BD2E700168117 /* APIService.swift in Sources */,
 				C852C28C2E6FACD400168117 /* Color+.swift in Sources */,
 				C852C28F2E6FAF5900168117 /* HTPickerView.swift in Sources */,
+				C852C2BF2E74B08D00168117 /* LoaderView.swift in Sources */,
 				C852C29C2E70977100168117 /* View+.swift in Sources */,
 				C852C2872E6E0EA700168117 /* HTTextField.swift in Sources */,
 			);
