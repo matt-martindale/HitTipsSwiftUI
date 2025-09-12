@@ -118,19 +118,10 @@ struct TipCalculationView: View {
         let pricePerPersonValue = total / Double(party)
         let tipPerPersonValue = tipAmountValue / Double(party)
         
-        if true {
-            withAnimation(.easeInOut(duration: 1.0)) {
-                tipAmount = tipAmountValue
-                tipPerPerson = tipPerPersonValue
-                pricePerPerson = pricePerPersonValue
-                totalBill = total
-            }
-        } else {
-            tipAmount = tipAmountValue
-            tipPerPerson = tipPerPersonValue
-            pricePerPerson = pricePerPersonValue
-            totalBill = total
-        }
+        tipAmount = tipAmountValue
+        tipPerPerson = tipPerPersonValue
+        pricePerPerson = pricePerPersonValue
+        totalBill = total
     }
     
     private func roundBillAmount() {
@@ -141,26 +132,33 @@ struct TipCalculationView: View {
     
     private func applyRounding(_ action: ButtonAction) {
         guard let bill = Double(billAmount) else { return }
-        let tipAmountValue = bill * Double(tipPercent) / 100
-
-        let roundedTipPerPerson: Double
+        
+        // First compute the unrounded total
+        let rawTipAmount = bill * Double(tipPercent) / 100
+        let rawTotal = bill + rawTipAmount
+        
+        // Decide whether to round up or down the total bill
+        let roundedTotal: Double
         switch action {
         case .roundUp:
-            roundedTipPerPerson = ceil(tipAmountValue / Double(party))
+            roundedTotal = ceil(rawTotal)
         case .roundDown:
-            roundedTipPerPerson = floor(tipAmountValue / Double(party))
+            roundedTotal = floor(rawTotal)
         }
-
-        let roundedTotal = bill + (roundedTipPerPerson * Double(party))
-        let roundedPricePerPerson = roundedTotal / Double(party)
-
+        
+        // Recompute tip based on the rounded total
+        let adjustedTip = roundedTotal - bill
+        let tipPerPersonValue = adjustedTip / Double(party)
+        let pricePerPersonValue = roundedTotal / Double(party)
+        
         withAnimation(.easeInOut(duration: 1.0)) {
-            tipAmount = tipAmountValue
-            tipPerPerson = roundedTipPerPerson
-            pricePerPerson = roundedPricePerPerson
-            totalBill = roundedTotal
+            tipAmount = adjustedTip
+            tipPerPerson = tipPerPersonValue
+            pricePerPerson = pricePerPersonValue
+            totalBill = roundedTotal  // 👈 always whole dollar
         }
     }
+
 
     
     private func validateAndAddTip() {
