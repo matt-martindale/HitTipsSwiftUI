@@ -79,6 +79,9 @@
 		C852C2CD2E74CB7F00168117 /* BannerAdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C852C2CC2E74CB7F00168117 /* BannerAdView.swift */; };
 		C852C2CE2E74CB7F00168117 /* BannerAdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C852C2CC2E74CB7F00168117 /* BannerAdView.swift */; };
 		C852C2CF2E74CB7F00168117 /* BannerAdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C852C2CC2E74CB7F00168117 /* BannerAdView.swift */; };
+		C852C2D22E74D28800168117 /* TipDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C852C2D12E74D28800168117 /* TipDetailView.swift */; };
+		C852C2D32E74D28800168117 /* TipDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C852C2D12E74D28800168117 /* TipDetailView.swift */; };
+		C852C2D42E74D28800168117 /* TipDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C852C2D12E74D28800168117 /* TipDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -129,6 +132,7 @@
 		C852C2C12E74B62500168117 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		C852C2C82E74CA8600168117 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C852C2CC2E74CB7F00168117 /* BannerAdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerAdView.swift; sourceTree = "<group>"; };
+		C852C2D12E74D28800168117 /* TipDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -223,11 +227,12 @@
 		C84FC47B2E6A232500E13B7A /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				C852C2CB2E74CB5D00168117 /* Utility Views */,
 				C84FC48C2E6A2F7200E13B7A /* SplashScreenView.swift */,
 				C84FC4782E6A232500E13B7A /* ContentView.swift */,
 				C84FC48A2E6A23A400E13B7A /* Home Page */,
+				C852C2D02E74D27300168117 /* Tip Detail */,
 				C84FC48B2E6A23AD00E13B7A /* History */,
+				C852C2CB2E74CB5D00168117 /* Utility Views */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -273,10 +278,6 @@
 			children = (
 				C852C2BC2E74A92000168117 /* Home */,
 				C852C2BB2E74A90900168117 /* TipCalculation */,
-				C852C2862E6E0EA700168117 /* HTTextField.swift */,
-				C852C28E2E6FAF5900168117 /* HTPickerView.swift */,
-				C852C2962E6FBD0100168117 /* CustomPickerWheel.swift */,
-				C852C2A62E71234F00168117 /* BillOutputView.swift */,
 			);
 			path = "Home Page";
 			sourceTree = "<group>";
@@ -294,6 +295,10 @@
 			children = (
 				C84FC4942E6A3E3600E13B7A /* TipCalculationView.swift */,
 				C852C2822E6E0AF200168117 /* TipCalculationViewModel.swift */,
+				C852C2862E6E0EA700168117 /* HTTextField.swift */,
+				C852C28E2E6FAF5900168117 /* HTPickerView.swift */,
+				C852C2962E6FBD0100168117 /* CustomPickerWheel.swift */,
+				C852C2A62E71234F00168117 /* BillOutputView.swift */,
 			);
 			path = TipCalculation;
 			sourceTree = "<group>";
@@ -314,6 +319,14 @@
 				C852C2CC2E74CB7F00168117 /* BannerAdView.swift */,
 			);
 			path = "Utility Views";
+			sourceTree = "<group>";
+		};
+		C852C2D02E74D27300168117 /* Tip Detail */ = {
+			isa = PBXGroup;
+			children = (
+				C852C2D12E74D28800168117 /* TipDetailView.swift */,
+			);
+			path = "Tip Detail";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -489,6 +502,7 @@
 				C852C27F2E6BD2E700168117 /* APIService.swift in Sources */,
 				C852C2832E6E0AF200168117 /* TipCalculationViewModel.swift in Sources */,
 				C852C2AB2E713C3C00168117 /* ViewModifiers.swift in Sources */,
+				C852C2D22E74D28800168117 /* TipDetailView.swift in Sources */,
 				C852C29B2E70977100168117 /* View+.swift in Sources */,
 				C852C2BE2E74B08D00168117 /* LoaderView.swift in Sources */,
 				C852C2C22E74B62500168117 /* AppSettings.swift in Sources */,
@@ -513,6 +527,7 @@
 				C852C29D2E70977100168117 /* View+.swift in Sources */,
 				C84FC4842E6A232500E13B7A /* HomeView.swift in Sources */,
 				C852C27D2E6BD2E700168117 /* APIService.swift in Sources */,
+				C852C2D32E74D28800168117 /* TipDetailView.swift in Sources */,
 				C852C2CE2E74CB7F00168117 /* BannerAdView.swift in Sources */,
 				C84FC4952E6A3E3600E13B7A /* TipCalculationView.swift in Sources */,
 				C852C2A82E71234F00168117 /* BillOutputView.swift in Sources */,
@@ -545,6 +560,7 @@
 				C852C28C2E6FACD400168117 /* Color+.swift in Sources */,
 				C852C28F2E6FAF5900168117 /* HTPickerView.swift in Sources */,
 				C852C2BF2E74B08D00168117 /* LoaderView.swift in Sources */,
+				C852C2D42E74D28800168117 /* TipDetailView.swift in Sources */,
 				C852C29C2E70977100168117 /* View+.swift in Sources */,
 				C852C2872E6E0EA700168117 /* HTTextField.swift in Sources */,
 			);
