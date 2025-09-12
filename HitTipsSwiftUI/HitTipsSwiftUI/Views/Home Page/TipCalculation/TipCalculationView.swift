@@ -28,6 +28,7 @@ struct TipCalculationView: View {
         LoaderView(isLoading: $viewModel.isLoading, message: $viewModel.loaderMessage) {
             NavigationStack {
                 VStack {
+                    // Bill Amount
                     HTTextField(title: UIStrings.billAmount, value: $viewModel.billAmount, keyboardType: .decimalPad)
                         .focused($focusedField, equals: .billAmount)
                         .onChange(of: focusedField) { newFocus in
@@ -41,18 +42,22 @@ struct TipCalculationView: View {
                         .padding(.horizontal)
                     
                     HStack {
+                        // Party picker
                         HTPickerView(selectedNumber: $viewModel.party, upperLimit: 99, icon: "person.2.fill", iconLeading: true)
                             .focused($focusedField, equals: .party)
                             .onChange(of: viewModel.party) { _ in viewModel.calculateTip() }
                         
+                        // Tip Amount
                         AnimatedNumberView(value: viewModel.tipAmount, title: UIStrings.tipAmount, hasBackground: false)
                         
+                        // Percent picker
                         HTPickerView(selectedNumber: $viewModel.tipPercent, upperLimit: 99, icon: "percent", iconLeading: false)
                             .focused($focusedField, equals: .tipPercent)
                             .onChange(of: viewModel.tipPercent) { _ in viewModel.calculateTip() }
                     }
                     .padding(.horizontal)
                     
+                    //Bill output view
                     BillOutputView(
                         tipPerPerson: $viewModel.tipPerPerson,
                         pricePerPerson: $viewModel.pricePerPerson,
@@ -64,6 +69,7 @@ struct TipCalculationView: View {
                     
                     Spacer()
                     
+                    // Confirm tip button
                     Button {
                         viewModel.validateAndAddTip()
                     } label: {
@@ -107,6 +113,6 @@ struct TipCalculationView: View {
 
 
 #Preview {
-    let container = try! ModelContainer(for: Tip.self)
+    let container = try! ModelContainer(for: Tip.self, AppSettings.self)
     TipCalculationView(context: container.mainContext)
 }

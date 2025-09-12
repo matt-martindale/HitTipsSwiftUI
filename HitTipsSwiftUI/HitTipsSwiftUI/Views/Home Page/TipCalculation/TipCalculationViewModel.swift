@@ -59,6 +59,7 @@ class TipCalculationViewModel: ObservableObject {
         case .roundDown: roundedTotal = floor(rawTotal)
         }
         
+        // Don't update percentage, else total bill won't be whole dollar
         let adjustedTip = roundedTotal - bill
         tipAmount = adjustedTip
         totalBill = roundedTotal

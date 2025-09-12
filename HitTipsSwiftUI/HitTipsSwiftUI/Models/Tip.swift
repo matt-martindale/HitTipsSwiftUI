@@ -19,16 +19,18 @@ final class Tip {
     var tipPerPerson: Double
     var tipAmount: Double
     var tipPercentage: Int
+    var isFavorite: Bool
 
     init(
-        billAmount: String = "",
-        totalBill: Double = 0,
+        billAmount: String,
+        totalBill: Double,
         date: Date = Date(),
-        party: Int = 0,
-        pricePerPerson: Double = 0,
-        tipPerPerson: Double = 0,
-        tipAmount: Double = 0,
-        tipPercentage: Int = 5
+        party: Int,
+        pricePerPerson: Double,
+        tipPerPerson: Double,
+        tipAmount: Double,
+        tipPercentage: Int,
+        isFavorite: Bool = false
     ) {
         self.billAmount = billAmount
         self.totalBill = totalBill
@@ -38,6 +40,7 @@ final class Tip {
         self.tipPerPerson = tipPerPerson
         self.tipAmount = tipAmount
         self.tipPercentage = tipPercentage
+        self.isFavorite = isFavorite
     }
 }
 
