@@ -21,7 +21,7 @@ class TipCalculationViewModel: ObservableObject {
     @Published var showInvalidAmountAlert = false
     @Published var showTipDetailScreen = false
     @Published var isLoading = false
-    @Published var loaderMessage = "Loading..."
+    @Published var loaderMessage = UIStrings.loading
     
     private let apiService: APIService
     private let context: ModelContext
@@ -85,10 +85,10 @@ class TipCalculationViewModel: ObservableObject {
             tipPercentage: tipPercent
         )
         
-        loaderMessage = "Coming up with good roast..."
+        loaderMessage = UIStrings.thinkingOfGoodRoast
         apiService.callFirebaseApi { [weak self] response in
             if let response = response {
-                self?.loaderMessage = "Processing response..."
+                self?.loaderMessage = UIStrings.processingResponse
                 self?.isLoading = false
                 self?.showTipDetailScreen = true
                 print(response)

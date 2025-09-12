@@ -20,18 +20,32 @@ struct LoaderView<Content: View>: View {
 
     var body: some View {
         ZStack {
-            // Your main content
+            // Main content
             content()
             
-            // Overlay loader if isLoading is true
+            // Loader overlay
             if isLoading {
-                ProgressView(message)
-                    .padding(20)
-                    .background(.white)
-                    .cornerRadius(12)
-                    .shadow(radius: 10)
+                // Blocks interaction with background
+                Color.black.opacity(0.001)
+                    .edgesIgnoringSafeArea(.all)
+                    .allowsHitTesting(true) // ensures touches don't pass through
+                
+                VStack(spacing: 16) {
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle(tint: .gray))
+                        .scaleEffect(1.5)
+                    Text(message)
+                        .font(.body)
+                        .foregroundColor(.primary)
+                }
+                .padding(20)
+                .background(.ultraThinMaterial) // modern blur
+                .cornerRadius(12)
+                .shadow(radius: 10)
+                .allowsHitTesting(false) // loader itself does not intercept taps
             }
         }
         .animation(.easeInOut, value: isLoading)
     }
 }
+
