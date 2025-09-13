@@ -30,7 +30,7 @@ struct HTTextField<T: LosslessStringConvertible>: View {
                 .disabled(isDisabled)
                 .keyboardType(keyboardType)
                 .multilineTextAlignment(.center)
-                .font(.HTBody20)
+                .font(.HTMono20)
                 .tint(.htGreen)
                 .background(hasBackground ? .htGray : .htGray2)
                 .appCornerRadius()

@@ -14,4 +14,7 @@ extension Font {
     static let HTBody24 = Font.system(size: 24)
     static let HTBody28 = Font.system(size: 28)
     static let HTBody30 = Font.system(size: 30)
+    
+    // Monospaced
+    static let HTMono20 = Font.system(size: 20, design: .monospaced)
 }

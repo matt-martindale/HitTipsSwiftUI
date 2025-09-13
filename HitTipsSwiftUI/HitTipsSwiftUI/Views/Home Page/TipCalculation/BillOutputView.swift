@@ -72,7 +72,7 @@ struct AnimatedNumberView: View {
         VStack(alignment: .leading, spacing: 2) {
             Text(String(format: "%.2f", displayedValue))
                 .frame(maxWidth: .infinity)
-                .font(.HTBody20)
+                .font(.HTMono20)
                 .padding(.horizontal, 20)
                 .padding(.vertical, 8)
                 .background(hasBackground ? .htGray : .htGray2)

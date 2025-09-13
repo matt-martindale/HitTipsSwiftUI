@@ -43,7 +43,7 @@ struct HTPickerView: View {
                 Picker("", selection: $selectedNumber) {
                     ForEach(numbers, id: \.self) { number in
                         Text("\(number)")
-                            .font(.HTBody20)
+                            .font(.HTMono20)
                             .tag(number as Int?)
                     }
                 }
@@ -65,7 +65,7 @@ struct HTPickerView: View {
                         .keyboardType(.numberPad)
                         .multilineTextAlignment(iconLeading ? .leading : .trailing)
                         .padding(.horizontal, 12)
-                        .font(.HTBody20)
+                        .font(.HTMono20)
                         .background(Color(.htGray))
                         .tint(.htGreen)
                         .appCornerRadius()
