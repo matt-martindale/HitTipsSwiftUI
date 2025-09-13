@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct TipDetailView: View {
-    @Environment(\.colorScheme) var colorScheme
     private var tip: Tip?
     
     init(tip: Tip?) {
@@ -24,7 +23,7 @@ struct TipDetailView: View {
                     .aspectRatio(contentMode: .fill)
                     .frame(width: width)
                     .rotationEffect(.degrees(15))
-                    .opacity(colorScheme == .dark ? 0.1 : 0.05)
+                    .opacity(0.05)
                     }
             VStack {
                 Spacer()
@@ -42,7 +41,7 @@ struct TipDetailView: View {
                     ReceiptRow(title: UIStrings.partyLowercase, value: "\(tip?.party ?? 0)")
                     ReceiptRow(title: UIStrings.tipPerPersonLowercase, value: "$\(String(format: "%.2f", tip?.tipPerPerson ?? ""))")
                     ReceiptRow(title: UIStrings.pricePerPersonLowercase, value: "$\(String(format: "%.2f", tip?.pricePerPerson ?? ""))")
-                    ReceiptRow(title: UIStrings.totalBill, value: "$\(String(format: "%.2f", tip?.totalBill ?? ""))")
+                    ReceiptRow(title: UIStrings.totalBill, value: "$\(String(format: "%.2f", tip?.totalBill ?? ""))", isHighlight: true)
                 }
             }
             .padding()
