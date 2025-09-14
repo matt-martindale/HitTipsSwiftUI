@@ -59,6 +59,7 @@ struct TipDetailView: View {
                 }
             }
             .padding()
+            .padding(.bottom, 20)
         }
     }
     

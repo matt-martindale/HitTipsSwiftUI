@@ -25,6 +25,7 @@ class TipCalculationViewModel: ObservableObject {
     @Published var showTipDetailScreen = false
     @Published var isLoading = false
     @Published var loaderMessage = UIStrings.loading
+    @Published var isTipReadyToShow = false
 
     private let apiService: APIService
     private let context: ModelContext
@@ -119,7 +120,7 @@ class TipCalculationViewModel: ObservableObject {
                 self.roast = response
                 self.addTip()
                 self.isLoading = false
-                self.showTipDetailScreen = true
+                self.isTipReadyToShow = true
                 print(response)
             }
         }
