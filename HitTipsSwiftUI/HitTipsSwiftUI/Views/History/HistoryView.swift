@@ -37,9 +37,9 @@ struct HistoryView: View {
                     List {
                         ForEach(tip) { tip in
                             NavigationLink {
-                                Text("\(tip.billAmount)")
+                                TipDetailView(tip: tip)
                             } label: {
-                                Text("\(tip.billAmount)")
+                                HistoryListItemView(tip: tip)
                             }
                         }
                         .onDelete(perform: deleteItems)
@@ -48,10 +48,6 @@ struct HistoryView: View {
             }
             .navigationTitle("History")
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(role: .destructive) {
                         showingDeleteAllConfirm = true
