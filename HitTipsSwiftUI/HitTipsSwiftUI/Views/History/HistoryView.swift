@@ -11,30 +11,33 @@ import SwiftData
 struct HistoryView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var tip: [Tip]
+    @State private var showingDeleteAllConfirm = false
 
     var body: some View {
         NavigationStack {
             Group {
                 if tip.isEmpty {
+                    // Empty state card
                     VStack {
                         Image(systemName: "newspaper")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 100)
-                            .foregroundStyle(.htGray3)
+                            .foregroundStyle(.gray)
                         Text("No saved tips")
-                            .font(.HTBody24)
-                            .foregroundStyle(.htGray3)
+                            .font(.title2)
+                            .foregroundStyle(.gray)
                     }
                     .padding(30)
-                    .background(.htGray)
-                    .appCornerRadius()
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center) // 👈 centers the card
+                    .background(Color.gray.opacity(0.2))
+                    .cornerRadius(12)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                 } else {
+                    // List of tips
                     List {
                         ForEach(tip) { tip in
                             NavigationLink {
-                                TipDetailView(tip: tip)
+                                Text("\(tip.billAmount)")
                             } label: {
                                 Text("\(tip.billAmount)")
                             }
@@ -43,35 +46,50 @@ struct HistoryView: View {
                     }
                 }
             }
+            .navigationTitle("History")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     EditButton()
                 }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
+                
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(role: .destructive) {
+                        showingDeleteAllConfirm = true
+                    } label: {
+                        Image(systemName: "trash")
                     }
                 }
             }
+            // Delete All confirmation
+            .confirmationDialog(
+                "Are you sure you want to delete all tips?",
+                isPresented: $showingDeleteAllConfirm,
+                titleVisibility: .visible
+            ) {
+                Button("Delete All", role: .destructive) {
+                    deleteAllItems()
+                }
+                Button("Cancel", role: .cancel) {}
+            }
         }
     }
 
-    private func addItem() {
-        withAnimation {
-            let newItem = Tip(roast: "test roast", billAmount: "1", totalBill: 2, date: Date(), party: 1, pricePerPerson: 3, tipPerPerson: 4, tipAmount: 5, tipPercentage: 20)
-            modelContext.insert(newItem)
-        }
-    }
+    // MARK: - Actions
 
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
-            for index in offsets {
-                modelContext.delete(tip[index])
-            }
+            for index in offsets { modelContext.delete(tip[index]) }
+        }
+    }
+
+    private func deleteAllItems() {
+        withAnimation {
+            for item in tip { modelContext.delete(item) }
         }
     }
 }
 
+// MARK: - Preview
 #Preview {
     HistoryView()
         .modelContainer(for: Tip.self, inMemory: true)
