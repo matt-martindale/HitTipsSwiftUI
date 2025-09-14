@@ -37,6 +37,13 @@ class TipCalculationViewModel: ObservableObject {
         loadLastTipPercentage()  // <-- load saved value on init
     }
     
+    var finalTipPercentageForTip: Int {
+        guard let bill = Double(billAmount), bill > 0 else { return tipPercent }
+        let adjustedTip = totalBill - bill
+        let finalPercent = (adjustedTip / bill) * 100
+        return Int(finalPercent.rounded())
+    }
+    
     // MARK: - Tip Calculation
     func calculateTip() {
         guard let bill = Double(billAmount) else { return }
@@ -128,25 +135,25 @@ class TipCalculationViewModel: ObservableObject {
     
     private func addTip() {
         guard let bill = Double(billAmount),
-        let roast = roast else { return }
-        let tipValue = bill * Double(tipPercent) / 100
-        let total = bill + tipValue
+              let roast = roast else { return }
         
+        // Use the displayed tipAmount and totalBill (after rounding) instead of recalculating
         let newTip = Tip(
             roast: roast,
             billAmount: String(format: "%.2f", bill),
-            totalBill: total,
+            totalBill: totalBill,
             date: Date(),
             party: party,
-            pricePerPerson: total / Double(party),
-            tipPerPerson: tipValue / Double(party),
-            tipAmount: tipValue,
-            tipPercentage: tipPercent
+            pricePerPerson: pricePerPerson,
+            tipPerPerson: tipPerPerson,
+            tipAmount: tipAmount,
+            tipPercentage: finalTipPercentageForTip
         )
-        self.tip = newTip
         
+        self.tip = newTip
         context.insert(newTip)
     }
+
     
     func formatBillAmount() {
         if let bill = Double(billAmount) {
