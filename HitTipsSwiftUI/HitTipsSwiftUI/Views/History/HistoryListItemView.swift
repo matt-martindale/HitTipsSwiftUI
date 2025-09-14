@@ -18,6 +18,7 @@ struct HistoryListItemView: View {
         HStack {
             Text(tip.date.toString())
                 .font(.HTBody16)
+            Spacer()
             Text("$" + String(format: "%.2f", tip.totalBill))
                 .font(.HTBody16)
             Spacer()
@@ -25,8 +26,8 @@ struct HistoryListItemView: View {
                 .font(.HTBody16)
             Image(systemName: "heart.fill")
                 .foregroundStyle(.htRed)
-                .font(.HTBody16)
-                .frame(width: 30)
+                .font(.HTBody14)
+                .frame(width: 20)
                 .opacity(tip.isFavorite ? 1 : 0)
         }
     }

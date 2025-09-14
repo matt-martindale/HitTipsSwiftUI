@@ -24,13 +24,13 @@ struct BillOutputView: View {
             VStack(spacing: 8) {
                 // Tip / Price per person
                 HStack(spacing: 16) {
-                    AnimatedNumberView(value: tipPerPerson, title: UIStrings.tipPerPerson)
-                    AnimatedNumberView(value: pricePerPerson, title: UIStrings.pricePerPerson)
+                    AnimatedNumberView(value: tipPerPerson, title: UIStrings.tipPerPersonCap)
+                    AnimatedNumberView(value: pricePerPerson, title: UIStrings.pricePerPersonCap)
                 }
                 
                 // Total and rounding buttons
                 HStack(spacing: 8) {
-                    AnimatedNumberView(value: totalBill, title: UIStrings.totalBill)
+                    AnimatedNumberView(value: totalBill, title: UIStrings.totalBillCap)
                     
                     VStack(spacing: 4) {
                         Button {

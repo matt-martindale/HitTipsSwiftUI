@@ -55,7 +55,7 @@ struct TipDetailView: View {
                     ReceiptRow(title: UIStrings.partyLowercase, value: "\(tip.party)")
                     ReceiptRow(title: UIStrings.tipPerPersonLowercase, value: "$\(String(format: "%.2f", tip.tipPerPerson))")
                     ReceiptRow(title: UIStrings.pricePerPersonLowercase, value: "$\(String(format: "%.2f", tip.pricePerPerson))")
-                    ReceiptRow(title: UIStrings.totalBill, value: "$\(String(format: "%.2f", tip.totalBill))", isHighlight: true)
+                    ReceiptRow(title: UIStrings.totalBillCap, value: "$\(String(format: "%.2f", tip.totalBill))", isHighlight: true)
                 }
             }
             .padding()

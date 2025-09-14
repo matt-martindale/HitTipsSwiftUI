@@ -14,12 +14,12 @@ struct UIStrings {
     static let processingResponse = "Processing response..."
     
     // Home page
-    static let billAmount = "BILL AMOUNT"
-    static let tipAmount = "TIP AMOUNT"
-    static let tipPercent = "TIP PERCENT"
-    static let tipPerPerson = "TIP/PERSON"
-    static let pricePerPerson = "PRICE/PERSON"
-    static let totalBill = "TOTAL BILL"
+    static let billAmountCap = "BILL AMOUNT"
+    static let tipAmountCap = "TIP AMOUNT"
+    static let tipPercentCap = "TIP PERCENT"
+    static let tipPerPersonCap = "TIP/PERSON"
+    static let pricePerPersonCap = "PRICE/PERSON"
+    static let totalBillCap = "TOTAL BILL"
     static let confirmTip = "Confirm tip"
     static let done = "Done"
     static let ok = "OK"
@@ -33,4 +33,9 @@ struct UIStrings {
     static let partyLowercase = "Party"
     static let tipPerPersonLowercase = "Tip/Person"
     static let pricePerPersonLowercase = "Price/Person"
+    
+    // History
+    static let date = "Date"
+    static let totalBill = "Total Bill"
+    static let percent = "Percent"
 }

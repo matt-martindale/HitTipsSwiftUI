@@ -35,14 +35,19 @@ struct HistoryView: View {
                 } else {
                     // List of tips
                     List {
-                        ForEach(tip) { tip in
-                            NavigationLink {
-                                TipDetailView(tip: tip)
-                            } label: {
-                                HistoryListItemView(tip: tip)
+                        Section(header: HistoryViewHeaderView()
+                            .foregroundStyle(.gray)
+                            .padding(.vertical, 4)
+                        ) {
+                            ForEach(tip) { tip in
+                                NavigationLink {
+                                    TipDetailView(tip: tip)
+                                } label: {
+                                    HistoryListItemView(tip: tip)
+                                }
                             }
+                            .onDelete(perform: deleteItems)
                         }
-                        .onDelete(perform: deleteItems)
                     }
                 }
             }

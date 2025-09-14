@@ -29,7 +29,7 @@ struct TipCalculationView: View {
             NavigationStack {
                 VStack {
                     // Bill Amount
-                    HTTextField(title: UIStrings.billAmount, value: $viewModel.billAmount, keyboardType: .decimalPad)
+                    HTTextField(title: UIStrings.billAmountCap, value: $viewModel.billAmount, keyboardType: .decimalPad)
                         .focused($focusedField, equals: .billAmount)
                         .onChange(of: focusedField) { newFocus in
                             if newFocus == .billAmount && viewModel.billAmount == "0.00" {
@@ -48,7 +48,7 @@ struct TipCalculationView: View {
                             .onChange(of: viewModel.party) { _ in viewModel.calculateTip() }
                         
                         // Tip Amount
-                        AnimatedNumberView(value: viewModel.tipAmount, title: UIStrings.tipAmount, hasBackground: false)
+                        AnimatedNumberView(value: viewModel.tipAmount, title: UIStrings.tipAmountCap, hasBackground: false)
                         
                         // Percent picker
                         HTPickerView(selectedNumber: $viewModel.tipPercent, upperLimit: 99, icon: "percent", iconLeading: false)

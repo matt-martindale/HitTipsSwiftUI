@@ -89,6 +89,7 @@
 		C852C2E02E772CE800168117 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C852C2DF2E772CE800168117 /* Date+.swift */; };
 		C852C2E12E772CE800168117 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C852C2DF2E772CE800168117 /* Date+.swift */; };
 		C852C2E22E772CE800168117 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C852C2DF2E772CE800168117 /* Date+.swift */; };
+		C852C2E42E773D2E00168117 /* HistoryViewHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C852C2E32E773D2E00168117 /* HistoryViewHeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -143,6 +144,7 @@
 		C852C2D52E74D4FB00168117 /* ReceiptRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptRow.swift; sourceTree = "<group>"; };
 		C852C2D92E772C1A00168117 /* HistoryListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryListItemView.swift; sourceTree = "<group>"; };
 		C852C2DF2E772CE800168117 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
+		C852C2E32E773D2E00168117 /* HistoryViewHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -296,6 +298,7 @@
 		C84FC48B2E6A23AD00E13B7A /* History */ = {
 			isa = PBXGroup;
 			children = (
+				C852C2E32E773D2E00168117 /* HistoryViewHeaderView.swift */,
 				C84FC4792E6A232500E13B7A /* HistoryView.swift */,
 				C852C2D92E772C1A00168117 /* HistoryListItemView.swift */,
 			);
@@ -525,6 +528,7 @@
 				C84FC48D2E6A2F7200E13B7A /* SplashScreenView.swift in Sources */,
 				C852C2892E6E0EA700168117 /* HTTextField.swift in Sources */,
 				C852C2912E6FAF5900168117 /* HTPickerView.swift in Sources */,
+				C852C2E42E773D2E00168117 /* HistoryViewHeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
