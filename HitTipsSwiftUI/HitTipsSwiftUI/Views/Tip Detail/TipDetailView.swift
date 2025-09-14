@@ -8,11 +8,12 @@
 import SwiftUI
 
 struct TipDetailView: View {
-    private var tip: Tip?
-    
-    init(tip: Tip?) {
-        self.tip = tip
-    }
+    @Environment(\.modelContext) private var modelContext
+    @Bindable private var tip: Tip
+        
+        init(tip: Tip) {
+            self._tip = Bindable(wrappedValue: tip)
+        }
     
     var body: some View {
         ZStack {
@@ -26,26 +27,46 @@ struct TipDetailView: View {
                     .opacity(0.05)
                     }
             VStack {
-                Spacer()
-                    .frame(height: 20)
+                HStack() {
+                    Spacer()
+                    Button {
+                        favoriteTapped()
+                    } label: {
+                        Image(systemName: tip.isFavorite ? "heart.fill" : "heart")
+                            .foregroundStyle(.htRed)
+                            .font(.HTBody24)
+                    }
+                }
+                .frame(height: 20)
                 ScrollView {
-                    Text(tip?.roast ?? "")
+                    Text(tip.roast)
                         .padding()
                         .font(.HTBody24)
                 }
                 Spacer()
                 Group {
-                    ReceiptRow(title: UIStrings.billAmountLowercase, value: "$\(tip?.billAmount ?? "")")
-                    ReceiptRow(title: UIStrings.tipAmountLowercase, value: "$\(String(format: "%.2f", tip?.tipAmount ?? ""))")
-                    ReceiptRow(title: UIStrings.tipPercentLowercase, value: "\(tip?.tipPercentage ?? 0)%")
-                    ReceiptRow(title: UIStrings.partyLowercase, value: "\(tip?.party ?? 0)")
-                    ReceiptRow(title: UIStrings.tipPerPersonLowercase, value: "$\(String(format: "%.2f", tip?.tipPerPerson ?? ""))")
-                    ReceiptRow(title: UIStrings.pricePerPersonLowercase, value: "$\(String(format: "%.2f", tip?.pricePerPerson ?? ""))")
-                    ReceiptRow(title: UIStrings.totalBill, value: "$\(String(format: "%.2f", tip?.totalBill ?? ""))", isHighlight: true)
+                    ReceiptRow(title: UIStrings.billAmountLowercase, value: "$\(tip.billAmount)")
+                    ReceiptRow(title: UIStrings.tipAmountLowercase, value: "$\(String(format: "%.2f", tip.tipAmount))")
+                    ReceiptRow(title: UIStrings.tipPercentLowercase, value: "\(tip.tipPercentage)%")
+                    ReceiptRow(title: UIStrings.partyLowercase, value: "\(tip.party)")
+                    ReceiptRow(title: UIStrings.tipPerPersonLowercase, value: "$\(String(format: "%.2f", tip.tipPerPerson))")
+                    ReceiptRow(title: UIStrings.pricePerPersonLowercase, value: "$\(String(format: "%.2f", tip.pricePerPerson))")
+                    ReceiptRow(title: UIStrings.totalBill, value: "$\(String(format: "%.2f", tip.totalBill))", isHighlight: true)
                 }
             }
             .padding()
         }
+    }
+    
+    private func favoriteTapped() {
+        tip.isFavorite.toggle()
+        
+        do {
+                try modelContext.save() // Persist changes
+                print("Tip favorite state saved!")
+            } catch {
+                print("Failed to save tip: \(error.localizedDescription)")
+            }
     }
 }
 

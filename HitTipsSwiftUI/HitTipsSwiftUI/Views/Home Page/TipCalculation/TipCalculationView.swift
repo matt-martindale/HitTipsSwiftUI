@@ -105,7 +105,7 @@ struct TipCalculationView: View {
                 }
             }
             .sheet(isPresented: $viewModel.showTipDetailScreen) {
-                TipDetailView(tip: viewModel.tip)
+                TipDetailView(tip: viewModel.tip ?? Tip.defaultTip())
             }
         }
     }

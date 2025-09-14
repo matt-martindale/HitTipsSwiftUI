@@ -9,7 +9,7 @@ import SwiftData
 import Foundation
 
 @Model
-final class Tip {
+final class Tip: Identifiable {
     @Attribute(.unique) var id: UUID = UUID()
     var roast: String
     var billAmount: String
@@ -45,6 +45,19 @@ final class Tip {
         self.tipPercentage = tipPercentage
         self.isFavorite = isFavorite
     }
+    
+    static func defaultTip() -> Tip {
+            return Tip(
+                roast: "No tip selected",
+                billAmount: "0.00",
+                totalBill: 0.0,
+                party: 1,
+                pricePerPerson: 0.0,
+                tipPerPerson: 0.0,
+                tipAmount: 0.0,
+                tipPercentage: 0
+            )
+        }
 }
 
 
