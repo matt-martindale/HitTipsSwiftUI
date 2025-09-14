@@ -10,7 +10,7 @@ import SwiftData
 
 struct HistoryView: View {
     @Environment(\.modelContext) private var modelContext
-    @Query private var tip: [Tip]
+    @Query(sort: \Tip.date, order: .reverse) private var tip: [Tip]
     @State private var showingDeleteAllConfirm = false
 
     var body: some View {
