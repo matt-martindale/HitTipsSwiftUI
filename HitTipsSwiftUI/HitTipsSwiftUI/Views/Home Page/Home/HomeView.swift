@@ -38,6 +38,7 @@ struct HomeView: View {
             }
             .padding()
         }
+        .tint(.primary)
     }
 }
 

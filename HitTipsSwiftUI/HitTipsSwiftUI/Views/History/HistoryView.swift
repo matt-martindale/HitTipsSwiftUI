@@ -58,6 +58,7 @@ struct HistoryView: View {
                         showingDeleteAllConfirm = true
                     } label: {
                         Image(systemName: "trash")
+                            .tint(.primary)
                     }
                 }
             }
@@ -73,6 +74,7 @@ struct HistoryView: View {
                 Button("Cancel", role: .cancel) {}
             }
         }
+        .tint(.primary)
     }
 
     // MARK: - Actions

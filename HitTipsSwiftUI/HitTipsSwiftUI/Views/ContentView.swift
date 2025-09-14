@@ -23,6 +23,7 @@ struct ContentView: View {
                 HistoryView()
             }
         }
+        .tint(.primary)
     }
 }
 
