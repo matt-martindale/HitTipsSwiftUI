@@ -14,15 +14,34 @@ struct HistoryView: View {
 
     var body: some View {
         NavigationStack {
-            List {
-                ForEach(tip) { tip in
-                    NavigationLink {
-                        Text("Item at \(tip.date)")
-                    } label: {
-                        Text("\(tip.billAmount)")
+            Group {
+                if tip.isEmpty {
+                    VStack {
+                        Image(systemName: "newspaper")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 100)
+                            .foregroundStyle(.htGray3)
+                        Text("No saved tips")
+                            .font(.HTBody24)
+                            .foregroundStyle(.htGray3)
+                    }
+                    .padding(30)
+                    .background(.htGray)
+                    .appCornerRadius()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center) // 👈 centers the card
+                } else {
+                    List {
+                        ForEach(tip) { tip in
+                            NavigationLink {
+                                TipDetailView(tip: tip)
+                            } label: {
+                                Text("\(tip.billAmount)")
+                            }
+                        }
+                        .onDelete(perform: deleteItems)
                     }
                 }
-                .onDelete(perform: deleteItems)
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
