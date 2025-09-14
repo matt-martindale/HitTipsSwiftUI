@@ -10,6 +10,7 @@ import SwiftUI
 struct TipDetailView: View {
     @Environment(\.modelContext) private var modelContext
     @Bindable private var tip: Tip
+    @State private var animateHeart: Bool = false
         
         init(tip: Tip) {
             self._tip = Bindable(wrappedValue: tip)
@@ -35,6 +36,9 @@ struct TipDetailView: View {
                         Image(systemName: tip.isFavorite ? "heart.fill" : "heart")
                             .foregroundStyle(.htRed)
                             .font(.HTBody24)
+                            .scaleEffect(animateHeart ? 1.4 : 1)
+                            .opacity(tip.isFavorite ? 1 : 0.5)
+                            .animation(.spring(response: 0.3, dampingFraction: 0.5), value: animateHeart)
                     }
                 }
                 .frame(height: 20)
@@ -61,12 +65,23 @@ struct TipDetailView: View {
     private func favoriteTapped() {
         tip.isFavorite.toggle()
         
+        withAnimation {
+            animateHeart = true
+        }
+        
+        // Bounce: shrink back after 0.2s
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                    withAnimation(.spring(response: 0.3, dampingFraction: 0.5)) {
+                        animateHeart = false
+                    }
+                }
+        
         do {
-                try modelContext.save() // Persist changes
-                print("Tip favorite state saved!")
-            } catch {
-                print("Failed to save tip: \(error.localizedDescription)")
-            }
+            try modelContext.save() // Persist changes
+            print("Tip favorite state saved!")
+        } catch {
+            print("Failed to save tip: \(error.localizedDescription)")
+        }
     }
 }
 
