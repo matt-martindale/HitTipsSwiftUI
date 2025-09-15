@@ -93,6 +93,9 @@
 		C8DB23992E7763D900F852FF /* InterstitialAdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8DB23982E7763D900F852FF /* InterstitialAdManager.swift */; };
 		C8DB239A2E7763D900F852FF /* InterstitialAdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8DB23982E7763D900F852FF /* InterstitialAdManager.swift */; };
 		C8DB239B2E7763D900F852FF /* InterstitialAdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8DB23982E7763D900F852FF /* InterstitialAdManager.swift */; };
+		C8DB239D2E77922100F852FF /* HTAdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8DB239C2E77922100F852FF /* HTAdManager.swift */; };
+		C8DB239E2E77922100F852FF /* HTAdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8DB239C2E77922100F852FF /* HTAdManager.swift */; };
+		C8DB239F2E77922100F852FF /* HTAdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8DB239C2E77922100F852FF /* HTAdManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -149,6 +152,7 @@
 		C852C2DF2E772CE800168117 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		C852C2E32E773D2E00168117 /* HistoryViewHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewHeaderView.swift; sourceTree = "<group>"; };
 		C8DB23982E7763D900F852FF /* InterstitialAdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterstitialAdManager.swift; sourceTree = "<group>"; };
+		C8DB239C2E77922100F852FF /* HTAdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTAdManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -287,6 +291,7 @@
 				C852C2A22E71229200168117 /* UIStrings.swift */,
 				C852C2AA2E713C3C00168117 /* ViewModifiers.swift */,
 				C852C2DF2E772CE800168117 /* Date+.swift */,
+				C8DB239C2E77922100F852FF /* HTAdManager.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -512,6 +517,7 @@
 				C852C2992E6FBD0100168117 /* CustomPickerWheel.swift in Sources */,
 				C852C28B2E6FACD400168117 /* Color+.swift in Sources */,
 				C84FC47E2E6A232500E13B7A /* HitTipsSwiftUIApp.swift in Sources */,
+				C8DB239E2E77922100F852FF /* HTAdManager.swift in Sources */,
 				C84FC4972E6A3E3600E13B7A /* TipCalculationView.swift in Sources */,
 				C84FC4912E6A32A400E13B7A /* HomeViewModel.swift in Sources */,
 				C852C2A32E71229200168117 /* UIStrings.swift in Sources */,
@@ -557,6 +563,7 @@
 				C852C2D32E74D28800168117 /* TipDetailView.swift in Sources */,
 				C852C2CE2E74CB7F00168117 /* BannerAdView.swift in Sources */,
 				C84FC4952E6A3E3600E13B7A /* TipCalculationView.swift in Sources */,
+				C8DB239F2E77922100F852FF /* HTAdManager.swift in Sources */,
 				C852C2A82E71234F00168117 /* BillOutputView.swift in Sources */,
 				C852C2D82E74D4FB00168117 /* ReceiptRow.swift in Sources */,
 				C8DB239A2E7763D900F852FF /* InterstitialAdManager.swift in Sources */,
@@ -588,6 +595,7 @@
 				C852C2A52E71229200168117 /* UIStrings.swift in Sources */,
 				C852C2E12E772CE800168117 /* Date+.swift in Sources */,
 				C852C27E2E6BD2E700168117 /* APIService.swift in Sources */,
+				C8DB239D2E77922100F852FF /* HTAdManager.swift in Sources */,
 				C852C28C2E6FACD400168117 /* Color+.swift in Sources */,
 				C852C28F2E6FAF5900168117 /* HTPickerView.swift in Sources */,
 				C852C2BF2E74B08D00168117 /* LoaderView.swift in Sources */,

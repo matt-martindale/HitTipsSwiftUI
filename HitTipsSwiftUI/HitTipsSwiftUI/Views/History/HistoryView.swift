@@ -7,12 +7,13 @@
 
 import SwiftUI
 import SwiftData
+import GoogleMobileAds
 
 struct HistoryView: View {
     @Environment(\.modelContext) private var modelContext
     @Query(sort: \Tip.date, order: .reverse) private var tip: [Tip]
     @State private var showingDeleteAllConfirm = false
-
+    
     var body: some View {
         NavigationStack {
             Group {
@@ -73,18 +74,23 @@ struct HistoryView: View {
                 }
                 Button("Cancel", role: .cancel) {}
             }
+            // Banner ad
+            BannerAdView(adUnitID: HTAdManager.historyAdBanner)
+                .frame(height: 50)
+                .frame(maxWidth: .infinity)
+                .padding(.horizontal)
         }
         .tint(.primary)
     }
-
+    
     // MARK: - Actions
-
+    
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
             for index in offsets { modelContext.delete(tip[index]) }
         }
     }
-
+    
     private func deleteAllItems() {
         withAnimation {
             for item in tip { modelContext.delete(item) }

@@ -29,8 +29,3 @@ struct BannerAdView: UIViewRepresentable {
             .first { $0.isKeyWindow }?.rootViewController
     }
 }
-
-
-#Preview {
-    BannerAdView(adUnitID: "ca-app-pub-3940256099942544/2934735716")
-}

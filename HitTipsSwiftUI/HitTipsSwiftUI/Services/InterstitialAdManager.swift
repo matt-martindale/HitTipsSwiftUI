@@ -11,7 +11,7 @@ import SwiftUI
 
 class InterstitialAdManager: NSObject, ObservableObject, FullScreenContentDelegate {
     private var interstitial: InterstitialAd?
-    private let adUnitID = "ca-app-pub-3940256099942544/4411468910" // test ID
+    private let adUnitID = HTAdManager.homeInterstitialAd
     @Published var isAdReady = false
     private var onAdDismissed: (() -> Void)?
 
