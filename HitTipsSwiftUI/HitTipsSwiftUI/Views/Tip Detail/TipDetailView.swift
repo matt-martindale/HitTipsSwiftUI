@@ -11,43 +11,65 @@ struct TipDetailView: View {
     @Environment(\.modelContext) private var modelContext
     @Bindable private var tip: Tip
     @State private var animateHeart: Bool = false
-        
-        init(tip: Tip) {
-            self._tip = Bindable(wrappedValue: tip)
-        }
-    
+
+    init(tip: Tip) {
+        self._tip = Bindable(wrappedValue: tip)
+    }
+
     var body: some View {
         ZStack {
+            // Faint background logo
             GeometryReader { geo in
-                        let width = geo.size.width
                 Image("HitTipsLogoTransparent")
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-                    .frame(width: width)
+                    .frame(width: geo.size.width)
                     .rotationEffect(.degrees(15))
                     .opacity(0.05)
-                    }
+            }
+
             VStack {
-                HStack() {
+                HStack {
                     Spacer()
-                    Button {
-                        favoriteTapped()
-                    } label: {
-                        Image(systemName: tip.isFavorite ? "heart.fill" : "heart")
-                            .foregroundStyle(.htRed)
-                            .font(.HTBody24)
-                            .scaleEffect(animateHeart ? 1.4 : 1)
-                            .opacity(tip.isFavorite ? 1 : 0.5)
-                            .animation(.spring(response: 0.3, dampingFraction: 0.5), value: animateHeart)
+                    HStack(spacing: 8) {
+                        // Favorite button
+                        Button {
+                            favoriteTapped()
+                        } label: {
+                            Image(systemName: tip.isFavorite ? "heart.fill" : "heart")
+                                .foregroundStyle(.htRed)
+                                .font(.HTBody22)
+                                .scaleEffect(animateHeart ? 1.4 : 1)
+                                .opacity(tip.isFavorite ? 1 : 0.5)
+                                .animation(.spring(response: 0.3, dampingFraction: 0.5), value: animateHeart)
+                        }
+
+                        // Share button
+                        Button {
+                            shareTapped()
+                        } label: {
+                            Image(systemName: "square.and.arrow.up")
+                                .tint(.primary)
+                                .font(.HTBody20)
+                                .offset(y: -3)
+                        }
                     }
+                    .padding(6)
+                    .padding(.horizontal, 4)
+                    .background(.htGray)
+                    .appCornerRadius()
                 }
-                .frame(height: 20)
+                .frame(height: 15)
+                .padding(.top)
+
                 ScrollView {
                     Text(tip.roast)
                         .padding()
                         .font(.HTBody24)
                 }
+
                 Spacer()
+
                 Group {
                     ReceiptRow(title: UIStrings.billAmountLowercase, value: "$\(tip.billAmount)")
                     ReceiptRow(title: UIStrings.tipAmountLowercase, value: "$\(String(format: "%.2f", tip.tipAmount))")
@@ -55,37 +77,73 @@ struct TipDetailView: View {
                     ReceiptRow(title: UIStrings.partyLowercase, value: "\(tip.party)")
                     ReceiptRow(title: UIStrings.tipPerPersonLowercase, value: "$\(String(format: "%.2f", tip.tipPerPerson))")
                     ReceiptRow(title: UIStrings.pricePerPersonLowercase, value: "$\(String(format: "%.2f", tip.pricePerPerson))")
-                    ReceiptRow(title: UIStrings.totalBillCap, value: "$\(String(format: "%.2f", tip.totalBill))", isHighlight: true)
+                    ReceiptRow(title: UIStrings.totalBillCap,
+                               value: "$\(String(format: "%.2f", tip.totalBill))",
+                               isHighlight: true)
                 }
             }
             .padding()
             .padding(.bottom, 20)
         }
     }
-    
+
+    // MARK: - Actions
+
     private func favoriteTapped() {
         tip.isFavorite.toggle()
-        
+
         withAnimation {
             animateHeart = true
         }
-        
-        // Bounce: shrink back after 0.2s
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                    withAnimation(.spring(response: 0.3, dampingFraction: 0.5)) {
-                        animateHeart = false
-                    }
-                }
-        
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            withAnimation(.spring(response: 0.3, dampingFraction: 0.5)) {
+                animateHeart = false
+            }
+        }
+
         do {
-            try modelContext.save() // Persist changes
-            print("Tip favorite state saved!")
+            try modelContext.save()
         } catch {
             print("Failed to save tip: \(error.localizedDescription)")
         }
     }
+
+    private func shareTapped() {
+        // Temporary hosting controller
+        let hostingController = UIHostingController(rootView: self)
+        hostingController.view.bounds = UIScreen.main.bounds
+        
+        // IMPORTANT: set a background so colors render correctly
+        hostingController.view.backgroundColor = UIColor.systemBackground
+
+        let renderer = UIGraphicsImageRenderer(size: hostingController.view.bounds.size)
+        let image = renderer.image { _ in
+            hostingController.view.drawHierarchy(in: hostingController.view.bounds, afterScreenUpdates: true)
+        }
+
+        let activityVC = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+
+        if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let rootVC = scene.windows.first?.rootViewController {
+            rootVC.present(activityVC, animated: true)
+        }
+    }
+
 }
 
 #Preview {
-    TipDetailView(tip: Tip(roast: "That tip was so small, it could fit in a fortune cookie and still leave the waiter wondering what he did wrong!", billAmount: "100.00", totalBill: 110.00, party: 2, pricePerPerson: 50, tipPerPerson: 5.25, tipAmount: 10, tipPercentage: 10))
+    TipDetailView(
+        tip: Tip(
+            roast: "That tip was so small, it could fit in a fortune cookie and still leave the waiter wondering what he did wrong!",
+            billAmount: "100.00",
+            totalBill: 110.00,
+            party: 2,
+            pricePerPerson: 50,
+            tipPerPerson: 5.25,
+            tipAmount: 10,
+            tipPercentage: 10
+        )
+    )
 }
+
