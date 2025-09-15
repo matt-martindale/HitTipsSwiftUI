@@ -17,74 +17,72 @@ struct TipDetailView: View {
     }
 
     var body: some View {
-        ZStack {
-            // Faint background logo
-            GeometryReader { geo in
-                Image("HitTipsLogoTransparent")
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: geo.size.width)
-                    .rotationEffect(.degrees(15))
-                    .opacity(0.05)
-            }
-
-            VStack {
-                HStack {
-                    Spacer()
-                    HStack(spacing: 8) {
-                        // Favorite button
-                        Button {
-                            favoriteTapped()
-                        } label: {
-                            Image(systemName: tip.isFavorite ? "heart.fill" : "heart")
-                                .foregroundStyle(.htRed)
-                                .font(.HTBody22)
-                                .scaleEffect(animateHeart ? 1.4 : 1)
-                                .opacity(tip.isFavorite ? 1 : 0.5)
-                                .animation(.spring(response: 0.3, dampingFraction: 0.5), value: animateHeart)
-                        }
-
-                        // Share button
-                        Button {
-                            shareTapped()
-                        } label: {
-                            Image(systemName: "square.and.arrow.up")
-                                .tint(.primary)
-                                .font(.HTBody20)
-                                .offset(y: -3)
-                        }
-                    }
-                    .padding(6)
-                    .padding(.horizontal, 4)
-                    .background(.htGray)
-                    .appCornerRadius()
-                }
-                .frame(height: 15)
-                .padding(.top)
-
-                ScrollView {
-                    Text(tip.roast)
-                        .padding()
-                        .font(.HTBody24)
-                }
-
+        VStack(spacing: 16) {
+            // Top buttons
+            HStack {
                 Spacer()
+                HStack(spacing: 8) {
+                    // Favorite button
+                    Button {
+                        favoriteTapped()
+                    } label: {
+                        Image(systemName: tip.isFavorite ? "heart.fill" : "heart")
+                            .foregroundStyle(.htRed)
+                            .font(.HTBody22)
+                            .scaleEffect(animateHeart ? 1.4 : 1)
+                            .opacity(tip.isFavorite ? 1 : 0.5)
+                            .animation(.spring(response: 0.3, dampingFraction: 0.5), value: animateHeart)
+                    }
 
-                Group {
-                    ReceiptRow(title: UIStrings.billAmountLowercase, value: "$\(tip.billAmount)")
-                    ReceiptRow(title: UIStrings.tipAmountLowercase, value: "$\(String(format: "%.2f", tip.tipAmount))")
-                    ReceiptRow(title: UIStrings.tipPercentLowercase, value: "\(tip.tipPercentage)%")
-                    ReceiptRow(title: UIStrings.partyLowercase, value: "\(tip.party)")
-                    ReceiptRow(title: UIStrings.tipPerPersonLowercase, value: "$\(String(format: "%.2f", tip.tipPerPerson))")
-                    ReceiptRow(title: UIStrings.pricePerPersonLowercase, value: "$\(String(format: "%.2f", tip.pricePerPerson))")
-                    ReceiptRow(title: UIStrings.totalBillCap,
-                               value: "$\(String(format: "%.2f", tip.totalBill))",
-                               isHighlight: true)
+                    // Share button
+                    Button {
+                        shareTapped()
+                    } label: {
+                        Image(systemName: "square.and.arrow.up")
+                            .tint(.primary)
+                            .font(.HTBody20)
+                            .offset(y: -3)
+                    }
                 }
+                .padding(6)
+                .padding(.horizontal, 4)
+                .background(.htGray)
+                .appCornerRadius()
             }
-            .padding()
+            .padding(.top)
+
+            // Scrollable roast text
+            ScrollView {
+                Text(tip.roast)
+                    .padding()
+                    .font(.HTBody24)
+                    .multilineTextAlignment(.leading)
+            }
+            .frame(maxHeight: 300) // adjust height for your UI
+
+            // Receipt rows
+            VStack(spacing: 8) {
+                ReceiptRow(title: UIStrings.billAmountLowercase, value: "$\(tip.billAmount)")
+                ReceiptRow(title: UIStrings.tipAmountLowercase, value: "$\(String(format: "%.2f", tip.tipAmount))")
+                ReceiptRow(title: UIStrings.tipPercentLowercase, value: "\(tip.tipPercentage)%")
+                ReceiptRow(title: UIStrings.partyLowercase, value: "\(tip.party)")
+                ReceiptRow(title: UIStrings.tipPerPersonLowercase, value: "$\(String(format: "%.2f", tip.tipPerPerson))")
+                ReceiptRow(title: UIStrings.pricePerPersonLowercase, value: "$\(String(format: "%.2f", tip.pricePerPerson))")
+                ReceiptRow(title: UIStrings.totalBillCap, value: "$\(String(format: "%.2f", tip.totalBill))", isHighlight: true)
+            }
             .padding(.bottom, 20)
+
+            Spacer()
         }
+        .padding()
+        .background(
+            Image("HitTipsLogoTransparent")
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .rotationEffect(.degrees(15))
+                .opacity(0.05)
+                .ignoresSafeArea()
+        )
     }
 
     // MARK: - Actions
@@ -110,11 +108,8 @@ struct TipDetailView: View {
     }
 
     private func shareTapped() {
-        // Temporary hosting controller
         let hostingController = UIHostingController(rootView: self)
         hostingController.view.bounds = UIScreen.main.bounds
-        
-        // IMPORTANT: set a background so colors render correctly
         hostingController.view.backgroundColor = UIColor.systemBackground
 
         let renderer = UIGraphicsImageRenderer(size: hostingController.view.bounds.size)
@@ -129,7 +124,6 @@ struct TipDetailView: View {
             rootVC.present(activityVC, animated: true)
         }
     }
-
 }
 
 #Preview {
@@ -146,4 +140,3 @@ struct TipDetailView: View {
         )
     )
 }
-
