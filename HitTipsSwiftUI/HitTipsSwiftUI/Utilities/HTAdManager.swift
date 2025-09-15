@@ -12,7 +12,7 @@ enum AdEnvironment {
 }
 
 struct HTAdManager {
-    static var adEnvironment: AdEnvironment { .test }
+    static var adEnvironment: AdEnvironment { .test } // Set which environment to fetch Ad Units
     
     // Ad Units
     static var homeAdBanner: String {
