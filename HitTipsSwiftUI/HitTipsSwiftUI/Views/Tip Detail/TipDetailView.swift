@@ -58,7 +58,6 @@ struct TipDetailView: View {
                     .font(.HTBody24)
                     .multilineTextAlignment(.leading)
             }
-//            .frame(maxHeight: 300) // adjust height for your UI
 
             Spacer()
             // Receipt rows
@@ -72,8 +71,6 @@ struct TipDetailView: View {
                 ReceiptRow(title: UIStrings.totalBillCap, value: "$\(String(format: "%.2f", tip.totalBill))", isHighlight: true)
             }
             .padding(.bottom, 20)
-
-//            Spacer()
         }
         .padding(.bottom)
         .padding(.horizontal)
@@ -110,6 +107,7 @@ struct TipDetailView: View {
     }
 
     private func shareTapped() {
+        // 1. Render TipDetailView as image
         let hostingController = UIHostingController(rootView: self)
         hostingController.view.bounds = UIScreen.main.bounds
         hostingController.view.backgroundColor = UIColor.systemBackground
@@ -119,13 +117,22 @@ struct TipDetailView: View {
             hostingController.view.drawHierarchy(in: hostingController.view.bounds, afterScreenUpdates: true)
         }
 
+        // 2. Create activity VC
         let activityVC = UIActivityViewController(activityItems: [image], applicationActivities: nil)
 
+        // 3. Present from the top-most VC
         if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-           let rootVC = scene.windows.first?.rootViewController {
-            rootVC.present(activityVC, animated: true)
+           let window = scene.windows.first,
+           var topController = window.rootViewController {
+            
+            while let presented = topController.presentedViewController {
+                topController = presented
+            }
+            
+            topController.present(activityVC, animated: true)
         }
     }
+
 }
 
 #Preview {
