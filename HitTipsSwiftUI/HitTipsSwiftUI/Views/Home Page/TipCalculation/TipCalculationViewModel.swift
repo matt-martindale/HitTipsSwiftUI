@@ -129,6 +129,9 @@ class TipCalculationViewModel: ObservableObject {
                 self.isLoading = false
                 self.isTipReadyToShow = true
                 print(response)
+            } else {
+                self?.isLoading = false
+                self?.showInvalidAmountAlert = true
             }
         }
     }

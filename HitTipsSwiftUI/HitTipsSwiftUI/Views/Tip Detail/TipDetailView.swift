@@ -17,7 +17,7 @@ struct TipDetailView: View {
     }
 
     var body: some View {
-        VStack(spacing: 16) {
+        VStack() {
             // Top buttons
             HStack {
                 Spacer()
@@ -58,8 +58,9 @@ struct TipDetailView: View {
                     .font(.HTBody24)
                     .multilineTextAlignment(.leading)
             }
-            .frame(maxHeight: 300) // adjust height for your UI
+//            .frame(maxHeight: 300) // adjust height for your UI
 
+            Spacer()
             // Receipt rows
             VStack(spacing: 8) {
                 ReceiptRow(title: UIStrings.billAmountLowercase, value: "$\(tip.billAmount)")
@@ -72,9 +73,10 @@ struct TipDetailView: View {
             }
             .padding(.bottom, 20)
 
-            Spacer()
+//            Spacer()
         }
-        .padding()
+        .padding(.bottom)
+        .padding(.horizontal)
         .background(
             Image("HitTipsLogoTransparent")
                 .resizable()
@@ -129,7 +131,7 @@ struct TipDetailView: View {
 #Preview {
     TipDetailView(
         tip: Tip(
-            roast: "That tip was so small, it could fit in a fortune cookie and still leave the waiter wondering what he did wrong!",
+            roast: "That tip was so small, it could fit in a fortune cookie and still leave the waiter wondering what he did wrong!. That tip was so small, it could fit in a fortune cookie and still leave the waiter wondering what he did wrong! That tip was so small, it could fit in a fortune cookie and still leave the waiter wondering what he did wrong! That tip was so small, it could fit in a fortune cookie and still leave the waiter wondering what he did wrong! That tip was so small, it could fit in a fortune cookie and still leave the waiter wondering what he did wrong!",
             billAmount: "100.00",
             totalBill: 110.00,
             party: 2,
