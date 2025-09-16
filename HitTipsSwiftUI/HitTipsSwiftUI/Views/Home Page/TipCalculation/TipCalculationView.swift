@@ -47,7 +47,7 @@ struct TipCalculationView: View {
             // Tip Detail Sheet
             .sheet(isPresented: $viewModel.showTipDetailScreen) {
                 if let tip = viewModel.tip {
-                    TipDetailView(tip: tip)
+                    TipDetailView(tip: tip, entryPoint: .sheet)
                         .ignoresSafeArea()     // Take the full screen bounds
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
