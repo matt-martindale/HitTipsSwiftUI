@@ -18,7 +18,7 @@ class FirestoreManager: ObservableObject {
     func fetchAppSettingsAndSaveToUserDefaults() {
         let db = Firestore.firestore()
         
-        db.collection("appSettings").document(firestoreAppSettings).getDocument { [weak self] document, error in
+        db.collection("appSettings").document(firestoreAppSettings).getDocument { document, error in
             guard error == nil else {
                 print(error?.localizedDescription as Any)
                 return

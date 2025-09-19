@@ -11,7 +11,9 @@ import FirebaseAuth
 
 class APIService: ObservableObject {
     
-    func callFirebaseApi(prompt: String, model: String, completion: @escaping (String?) -> Void) {
+    func callFirebaseApi(prompt: String, completion: @escaping (String?) -> Void) {
+        let model = UserDefaultsManager.shared.fetchAiModelFromUserDefaults()
+        
         if Auth.auth().currentUser == nil {
                 Auth.auth().signInAnonymously { result, error in
                     if let error = error {
