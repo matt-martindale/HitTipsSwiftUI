@@ -8,6 +8,8 @@
 import Foundation
 
 struct UIStrings {
+    static let hitTips = "HitTips"
+    
     // Loader view
     static let loading = "Loading..."
     static let thinkingOfGoodRoast = "Thinking of good roast..."

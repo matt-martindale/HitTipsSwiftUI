@@ -17,11 +17,11 @@ struct ContentView: View {
     
     var body: some View {
         TabView(selection: $currentTab) {
-            Tab("HitTips", systemImage: "exclamationmark.square", value: TabIdentifier.home) {
+            Tab(UIStrings.hitTips, systemImage: "exclamationmark.square", value: TabIdentifier.home) {
                 HomeView()
                     .environmentObject(fireStoreManager)
             }
-            Tab("History", systemImage: "newspaper", value: TabIdentifier.history) {
+            Tab(UIStrings.history, systemImage: "newspaper", value: TabIdentifier.history) {
                 HistoryView()
             }
         }
