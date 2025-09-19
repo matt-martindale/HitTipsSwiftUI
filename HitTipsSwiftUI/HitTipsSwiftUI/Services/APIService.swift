@@ -13,6 +13,7 @@ class APIService: ObservableObject {
     
     func callFirebaseApi(prompt: String, completion: @escaping (String?) -> Void) {
         let model = UserDefaultsManager.shared.fetchAiModelFromUserDefaults()
+        let prompt = String(format: "roast a %@ tip I left at a restaurant", prompt)
         
         if Auth.auth().currentUser == nil {
                 Auth.auth().signInAnonymously { result, error in

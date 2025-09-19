@@ -9,6 +9,10 @@ import SwiftData
 import FirebaseFunctions
 import SwiftUI
 
+enum TipTier: String {
+    case terrible, bad, decent, good
+}
+
 @MainActor
 class TipCalculationViewModel: ObservableObject {
     var tip: Tip?
@@ -124,7 +128,7 @@ class TipCalculationViewModel: ObservableObject {
     
     private func fetchRoast() {
         loaderMessage = UIStrings.thinkingOfGoodRoast
-        apiService.callFirebaseApi(prompt: "Roast a good tip I left at a restaurant") { [weak self] response in
+        apiService.callFirebaseApi(prompt: fetchPrompt()) { [weak self] response in
             if let response = response,
                let self = self {
                 self.loaderMessage = UIStrings.processingResponse
@@ -165,6 +169,21 @@ class TipCalculationViewModel: ObservableObject {
     func formatBillAmount() {
         if let bill = Double(billAmount) {
             billAmount = String(format: "%.2f", bill)
+        }
+    }
+    
+    func fetchPrompt() -> String {
+        switch tipPercent {
+        case 0...10:
+            TipTier.terrible.rawValue
+        case 11...19:
+            TipTier.bad.rawValue
+        case 20...29:
+            TipTier.decent.rawValue
+        case 30...99:
+            TipTier.good.rawValue
+        default:
+            TipTier.bad.rawValue
         }
     }
 }
