@@ -24,23 +24,23 @@ struct TipDetailView: View {
     }
     
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             if entryPoint == .sheet {
                 // Top buttons when in sheet
                 topButtons
                     .padding(.top)
             }
-            
+
             // Scrollable roast text
             ScrollView {
                 Text(tip.roast)
                     .padding()
                     .font(.HTBody24)
                     .multilineTextAlignment(.leading)
+                    .frame(maxWidth: .infinity, alignment: .leading) // prevent squishing
             }
-            
-            Spacer()
-            // Receipt rows
+
+            // Receipt rows pinned at bottom
             VStack(spacing: 8) {
                 ReceiptRow(title: UIStrings.billAmountLowercase, value: "$\(tip.billAmount)")
                 ReceiptRow(title: UIStrings.tipAmountLowercase, value: "$\(String(format: "%.2f", tip.tipAmount))")
@@ -50,9 +50,9 @@ struct TipDetailView: View {
                 ReceiptRow(title: UIStrings.pricePerPersonLowercase, value: "$\(String(format: "%.2f", tip.pricePerPerson))")
                 ReceiptRow(title: UIStrings.totalBillCap, value: "$\(String(format: "%.2f", tip.totalBill))", isHighlight: true)
             }
-            .padding(.bottom, 20)
+            .padding(.vertical, 20)
+            .background(Color(.systemBackground)) // optional: keeps it distinct
         }
-        .padding(.bottom)
         .padding(.horizontal)
         .background(
             Image("HitTipsLogoTransparent")
@@ -60,7 +60,6 @@ struct TipDetailView: View {
                 .aspectRatio(contentMode: .fill)
                 .rotationEffect(.degrees(15))
                 .opacity(0.05)
-                .ignoresSafeArea()
         )
         .if(entryPoint == .navigation) { view in
             view.toolbar {
@@ -70,6 +69,7 @@ struct TipDetailView: View {
             }
         }
     }
+
     
     // MARK: - Buttons (reusable)
     private var topButtons: some View {
