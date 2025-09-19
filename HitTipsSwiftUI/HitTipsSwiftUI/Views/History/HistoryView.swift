@@ -16,69 +16,74 @@ struct HistoryView: View {
     
     var body: some View {
         NavigationStack {
-            Group {
-                if tip.isEmpty {
-                    // Empty state card
-                    VStack {
-                        Image(systemName: "newspaper")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 100)
-                            .foregroundStyle(.gray)
-                        Text("No saved tips")
-                            .font(.title2)
-                            .foregroundStyle(.gray)
-                    }
-                    .padding(30)
-                    .background(Color.gray.opacity(0.2))
-                    .cornerRadius(12)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                } else {
-                    // List of tips
-                    List {
-                        Section(header: HistoryViewHeaderView()
-                            .foregroundStyle(.gray)
-                            .padding(.vertical, 4)
-                        ) {
-                            ForEach(tip) { tip in
-                                NavigationLink {
-                                    TipDetailView(tip: tip)
-                                } label: {
-                                    HistoryListItemView(tip: tip)
+            ZStack {
+                Group {
+                    if tip.isEmpty {
+                        // Empty state card
+                        VStack {
+                            Image(systemName: "newspaper")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 100)
+                                .foregroundStyle(.gray)
+                            Text(UIStrings.noSavedTips)
+                                .font(.title2)
+                                .foregroundStyle(.gray)
+                        }
+                        .padding(30)
+                        .background(Color.gray.opacity(0.2))
+                        .cornerRadius(12)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    } else {
+                        // List of tips
+                        List {
+                            Section(header: HistoryViewHeaderView()
+                                .foregroundStyle(.gray)
+                                .padding(.vertical, 4)
+                            ) {
+                                ForEach(tip) { tip in
+                                    NavigationLink {
+                                        TipDetailView(tip: tip)
+                                    } label: {
+                                        HistoryListItemView(tip: tip)
+                                    }
                                 }
+                                .onDelete(perform: deleteItems)
                             }
-                            .onDelete(perform: deleteItems)
                         }
                     }
                 }
-            }
-            .navigationTitle("History")
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(role: .destructive) {
-                        showingDeleteAllConfirm = true
-                    } label: {
-                        Image(systemName: "trash")
-                            .tint(.primary)
+                .navigationTitle(UIStrings.history)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button(role: .destructive) {
+                            showingDeleteAllConfirm = true
+                        } label: {
+                            Image(systemName: "trash")
+                                .tint(.primary)
+                        }
                     }
                 }
-            }
-            // Delete All confirmation
-            .confirmationDialog(
-                "Are you sure you want to delete all tips?",
-                isPresented: $showingDeleteAllConfirm,
-                titleVisibility: .visible
-            ) {
-                Button("Delete All", role: .destructive) {
-                    deleteAllItems()
+                // Delete All confirmation
+                .confirmationDialog(
+                    UIStrings.deleteAllTips,
+                    isPresented: $showingDeleteAllConfirm,
+                    titleVisibility: .visible
+                ) {
+                    Button("Delete All", role: .destructive) {
+                        deleteAllItems()
+                    }
+                    Button("Cancel", role: .cancel) {}
                 }
-                Button("Cancel", role: .cancel) {}
+                VStack {
+                    Spacer()
+                    // Banner ad
+                    BannerAdView(adUnitID: HTAdManager.historyAdBanner)
+                        .frame(height: 50)
+                        .frame(maxWidth: .infinity)
+                        .padding(.horizontal)
+                }
             }
-            // Banner ad
-            BannerAdView(adUnitID: HTAdManager.historyAdBanner)
-                .frame(height: 50)
-                .frame(maxWidth: .infinity)
-                .padding(.horizontal)
         }
         .tint(.primary)
     }

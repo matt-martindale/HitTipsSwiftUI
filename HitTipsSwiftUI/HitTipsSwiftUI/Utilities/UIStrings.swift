@@ -35,7 +35,10 @@ struct UIStrings {
     static let pricePerPersonLowercase = "Price/Person"
     
     // History
+    static let history = "History"
+    static let noSavedTips = "No saved tips"
+    static let deleteAllTips = "Are you sure you want to delete all tips?"
     static let date = "Date"
-    static let totalBill = "Total Bill"
-    static let percent = "Percent"
+    static let bill = "Bill"
+    static let percent = "Tip %"
 }
