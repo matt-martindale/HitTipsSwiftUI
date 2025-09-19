@@ -11,6 +11,9 @@
 		C8016C9F2E7DC24E00E852AA /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8016C9D2E7DC24E00E852AA /* FirestoreManager.swift */; };
 		C8016CA02E7DC24E00E852AA /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8016C9D2E7DC24E00E852AA /* FirestoreManager.swift */; };
 		C8016CA22E7DEB3600E852AA /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = C8016CA12E7DEB3600E852AA /* FirebaseAuth */; };
+		C8016CA42E7E08A000E852AA /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8016CA32E7E08A000E852AA /* UserDefaultsManager.swift */; };
+		C8016CA52E7E08A000E852AA /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8016CA32E7E08A000E852AA /* UserDefaultsManager.swift */; };
+		C8016CA62E7E08A000E852AA /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8016CA32E7E08A000E852AA /* UserDefaultsManager.swift */; };
 		C84FC47D2E6A232500E13B7A /* Tip.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84FC4702E6A232500E13B7A /* Tip.swift */; };
 		C84FC47E2E6A232500E13B7A /* HitTipsSwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84FC4752E6A232500E13B7A /* HitTipsSwiftUIApp.swift */; };
 		C84FC47F2E6A232500E13B7A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84FC4782E6A232500E13B7A /* ContentView.swift */; };
@@ -121,6 +124,7 @@
 
 /* Begin PBXFileReference section */
 		C8016C9D2E7DC24E00E852AA /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
+		C8016CA32E7E08A000E852AA /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		C84FC4332E6A13A900E13B7A /* HitTipsSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HitTipsSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C84FC4452E6A13AA00E13B7A /* HitTipsSwiftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HitTipsSwiftUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C84FC44F2E6A13AA00E13B7A /* HitTipsSwiftUIUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HitTipsSwiftUIUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -285,6 +289,7 @@
 				C8016C9D2E7DC24E00E852AA /* FirestoreManager.swift */,
 				C8DB239C2E77922100F852FF /* HTAdManager.swift */,
 				C8DB23982E7763D900F852FF /* InterstitialAdManager.swift */,
+				C8016CA32E7E08A000E852AA /* UserDefaultsManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -525,6 +530,7 @@
 				C852C2992E6FBD0100168117 /* CustomPickerWheel.swift in Sources */,
 				C852C28B2E6FACD400168117 /* Color+.swift in Sources */,
 				C84FC47E2E6A232500E13B7A /* HitTipsSwiftUIApp.swift in Sources */,
+				C8016CA42E7E08A000E852AA /* UserDefaultsManager.swift in Sources */,
 				C8DB239E2E77922100F852FF /* HTAdManager.swift in Sources */,
 				C84FC4972E6A3E3600E13B7A /* TipCalculationView.swift in Sources */,
 				C84FC4912E6A32A400E13B7A /* HomeViewModel.swift in Sources */,
@@ -579,6 +585,7 @@
 				C8DB239A2E7763D900F852FF /* InterstitialAdManager.swift in Sources */,
 				C84FC4852E6A232500E13B7A /* ContentView.swift in Sources */,
 				C852C2902E6FAF5900168117 /* HTPickerView.swift in Sources */,
+				C8016CA52E7E08A000E852AA /* UserDefaultsManager.swift in Sources */,
 				C84FC4922E6A32A400E13B7A /* HomeViewModel.swift in Sources */,
 				C852C2972E6FBD0100168117 /* CustomPickerWheel.swift in Sources */,
 				C84FC48F2E6A2F7200E13B7A /* SplashScreenView.swift in Sources */,
@@ -597,6 +604,7 @@
 				C852C2AC2E713C3C00168117 /* ViewModifiers.swift in Sources */,
 				C852C2982E6FBD0100168117 /* CustomPickerWheel.swift in Sources */,
 				C852C2A92E71234F00168117 /* BillOutputView.swift in Sources */,
+				C8016CA62E7E08A000E852AA /* UserDefaultsManager.swift in Sources */,
 				C84FC4872E6A232500E13B7A /* ContentView.swift in Sources */,
 				C852C2942E6FB53400168117 /* Font+.swift in Sources */,
 				C84FC48E2E6A2F7200E13B7A /* SplashScreenView.swift in Sources */,

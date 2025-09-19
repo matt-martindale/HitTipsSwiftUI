@@ -10,10 +10,6 @@ import Firebase
 
 class FirestoreManager: ObservableObject {
     let firestoreAppSettings = "sqvb8vSKZBSRbk6Fw2ba"
-    let userDefaults = UserDefaults.standard
-    let aiModelString = "aiModel"
-    let adFrequencyString = "adFrequency"
-    let adCountString = "adCount"
     
     init() {
         fetchAppSettingsAndSaveToUserDefaults()
@@ -41,46 +37,10 @@ class FirestoreManager: ObservableObject {
                 print("AI model:\(aiModel), Ad frequency:\(adFrequency)")
                 
                 // Save to user defaults
-                self?.updateAiModelToUserDefaults(aiModel)
-                self?.updateAdFrequencyToUserDefaults(adFrequency)
+                UserDefaultsManager.shared.updateAiModelToUserDefaults(aiModel)
+                UserDefaultsManager.shared.updateAdFrequencyToUserDefaults(adFrequency)
             }
         }
-    }
-    
-    private func updateAiModelToUserDefaults(_ aiModel: String) {
-        userDefaults.set(aiModel, forKey: aiModelString)
-    }
-    
-    private func updateAdFrequencyToUserDefaults(_ adFrequency: Int) {
-        userDefaults.set(adFrequency, forKey: adFrequencyString)
-    }
-    
-    func fetchAiModelToUserDefaults() -> String {
-        userDefaults.value(forKey: aiModelString) as? String ?? "gpt-4o-mini"
-    }
-    
-    func fetchAdFrequencyFromUserDefaults() -> Int {
-        (userDefaults.value(forKey: adFrequencyString) as? Int) ?? 3
-    }
-    
-    func fetchAdCountFromUserDefaults() -> Int {
-        (userDefaults.value(forKey: adCountString) as? Int) ?? 0
-    }
-    
-    func incrementAdCount() {
-        var adCount = fetchAdCountFromUserDefaults()
-        adCount += 1
-        userDefaults.set(adCount, forKey: adCountString)
-    }
-    
-    func shouldShowAd() -> Bool {
-        let adCount = fetchAdCountFromUserDefaults()
-        let adFrequency = fetchAdFrequencyFromUserDefaults()
-        return adCount >= adFrequency
-    }
-    
-    func resetAdCount() {
-        userDefaults.set(0, forKey: adCountString)
     }
     
 }
