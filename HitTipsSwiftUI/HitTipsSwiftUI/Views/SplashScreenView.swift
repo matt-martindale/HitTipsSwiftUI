@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SplashScreen: View {
+    @EnvironmentObject var fireStoreManager: FirestoreManager
     @State private var isActive = false
     @State private var logoScale: CGFloat = 1.0
     @State private var logoOpacity: Double = 1.0
@@ -16,6 +17,7 @@ struct SplashScreen: View {
         ZStack {
             // Main content (appears after splash fades)
             ContentView()
+                .environmentObject(fireStoreManager)
                 .opacity(isActive ? 1 : 0)
             
             // Splash overlay

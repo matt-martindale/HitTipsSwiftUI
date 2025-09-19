@@ -1,5 +1,9 @@
 {
   "projects": {
-    "default": "hittips-8c1eb"
-  }
+    "default": "hittips-8c1eb",
+    "dev": "hittips-8c1eb",
+    "prod": "hittips-8c1eb"
+  },
+  "targets": {},
+  "etags": {}
 }

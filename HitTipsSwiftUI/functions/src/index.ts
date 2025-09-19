@@ -26,104 +26,110 @@
 // this will be the maximum concurrent request count.
 //setGlobalOptions({ maxInstances: 10 });
 
-// export const helloWorld = onRequest((request, response) => {
-//   logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
-
-import * as functions from "firebase-functions";
+import { onCall, HttpsError } from "firebase-functions/v2/https";
 import * as admin from "firebase-admin";
 import axios from "axios";
 
 admin.initializeApp();
 
-// Your external API URL
 const API_URL = "https://api.openai.com/v1/responses";
 
-export const callExternalApi = functions.https.onCall(async (data, context) => {
-    //    console.log("Incoming data:", data);
-    console.log("context.auth:", context.auth);
-    
-    const prompt = (data as any)?.prompt ?? (data as any)?.data?.prompt;
+export const callExternalApi = onCall(
+                                      { secrets: ["OPENAI_API_KEY"],
+                                          timeoutSeconds: 10
+                                      }, // inject secret
+  async (request) => {
+      const uid = request.auth?.uid;
+          if (uid) {
+            console.log("Authenticated user UID:", uid);
+          } else {
+            console.log("Unauthenticated request");
+          }
+
+    const prompt: string | undefined = request.data?.prompt;
+    const model: string = request.data?.model ?? "gpt-4o-mini";
+
     if (!prompt || typeof prompt !== "string") {
-        console.error("Prompt missing or invalid:", data);
-        throw new functions.https.HttpsError("invalid-argument", "Missing prompt");
+      throw new HttpsError("invalid-argument", "Missing prompt");
     }
-    
+
+    const apiKey = process.env.OPENAI_API_KEY;
+      console.log(apiKey)
+    if (!apiKey) {
+        console.error("OPENAI_API_KEY not set!");
+      throw new HttpsError("internal", "Missing OpenAI API key");
+    }
+
     console.log("Prompt received:", prompt);
-    
+
     try {
-        //    const prompt: string = data.prompt;
-        if (!prompt) {
-            throw new functions.https.HttpsError("invalid-argument", "Missing prompt silly");
-        }
-        
-        // Your AI model
-        const aiModel = "gpt-4o-mini";
-        
-        // JSON schema (replicated from your Swift code)
-        const jsonSchema = {
-            type: "object",
-            strict: true,
-            additionalProperties: false,
-            properties: {
-                comment: { type: "string" },
-            },
-            required: ["comment"]
-        };
-        
-        const payload = {
-            model: aiModel,
-            input: [
-                {
-                    role: "system",
-                    content: [{ type: "input_text", text: "Response should be short, creative and have one property" }]
-                },
-                {
-                    role: "user",
-                    content: [{ type: "input_text", text: prompt }]
-                }
+      const jsonSchema = {
+        type: "object",
+        strict: true,
+        additionalProperties: false,
+        properties: {
+          comment: { type: "string" },
+        },
+        required: ["comment"],
+      };
+
+      const payload = {
+        model,
+        input: [
+          {
+            role: "system",
+            content: [
+              {
+                type: "input_text",
+                text: "Response should be short, creative and have one property",
+              },
             ],
-            text: {
-                format: {
-                    name: "comment_schema"
-                    type: "json_schema",
-                    schema: jsonSchema
-                }
-            }
-        };
-        
-        
-        //      console.log("request payload", payload)
-//        console.log("Sending payload to OpenAI:", JSON.stringify(payload, null, 2));
-        
-        // Make the external API call
-        const response = await axios.post(API_URL, payload, {
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${functions.config().api.key}`, // stored securely in Firebase config
-            },
-        });
-        console.log("Full API Response:", JSON.stringify(response.data, null, 2));
-        const text = response.data?.output?.[0]?.content?.[0]?.text;
-        if !text {
-            throw new functions.https.HttpsError("internal", "No text found in OpenAI response");
-        }
-        
-        let parsed;
-        try {
-            parsed = JSON.parse(text);
-        } catch (e) {
-            console.error("Failed to parse OpenAI text as JSON:", text);
-            throw new functions.https.HttpsError("internal", "Invalid JSON returned from OpenAI");
-        }
-        
-        console.log(parsed.comment);
-        return parsed.comment;
+          },
+          {
+            role: "user",
+            content: [{ type: "input_text", text: prompt }],
+          },
+        ],
+        text: {
+          format: {
+            name: "comment_schema",
+            type: "json_schema",
+            schema: jsonSchema,
+          },
+        },
+      };
+
+      const response = await axios.post(API_URL, payload, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${apiKey}`,
+        },
+          timeout: 5000
+      });
+
+      console.log("Full API Response:", JSON.stringify(response.data, null, 2));
+
+      const text = response.data?.output?.[0]?.content?.[0]?.text;
+      if (!text) {
+        throw new HttpsError("internal", "No text found in OpenAI response");
+      }
+
+      let parsed;
+      try {
+        parsed = JSON.parse(text);
+      } catch (e) {
+        console.error("Failed to parse OpenAI text as JSON:", text);
+        throw new HttpsError("internal", "Invalid JSON returned from OpenAI");
+      }
+
+      console.log(parsed.comment);
+      return parsed.comment;
     } catch (error: any) {
-        console.error("External API error:", error.response?.data || error.message);
-        throw new functions.https.HttpsError("internal", error.response?.data?.error?.message || "Failed to call external API");
+      console.error("External API error:", error.response?.data || error.message);
+      throw new HttpsError(
+        "internal",
+        error.response?.data?.error?.message || "Failed to call external API"
+      );
     }
-});
-
-
+  }
+);

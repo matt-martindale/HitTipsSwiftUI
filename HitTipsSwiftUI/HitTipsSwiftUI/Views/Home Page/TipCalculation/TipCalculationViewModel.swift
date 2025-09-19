@@ -28,10 +28,14 @@ class TipCalculationViewModel: ObservableObject {
     @Published var isTipReadyToShow = false
 
     private let apiService: APIService
+    private let fireStoreManager: FirestoreManager
     private let context: ModelContext
 
-    init(apiService: APIService = APIService(), context: ModelContext) {
+    init(apiService: APIService = APIService(),
+         fireStoreManager: FirestoreManager = FirestoreManager(),
+         context: ModelContext) {
         self.apiService = apiService
+        self.fireStoreManager = fireStoreManager
         self.context = context
         
         loadLastTipPercentage()  // <-- load saved value on init
@@ -120,7 +124,7 @@ class TipCalculationViewModel: ObservableObject {
     
     private func fetchRoast() {
         loaderMessage = UIStrings.thinkingOfGoodRoast
-        apiService.callFirebaseApi { [weak self] response in
+        apiService.callFirebaseApi(prompt: "Roast a good tip I left at a restaurant", model: fireStoreManager.fetchAiModelToUserDefaults()) { [weak self] response in
             if let response = response,
                let self = self {
                 self.loaderMessage = UIStrings.processingResponse

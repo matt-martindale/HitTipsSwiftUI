@@ -22,6 +22,8 @@ var sharedModelContainer: ModelContainer = {
 @main
 struct HitTipsSwiftUIApp: App {
     
+    @StateObject private var fireStoreManager = FirestoreManager()
+    
     init() {
         MobileAds.shared.start()
         FirebaseApp.configure()
@@ -30,6 +32,7 @@ struct HitTipsSwiftUIApp: App {
     var body: some Scene {
         WindowGroup {
             SplashScreen()
+                .environmentObject(fireStoreManager)
                 .modelContainer(sharedModelContainer)
         }
     }

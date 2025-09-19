@@ -7,14 +7,41 @@
 
 import Foundation
 import FirebaseFunctions
+import FirebaseAuth
 
 class APIService: ObservableObject {
     
-    func callFirebaseApi(completion: @escaping (String?) -> Void) {
-        let functions = Functions.functions()
-        functions.useEmulator(withHost: "127.0.0.1", port: 5001)
+    func callFirebaseApi(prompt: String, model: String, completion: @escaping (String?) -> Void) {
+        if Auth.auth().currentUser == nil {
+                Auth.auth().signInAnonymously { result, error in
+                    if let error = error {
+                        print("Anonymous sign-in failed:", error)
+                        return
+                    }
+                    print("Signed in anonymously")
+                    // Call the function after signing in
+                    self.callApiAfterSignIn(prompt: prompt, model: model) { response in
+                        completion(response)
+                    }
+                }
+            } else {
+                // Already signed in
+                callApiAfterSignIn(prompt: prompt, model: model) { response in
+                    completion(response)
+                }
+            }
+    }
+    
+    private func callApiAfterSignIn(prompt: String, model: String, completion: @escaping (String?) -> Void) {
+        let functions = Functions.functions(region: "us-central1")
+//        functions.useEmulator(withHost: "127.0.0.1", port: 5001)
         
-        functions.httpsCallable("callExternalApi").call(["prompt": "roast a terrible tip I left at a restaurant"]) { result, error in
+        var data: [String: Any] = [
+                    "prompt": prompt,
+                    "model": model
+                ]
+        
+        functions.httpsCallable("callExternalApi").call(data) { result, error in
             if let error = error {
                 print("Error: \(error.localizedDescription)")
                 completion(nil)
@@ -25,44 +52,5 @@ class APIService: ObservableObject {
             }
         }
     }
-    
-    //    @Published var result: String = ""
-    //
-    //    private let baseURL = "http://localhost:5001/hittips-8c1eb/us-central1"
-    //    func sendData() {
-    //        guard let url = URL(string: "\(baseURL)/callExternalApi") else { return }
-    //
-    //        var request = URLRequest(url: url)
-    //        request.httpMethod = "POST"
-    //        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-    //
-    //        let body: [String: Any] = [
-    //            "model": "gpt-4o-mini",
-    //            "messages":
-    //                [
-    //                    [
-    //                        "role": "user", "content": [[
-    //                            "type": "text",
-    //                            "text": "tell me how good looking I am"
-    //                        ]]
-    //                    ]
-    //                ]
-    //        ]
-    //        request.httpBody = try? JSONSerialization.data(withJSONObject: body)
-    //
-    //        URLSession.shared.dataTask(with: request) { data, _, error in
-    //            if let error = error {
-    //                print("Error:", error.localizedDescription)
-    //                return
-    //            }
-    //
-    //            if let data = data,
-    //               let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any] {
-    //                DispatchQueue.main.async {
-    //                    self.result = (json["id"] as AnyObject).description ?? "No response id"
-    //                }
-    //            }
-    //        }.resume()
-    //    }
     
 }

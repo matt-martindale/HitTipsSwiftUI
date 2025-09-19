@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct HomeView: View {
+    @EnvironmentObject var fireStoreManager: FirestoreManager
     @Environment(\.modelContext) private var context
     @Query(sort: \Tip.date, order: .reverse) private var tips: [Tip]
     
@@ -34,6 +35,7 @@ struct HomeView: View {
                 }
                 HStack {
                     TipCalculationView(context: context)
+                        .environmentObject(fireStoreManager)
                 }
             }
             .padding()
