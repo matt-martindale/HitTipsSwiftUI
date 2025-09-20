@@ -33,32 +33,29 @@ class InterstitialAdManager: NSObject, ObservableObject, FullScreenContentDelega
     func showAd(from root: UIViewController, onDismiss: @escaping () -> Void) {
         guard let interstitial = interstitial else {
             print("⚠️ Ad not ready")
-            onDismiss() // fallback if ad isn’t ready
+            onDismiss()
             return
         }
-        
-        guard UserDefaultsManager.shared.shouldShowAd() else {
-            print(UserDefaultsManager.shared.adCountErrorMessage())
-            return
-        }
-        
+
         print("Presenting interstitial")
         self.onAdDismissed = onDismiss
 
         DispatchQueue.main.async {
             interstitial.present(from: root)
+            self.interstitial = nil
+            self.isAdReady = false
         }
     }
 
-    // MARK: - FullScreenContentDelegate
-    func adDidDismissFullScreenContent(_ ad: Any) {
+    // Delegate
+    func adDidDismissFullScreenContent(_ ad: FullScreenPresentingAd) {
+        print("ℹ️ Interstitial dismissed")
         Task { @MainActor in
             self.onAdDismissed?()
             self.onAdDismissed = nil
         }
-        interstitial = nil
-        isAdReady = false
-        loadAd()
+        loadAd() // Preload next ad
     }
+
 }
 

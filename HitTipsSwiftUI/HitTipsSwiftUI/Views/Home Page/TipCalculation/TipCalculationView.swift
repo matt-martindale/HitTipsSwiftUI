@@ -5,9 +5,15 @@
 //  Created by Matt Martindale on 9/4/25.
 //
 
+//
+//  TipCalculationView.swift
+//  HitTipsSwiftUI
+//
+//  Created by Matt Martindale on 9/4/25.
+//
+
 import SwiftUI
 import SwiftData
-import GoogleMobileAds
 
 enum FocusedField {
     case billAmount, party, tipPercent
@@ -15,11 +21,7 @@ enum FocusedField {
 
 struct TipCalculationView: View {
     @StateObject private var viewModel: TipCalculationViewModel
-    @StateObject private var adManager = InterstitialAdManager()
     @FocusState private var focusedField: FocusedField?
-
-    // Track if we've already shown the sheet for the current tip
-    @State private var hasShownTip = false
 
     init(context: ModelContext) {
         _viewModel = StateObject(wrappedValue: TipCalculationViewModel(context: context))
@@ -44,36 +46,12 @@ struct TipCalculationView: View {
                     Text(UIStrings.enterValidAmount)
                 }
             }
-            // Tip Detail Sheet
+            // Tip Detail Sheet controlled by VM
             .sheet(isPresented: $viewModel.showTipDetailScreen) {
                 if let tip = viewModel.tip {
                     TipDetailView(tip: tip, entryPoint: .sheet)
-                        .ignoresSafeArea()     // Take the full screen bounds
+                        .ignoresSafeArea()
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
-                }
-            }
-            // Show sheet automatically once a Tip exists
-            .onChange(of: viewModel.tip) { newTip in
-                guard let _ = newTip else { return }
-                
-                // Always show sheet for new Tip objects
-                if !hasShownTip {
-                    viewModel.showTipDetailScreen = true
-                    hasShownTip = true
-                } else {
-                    // New tip object, reset flag
-                    hasShownTip = false
-                    viewModel.showTipDetailScreen = true
-                    hasShownTip = true
-                }
-            }
-
-            .onAppear {
-                adManager.loadAd()
-                // In case tip already exists when view appears
-                if viewModel.tip != nil && !hasShownTip {
-                    viewModel.showTipDetailScreen = true
-                    hasShownTip = true
                 }
             }
         }
@@ -121,7 +99,6 @@ struct TipCalculationView: View {
     private var confirmButton: some View {
         Button {
             viewModel.validateAndAddTip()
-            showTipAfterAd()
         } label: {
             Text(UIStrings.confirmTip)
                 .font(.HTBody20)
@@ -146,34 +123,5 @@ struct TipCalculationView: View {
                 }
             }
         }
-    }
-
-    // MARK: - Ad Presentation
-
-    private func showTipAfterAd() {
-        if UserDefaultsManager.shared.shouldShowAd(), adManager.isAdReady {
-            // Present the ad; sheet will show automatically via tip change
-            if let root = UIApplication.shared.topMostViewController {
-                adManager.showAd(from: root) {
-                    UserDefaultsManager.shared.resetAdCount()
-                }
-            }
-        }
-    }
-}
-
-// MARK: - UIApplication Extension for Top ViewController
-extension UIApplication {
-    var topMostViewController: UIViewController? {
-        let keyWindow = connectedScenes
-            .compactMap { $0 as? UIWindowScene }
-            .flatMap { $0.windows }
-            .first { $0.isKeyWindow }
-
-        var topController = keyWindow?.rootViewController
-        while let presented = topController?.presentedViewController {
-            topController = presented
-        }
-        return topController
     }
 }

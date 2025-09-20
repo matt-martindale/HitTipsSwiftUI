@@ -8,6 +8,7 @@
 import SwiftData
 import FirebaseFunctions
 import SwiftUI
+import GoogleMobileAds
 
 enum TipTier: String {
     case terrible, bad, decent, good
@@ -17,7 +18,7 @@ enum TipTier: String {
 class TipCalculationViewModel: ObservableObject {
     var tip: Tip?
     var roast: String?
-    // Existing published properties
+
     @Published var billAmount = "0.00"
     @Published var tipAmount: Double = 0.0
     @Published var tipPerPerson: Double = 0.0
@@ -29,11 +30,11 @@ class TipCalculationViewModel: ObservableObject {
     @Published var showTipDetailScreen = false
     @Published var isLoading = false
     @Published var loaderMessage = UIStrings.loading
-    @Published var isTipReadyToShow = false
 
     private let apiService: APIService
     private let fireStoreManager: FirestoreManager
     private let context: ModelContext
+    private let adManager = InterstitialAdManager()
 
     init(apiService: APIService = APIService(),
          fireStoreManager: FirestoreManager = FirestoreManager(),
@@ -41,50 +42,50 @@ class TipCalculationViewModel: ObservableObject {
         self.apiService = apiService
         self.fireStoreManager = fireStoreManager
         self.context = context
-        
-        loadLastTipPercentage()  // <-- load saved value on init
+
+        loadLastTipPercentage()
+        adManager.loadAd()
     }
-    
+
     var finalTipPercentageForTip: Int {
         guard let bill = Double(billAmount), bill > 0 else { return tipPercent }
         let adjustedTip = totalBill - bill
         let finalPercent = (adjustedTip / bill) * 100
         return Int(finalPercent.rounded())
     }
-    
+
     // MARK: - Tip Calculation
     func calculateTip() {
         guard let bill = Double(billAmount) else { return }
         let tipValue = bill * Double(tipPercent) / 100
         let total = bill + tipValue
-        
+
         saveLastTipPercentage()
-        
+
         tipAmount = tipValue
         totalBill = total
         tipPerPerson = tipValue / Double(party)
         pricePerPerson = total / Double(party)
     }
-    
+
     func applyRounding(_ action: ButtonAction) {
         guard let bill = Double(billAmount) else { return }
         let rawTip = bill * Double(tipPercent) / 100
         let rawTotal = bill + rawTip
-        
+
         let roundedTotal: Double
         switch action {
         case .roundUp: roundedTotal = ceil(rawTotal)
         case .roundDown: roundedTotal = floor(rawTotal)
         }
-        
-        // Don't update percentage, else total bill won't be whole dollar
+
         let adjustedTip = roundedTotal - bill
         tipAmount = adjustedTip
         totalBill = roundedTotal
         tipPerPerson = adjustedTip / Double(party)
         pricePerPerson = roundedTotal / Double(party)
     }
-    
+
     // MARK: - Save/Load Last Tip Percentage
     private func loadLastTipPercentage() {
         let request = FetchDescriptor<AppSettings>()
@@ -99,7 +100,7 @@ class TipCalculationViewModel: ObservableObject {
             tipPercent = 15
         }
     }
-    
+
     private func saveLastTipPercentage() {
         let request = FetchDescriptor<AppSettings>()
         do {
@@ -114,7 +115,7 @@ class TipCalculationViewModel: ObservableObject {
             print("Failed to save last tip percentage:", error)
         }
     }
-    
+
     // MARK: - Validate & Add Tip
     func validateAndAddTip() {
         guard Double(billAmount) != nil else {
@@ -125,30 +126,29 @@ class TipCalculationViewModel: ObservableObject {
         saveLastTipPercentage()
         fetchRoast()
     }
-    
+
     private func fetchRoast() {
         loaderMessage = UIStrings.thinkingOfGoodRoast
         apiService.callFirebaseApi(prompt: fetchPrompt()) { [weak self] response in
-            if let response = response,
-               let self = self {
+            guard let self = self else { return }
+
+            if let response = response {
                 self.loaderMessage = UIStrings.processingResponse
                 self.roast = response
                 self.addTip()
                 self.isLoading = false
-                self.isTipReadyToShow = true
-                print(response)
+                self.handleAdAndSheet()
             } else {
-                self?.isLoading = false
-                self?.showInvalidAmountAlert = true
+                self.isLoading = false
+                self.showInvalidAmountAlert = true
             }
         }
     }
-    
+
     private func addTip() {
         guard let bill = Double(billAmount),
               let roast = roast else { return }
-        
-        // Use the displayed tipAmount and totalBill (after rounding) instead of recalculating
+
         let newTip = Tip(
             roast: roast,
             billAmount: String(format: "%.2f", bill),
@@ -160,20 +160,46 @@ class TipCalculationViewModel: ObservableObject {
             tipAmount: tipAmount,
             tipPercentage: finalTipPercentageForTip
         )
-        
+
         self.tip = newTip
         context.insert(newTip)
-        
+
+        // Increment ad counter when a tip is successfully added
         UserDefaultsManager.shared.incrementAdCount()
     }
 
-    
+    // MARK: - Ad + Sheet Coordination
+    private func handleAdAndSheet() {
+        if UserDefaultsManager.shared.shouldShowAd(),
+           adManager.isAdReady,
+           let root = UIApplication.shared.connectedScenes
+               .compactMap({ $0 as? UIWindowScene })
+               .flatMap({ $0.windows })
+               .first(where: { $0.isKeyWindow })?.rootViewController {
+            
+            adManager.showAd(from: root) {
+                // Ad dismissed → reset ad count and show sheet
+                UserDefaultsManager.shared.resetAdCount()
+                DispatchQueue.main.async {
+                    self.showTipDetailScreen = true
+                }
+            }
+        } else {
+            // No ad → show sheet immediately
+            DispatchQueue.main.async {
+                self.showTipDetailScreen = true
+            }
+        }
+    }
+
+
+    // MARK: - Helpers
     func formatBillAmount() {
         if let bill = Double(billAmount) {
             billAmount = String(format: "%.2f", bill)
         }
     }
-    
+
     func fetchPrompt() -> String {
         switch tipPercent {
         case 0...10:
@@ -189,5 +215,3 @@ class TipCalculationViewModel: ObservableObject {
         }
     }
 }
-
-
