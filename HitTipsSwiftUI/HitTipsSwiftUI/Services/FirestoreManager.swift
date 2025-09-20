@@ -37,8 +37,8 @@ class FirestoreManager: ObservableObject {
                 print("AI model:\(aiModel), Ad frequency:\(adFrequency)")
                 
                 // Save to user defaults
-                UserDefaultsManager.shared.updateAiModelToUserDefaults(aiModel)
-                UserDefaultsManager.shared.updateAdFrequencyToUserDefaults(adFrequency)
+                UserDefaultsManager.shared.aiModel = aiModel
+                UserDefaultsManager.shared.adFrequency = adFrequency
             }
         }
     }

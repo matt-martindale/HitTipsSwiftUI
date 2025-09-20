@@ -163,6 +163,8 @@ class TipCalculationViewModel: ObservableObject {
         
         self.tip = newTip
         context.insert(newTip)
+        
+        UserDefaultsManager.shared.incrementAdCount()
     }
 
     

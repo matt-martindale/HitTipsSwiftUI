@@ -151,10 +151,12 @@ struct TipCalculationView: View {
     // MARK: - Ad Presentation
 
     private func showTipAfterAd() {
-        if adManager.isAdReady {
+        if UserDefaultsManager.shared.shouldShowAd(), adManager.isAdReady {
             // Present the ad; sheet will show automatically via tip change
             if let root = UIApplication.shared.topMostViewController {
-                adManager.showAd(from: root) { /* no-op */ }
+                adManager.showAd(from: root) {
+                    UserDefaultsManager.shared.resetAdCount()
+                }
             }
         }
     }

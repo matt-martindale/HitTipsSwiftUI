@@ -36,6 +36,12 @@ class InterstitialAdManager: NSObject, ObservableObject, FullScreenContentDelega
             onDismiss() // fallback if ad isn’t ready
             return
         }
+        
+        guard UserDefaultsManager.shared.shouldShowAd() else {
+            print(UserDefaultsManager.shared.adCountErrorMessage())
+            return
+        }
+        
         print("Presenting interstitial")
         self.onAdDismissed = onDismiss
 

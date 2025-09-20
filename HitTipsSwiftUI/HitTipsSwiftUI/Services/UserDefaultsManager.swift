@@ -7,36 +7,50 @@
 
 import Foundation
 
-struct UserDefaultsManager {
+class UserDefaultsManager {
     static let shared = UserDefaultsManager()
     private let userDefaults = UserDefaults.standard
-    private let aiModelString = "aiModel"
-    private let adFrequencyString = "adFrequency"
-    private let adCountString = "adCount"
+    
+    // MARK: Keys
+    private let aiModelKey = "aiModel"
+    private let adFrequencyKey = "adFrequency"
+    private let adCountKey = "adCount"
     
     private init() {}
     
-    func updateAiModelToUserDefaults(_ aiModel: String) {
-        userDefaults.set(aiModel, forKey: aiModelString)
+    // MARK: Computed properties
+    var aiModel: String {
+        get { userDefaults.string(forKey: aiModelKey) ?? "gpt-4o-mini" }
+        set { userDefaults.set(newValue, forKey: aiModelKey) }
     }
     
-    func updateAdFrequencyToUserDefaults(_ adFrequency: Int) {
-        userDefaults.set(adFrequency, forKey: adFrequencyString)
+    var adCount: Int {
+        get { userDefaults.integer(forKey: adCountKey) }
+        set { userDefaults.set(newValue, forKey: adCountKey) }
     }
     
-    func updateAdCountToUserDefaults(_ adCount: Int) {
-        userDefaults.set(adCount, forKey: adCountString)
+    var adFrequency: Int {
+        get {
+            let stored =  userDefaults.integer(forKey: adFrequencyKey)
+            return stored == 0 ? 3 : stored
+        }
+        set { userDefaults.set(newValue, forKey: adFrequencyKey) }
     }
     
-    func fetchAiModelFromUserDefaults() -> String {
-        userDefaults.value(forKey: aiModelString) as? String ?? "gpt-4o-mini"
+    // MARK: Helpers
+    func incrementAdCount() {
+        adCount += 1
     }
     
-    func fetchAdFrequencyFromUserDefaults() -> Int {
-        (userDefaults.value(forKey: adFrequencyString) as? Int) ?? 3
+    func shouldShowAd() -> Bool {
+        adCount >= adFrequency
     }
     
-    func fetchAdCountFromUserDefaults() -> Int {
-        (userDefaults.value(forKey: adCountString) as? Int) ?? 0
+    func resetAdCount() {
+        adCount = 0
+    }
+    
+    func adCountErrorMessage() -> String {
+        return "Error: Ad count \(adCount), Ad frequency \(adFrequency)"
     }
 }
