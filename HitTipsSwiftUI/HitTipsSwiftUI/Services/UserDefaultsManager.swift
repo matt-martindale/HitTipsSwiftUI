@@ -40,14 +40,18 @@ class UserDefaultsManager {
     // MARK: Helpers
     func incrementAdCount() {
         adCount += 1
+        print("Ad count\(adCount), Ad frequency: \(adFrequency)")
     }
     
     func shouldShowAd() -> Bool {
-        adCount >= adFrequency
+        print("Should show ad? Ad count\(adCount), Ad frequency: \(adFrequency)")
+        return adCount >= adFrequency
     }
     
     func resetAdCount() {
+        print("Reset ad count: \(adCount)")
         adCount = 0
+        print("Reset ad count: \(adCount)")
     }
     
     func adCountErrorMessage() -> String {
