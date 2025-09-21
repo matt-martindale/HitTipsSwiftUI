@@ -35,7 +35,9 @@ struct TipCalculationView: View {
                     partyTipPickers
                     billOutputView
                     Spacer()
+                        .frame(height: 40)
                     confirmButton
+                    Spacer()
                 }
                 .padding(.horizontal)
                 .appCornerRadius()
