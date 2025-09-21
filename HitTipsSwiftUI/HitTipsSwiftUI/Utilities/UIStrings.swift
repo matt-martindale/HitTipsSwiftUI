@@ -12,7 +12,40 @@ struct UIStrings {
     
     // Loader view
     static let loading = "Loading..."
-    static let thinkingOfGoodRoast = "Thinking of good roast..."
+    private static let roastTextArray = [
+        "Preheating the oven for your roast…",
+        "Sharpening the chef’s knife…",
+        "Marinating your humiliation…",
+        "Seasoning this roast just right…",
+        "Letting the burn simmer…",
+        "Cooking up some premium sass…",
+        "Checking if it’s medium-rare or well-done…",
+        "Roast in progress… please hold your ego…",
+        
+        "Crunching numbers and egos…",
+        "Downloading insults from the cloud…",
+        "Applying advanced sarcasm algorithms…",
+        "Waiting for neurons to finish laughing…",
+        "Debugging your life choices…",
+        "Optimizing burn efficiency…",
+        
+        "Sorry, this might sting a little…",
+        "Finding the line between mean and funny…",
+        "Making sure you can still be friends after this…",
+        "Checking if your ego has insurance…",
+        "Hold on, this roast is extra crispy…",
+        
+        "Roast loading…",
+        "Warming up burns…",
+        "Igniting sarcasm…",
+        "Fueling the flame thrower…",
+        "Serving fresh humiliation…",
+        "Your roast will be ready in a moment…"
+    ]
+
+    static var randomFetchingRoastArray: String {
+        return roastTextArray.randomElement() ?? "Cooking up a roast..."
+    }
     static let processingResponse = "Processing response..."
     
     // Home page

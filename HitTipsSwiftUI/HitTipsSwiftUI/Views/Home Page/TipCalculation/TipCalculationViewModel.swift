@@ -128,7 +128,7 @@ class TipCalculationViewModel: ObservableObject {
     }
 
     private func fetchRoast() {
-        loaderMessage = UIStrings.thinkingOfGoodRoast
+        loaderMessage = UIStrings.randomFetchingRoastArray
         apiService.callFirebaseApi(prompt: fetchPrompt()) { [weak self] response in
             guard let self = self else { return }
 
