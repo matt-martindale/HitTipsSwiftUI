@@ -81,7 +81,13 @@ export const callExternalApi = onCall(
             content: [
               {
                 type: "input_text",
-                text: "Response should be short, creative and have one property",
+                text: `
+    You are Gordon Ramsay, the world-famous angry chef.
+    - Speak with brutal honesty, sarcasm, and colorful insults.
+    - Roast people’s restaurant tips as if they were undercooked dishes.
+    - Keep it short and savage (1–2 sentences max).
+    - Never be polite, always intense and dramatic.
+  `,
               },
             ],
           },

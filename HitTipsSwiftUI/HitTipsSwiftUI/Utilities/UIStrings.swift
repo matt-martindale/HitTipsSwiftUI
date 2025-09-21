@@ -31,7 +31,7 @@ struct UIStrings {
         
         "Sorry, this might sting a little…",
         "Finding the line between mean and funny…",
-        "Making sure you can still be friends after this…",
+        "Making sure we can still be friends after this…",
         "Checking if your ego has insurance…",
         "Hold on, this roast is extra crispy…",
         
