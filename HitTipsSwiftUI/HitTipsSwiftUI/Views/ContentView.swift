@@ -12,14 +12,12 @@ enum TabIdentifier: Hashable {
 }
 
 struct ContentView: View {
-    @EnvironmentObject var fireStoreManager: FirestoreManager
     @State private var currentTab: TabIdentifier = .home
     
     var body: some View {
         TabView(selection: $currentTab) {
             Tab(UIStrings.hitTips, systemImage: "exclamationmark.square", value: TabIdentifier.home) {
                 HomeView()
-                    .environmentObject(fireStoreManager)
             }
             Tab(UIStrings.history, systemImage: "newspaper", value: TabIdentifier.history) {
                 HistoryView()
