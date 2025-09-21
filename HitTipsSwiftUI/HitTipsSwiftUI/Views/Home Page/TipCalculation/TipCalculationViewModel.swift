@@ -96,7 +96,7 @@ class TipCalculationViewModel: ObservableObject {
                 tipPercent = 15
             }
         } catch {
-            print("Failed to fetch last tip percentage:", error)
+            print("HTApp: Failed to fetch last tip percentage:", error)
             tipPercent = 15
         }
     }
@@ -112,7 +112,7 @@ class TipCalculationViewModel: ObservableObject {
             }
             try context.save()
         } catch {
-            print("Failed to save last tip percentage:", error)
+            print("HTApp: Failed to save last tip percentage:", error)
         }
     }
 

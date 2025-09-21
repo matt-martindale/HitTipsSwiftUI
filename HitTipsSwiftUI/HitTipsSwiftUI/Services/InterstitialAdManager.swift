@@ -22,9 +22,9 @@ class InterstitialAdManager: NSObject, ObservableObject, FullScreenContentDelega
                 self.interstitial = ad
                 ad.fullScreenContentDelegate = self
                 self.isAdReady = true
-                print("✅ Interstitial loaded")
+                print("HTApp: ✅ Interstitial loaded")
             } else if let error = error {
-                print("❌ Failed to load interstitial: \(error.localizedDescription)")
+                print("HTApp: ❌ Failed to load interstitial: \(error.localizedDescription)")
                 self.isAdReady = false
             }
         }
@@ -32,12 +32,12 @@ class InterstitialAdManager: NSObject, ObservableObject, FullScreenContentDelega
 
     func showAd(from root: UIViewController, onDismiss: @escaping () -> Void) {
         guard let interstitial = interstitial else {
-            print("⚠️ Ad not ready")
+            print("HTApp: ⚠️ Ad not ready")
             onDismiss()
             return
         }
 
-        print("Presenting interstitial")
+        print("HTApp: Presenting interstitial")
         self.onAdDismissed = onDismiss
 
         DispatchQueue.main.async {
@@ -49,7 +49,7 @@ class InterstitialAdManager: NSObject, ObservableObject, FullScreenContentDelega
 
     // Delegate
     func adDidDismissFullScreenContent(_ ad: FullScreenPresentingAd) {
-        print("ℹ️ Interstitial dismissed")
+        print("HTApp: ℹ️ Interstitial dismissed")
         Task { @MainActor in
             self.onAdDismissed?()
             self.onAdDismissed = nil

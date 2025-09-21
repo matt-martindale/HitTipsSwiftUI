@@ -117,7 +117,7 @@ struct TipDetailView: View {
         do {
             try modelContext.save()
         } catch {
-            print("Failed to save tip: \(error.localizedDescription)")
+            print("HTApp: Failed to save tip: \(error.localizedDescription)")
         }
     }
     

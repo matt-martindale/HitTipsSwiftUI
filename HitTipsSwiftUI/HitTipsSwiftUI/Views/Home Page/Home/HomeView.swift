@@ -24,7 +24,7 @@ struct HomeView: View {
                         .bold()
                     
                     Button {
-                        print("Tapped me")
+                        print("HTApp: Tapped me")
                     } label: {
                         Text("😈")
                             .font(.largeTitle)

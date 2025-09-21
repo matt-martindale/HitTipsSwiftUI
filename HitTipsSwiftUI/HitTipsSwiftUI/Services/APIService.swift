@@ -18,10 +18,10 @@ class APIService: ObservableObject {
         if Auth.auth().currentUser == nil {
                 Auth.auth().signInAnonymously { result, error in
                     if let error = error {
-                        print("Anonymous sign-in failed:", error)
+                        print("HTApp: Anonymous sign-in failed:", error)
                         return
                     }
-                    print("Signed in anonymously")
+                    print("HTApp: Signed in anonymously")
                     // Call the function after signing in
                     self.callApiAfterSignIn(prompt: prompt, model: model) { response in
                         completion(response)
@@ -46,7 +46,7 @@ class APIService: ObservableObject {
         
         functions.httpsCallable("callExternalApi").call(data) { result, error in
             if let error = error {
-                print("Error: \(error.localizedDescription)")
+                print("HTApp: Error: \(error.localizedDescription)")
                 completion(nil)
                 return
             }
