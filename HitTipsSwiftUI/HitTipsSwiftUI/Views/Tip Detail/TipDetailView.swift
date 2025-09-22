@@ -30,7 +30,7 @@ struct TipDetailView: View {
                 topButtons
                     .padding(.top)
             }
-
+            
             // Scrollable roast text
             ScrollView {
                 Text(tip.roast)
@@ -39,20 +39,16 @@ struct TipDetailView: View {
                     .multilineTextAlignment(.leading)
                     .frame(maxWidth: .infinity, alignment: .leading) // prevent squishing
             }
-
-            // Receipt rows pinned at bottom
-            VStack(spacing: 8) {
-                ReceiptRow(title: UIStrings.billAmountLowercase, value: "$\(tip.billAmount)")
-                ReceiptRow(title: UIStrings.tipAmountLowercase, value: "$\(String(format: "%.2f", tip.tipAmount))")
-                ReceiptRow(title: UIStrings.tipPercentLowercase, value: "\(tip.tipPercentage)%")
-                ReceiptRow(title: UIStrings.partyLowercase, value: "\(tip.party)")
-                ReceiptRow(title: UIStrings.tipPerPersonLowercase, value: "$\(String(format: "%.2f", tip.tipPerPerson))")
-                ReceiptRow(title: UIStrings.pricePerPersonLowercase, value: "$\(String(format: "%.2f", tip.pricePerPerson))")
-                ReceiptRow(title: UIStrings.totalBillCap, value: "$\(String(format: "%.2f", tip.totalBill))", isHighlight: true)
+            
+            .safeAreaInset(edge: .bottom) {
+                receiptSection
+                    .padding(.vertical, 20)
+                    .padding(.horizontal)
+                    .background(Color(.systemBackground))
+                    .frame(maxWidth: 600) // ✅ this one line caps horizontal width
             }
-            .padding(.vertical, 20)
-            .background(Color(.systemBackground)) // optional: keeps it distinct
         }
+        .frame(maxWidth: 600)
         .padding(.horizontal)
         .background(
             Image("HitTipsLogoTransparent")
@@ -69,7 +65,19 @@ struct TipDetailView: View {
             }
         }
     }
-
+    
+    // MARK: - Receipt Section
+    private var receiptSection: some View {
+        VStack(spacing: 8) {
+            ReceiptRow(title: UIStrings.billAmountLowercase, value: "$\(tip.billAmount)")
+            ReceiptRow(title: UIStrings.tipAmountLowercase, value: "$\(String(format: "%.2f", tip.tipAmount))")
+            ReceiptRow(title: UIStrings.tipPercentLowercase, value: "\(tip.tipPercentage)%")
+            ReceiptRow(title: UIStrings.partyLowercase, value: "\(tip.party)")
+            ReceiptRow(title: UIStrings.tipPerPersonLowercase, value: "$\(String(format: "%.2f", tip.tipPerPerson))")
+            ReceiptRow(title: UIStrings.pricePerPersonLowercase, value: "$\(String(format: "%.2f", tip.pricePerPerson))")
+            ReceiptRow(title: UIStrings.totalBillCap, value: "$\(String(format: "%.2f", tip.totalBill))", isHighlight: true)
+        }
+    }
     
     // MARK: - Buttons (reusable)
     private var topButtons: some View {
