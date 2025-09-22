@@ -1,30 +1,4 @@
-/**
- * Import function triggers from their respective submodules:
- *
- * import {onCall} from "firebase-functions/v2/https";
- * import {onDocumentWritten} from "firebase-functions/v2/firestore";
- *
- * See a full list of supported triggers at https://firebase.google.com/docs/functions
- */
 
-//import {setGlobalOptions} from "firebase-functions";
-//import {onRequest} from "firebase-functions/https";
-//import * as logger from "firebase-functions/logger";
-
-// Start writing functions
-// https://firebase.google.com/docs/functions/typescript
-
-// For cost control, you can set the maximum number of containers that can be
-// running at the same time. This helps mitigate the impact of unexpected
-// traffic spikes by instead downgrading performance. This limit is a
-// per-function limit. You can override the limit for each function using the
-// `maxInstances` option in the function's options, e.g.
-// `onRequest({ maxInstances: 5 }, (req, res) => { ... })`.
-// NOTE: setGlobalOptions does not apply to functions using the v1 API. V1
-// functions should each use functions.runWith({ maxInstances: 10 }) instead.
-// In the v1 API, each function can only serve one request per container, so
-// this will be the maximum concurrent request count.
-//setGlobalOptions({ maxInstances: 10 });
 
 import { onCall, HttpsError } from "firebase-functions/v2/https";
 import * as admin from "firebase-admin";
@@ -34,10 +8,11 @@ admin.initializeApp();
 
 const API_URL = "https://api.openai.com/v1/responses";
 
+// Prod function
 export const callExternalApi = onCall(
                                       { secrets: ["OPENAI_API_KEY"],
                                           timeoutSeconds: 10
-                                      }, // inject secret
+                                      },
   async (request) => {
       const uid = request.auth?.uid;
           if (uid) {
@@ -81,13 +56,7 @@ export const callExternalApi = onCall(
             content: [
               {
                 type: "input_text",
-                text: `
-    You are Gordon Ramsay, the world-famous angry chef.
-    - Speak with brutal honesty, sarcasm, and colorful insults.
-    - Roast people’s restaurant tips as if they were undercooked dishes.
-    - Keep it short and savage (1–2 sentences max).
-    - Never be polite, always intense and dramatic.
-  `,
+                text: "Response should be short, creative and have one property",
               },
             ],
           },
@@ -135,6 +104,72 @@ export const callExternalApi = onCall(
       throw new HttpsError(
         "internal",
         error.response?.data?.error?.message || "Failed to call external API"
+      );
+    }
+  }
+);
+
+/**
+ * Development function (safe playground)
+ * 👉 You can freely tweak model, prompts, schema, etc.
+ */
+export const callExternalApiDev = onCall(
+  { secrets: ["OPENAI_API_KEY"], timeoutSeconds: 10 },
+  async (request) => {
+      
+    const prompt: string | undefined = request.data?.prompt;
+    const model: string = request.data?.model ?? "gpt-4o-mini";
+      
+    if (!prompt) {
+      throw new HttpsError("invalid-argument", "Missing prompt");
+    }
+
+    const apiKey = process.env.OPENAI_API_KEY;
+    if (!apiKey) {
+      throw new HttpsError("internal", "Missing OpenAI API key");
+    }
+
+    console.log("[DEV] Prompt received:", prompt);
+
+    try {
+      const payload = {
+          model: model,
+        input: [
+          {
+            role: "system",
+            content: [
+              {
+                type: "input_text",
+                text: "Response should be short, creative and have one property.",
+              },
+            ],
+          },
+          {
+            role: "user",
+            content: [{ type: "input_text", text: prompt }],
+          },
+        ],
+      };
+
+      const response = await axios.post(API_URL, payload, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${apiKey}`,
+        },
+        timeout: 5000,
+      });
+
+      const text = response.data?.output?.[0]?.content?.[0]?.text;
+      if (!text) {
+        throw new HttpsError("internal", "No text found in OpenAI response");
+      }
+
+      return `[DEV] ${text}`;
+    } catch (error: any) {
+      console.error("[DEV] External API error:", error.response?.data || error.message);
+      throw new HttpsError(
+        "internal",
+        error.response?.data?.error?.message || "Failed to call external API (dev)"
       );
     }
   }

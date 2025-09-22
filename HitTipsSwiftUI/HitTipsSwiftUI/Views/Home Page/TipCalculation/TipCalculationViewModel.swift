@@ -186,6 +186,7 @@ class TipCalculationViewModel: ObservableObject {
             }
         } else {
             // No ad → show sheet immediately
+            adManager.loadAd()
             DispatchQueue.main.async {
                 self.showTipDetailScreen = true
             }

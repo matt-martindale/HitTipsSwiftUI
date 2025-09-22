@@ -37,14 +37,20 @@ class APIService: ObservableObject {
     
     private func callApiAfterSignIn(prompt: String, model: String, completion: @escaping (String?) -> Void) {
         let functions = Functions.functions(region: "us-central1")
-//        functions.useEmulator(withHost: "127.0.0.1", port: 5001)
+        //        functions.useEmulator(withHost: "127.0.0.1", port: 5001)
         
-        var data: [String: Any] = [
-                    "prompt": prompt,
-                    "model": model
-                ]
+        let data: [String: Any] = [
+            "prompt": prompt,
+            "model": model
+        ]
         
-        functions.httpsCallable("callExternalApi").call(data) { result, error in
+        #if DEBUG
+        let functionName = "callExternalApiDev"   // dev version
+        #else
+        let functionName = "callExternalApi"      // prod version
+        #endif
+        
+        functions.httpsCallable(functionName).call(data) { result, error in
             if let error = error {
                 print("HTApp: Error: \(error.localizedDescription)")
                 completion(nil)
