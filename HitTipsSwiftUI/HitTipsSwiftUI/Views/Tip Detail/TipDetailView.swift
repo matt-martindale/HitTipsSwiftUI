@@ -37,7 +37,7 @@ struct TipDetailView: View {
                     .padding()
                     .font(.HTBody24)
                     .multilineTextAlignment(.leading)
-                    .frame(maxWidth: .infinity, alignment: .leading) // prevent squishing
+                    .frame(maxWidth: .infinity, alignment: .leading)
             }
             
             .safeAreaInset(edge: .bottom) {
@@ -45,7 +45,7 @@ struct TipDetailView: View {
                     .padding(.vertical, 20)
                     .padding(.horizontal)
                     .background(Color(.systemBackground))
-                    .frame(maxWidth: 600) // ✅ this one line caps horizontal width
+                    .frame(maxWidth: 600)
             }
         }
         .frame(maxWidth: 600)
