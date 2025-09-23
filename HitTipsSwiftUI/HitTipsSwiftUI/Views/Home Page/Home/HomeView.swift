@@ -47,7 +47,7 @@ struct HomeView: View {
                     .padding()
                     .tint(.primary)
                     
-                    if false {
+                    if true { // Toggle for roast drawer
                         // --- Drawer overlay ---
                         DrawerView(minHeight: 60, maxHeight: 800, isExpanded: $drawerExpanded) {
                             VStack() {
