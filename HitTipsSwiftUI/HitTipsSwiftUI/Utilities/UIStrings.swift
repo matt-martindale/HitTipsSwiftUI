@@ -60,6 +60,8 @@ struct UIStrings {
     static let ok = "OK"
     static let invalidAmount = "Invalid Amount"
     static let enterValidAmount = "Please enter a valid bill amount."
+    static let ssww = "Sorry, something went wrong."
+    static let pleaseTryAgain = "Please try again."
     
     // Roast settings
     static let roastSettings = "🔥 Roast Settings 🔥"

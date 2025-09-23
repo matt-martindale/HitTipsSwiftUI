@@ -30,6 +30,8 @@ class TipCalculationViewModel: ObservableObject {
     @Published var showTipDetailScreen = false
     @Published var isLoading = false
     @Published var loaderMessage = UIStrings.loading
+    @Published var alertTitle: String? = nil
+    @Published var alertMessage: String? = nil
 
     private let apiService: APIService
     private let fireStoreManager: FirestoreManager
@@ -119,7 +121,8 @@ class TipCalculationViewModel: ObservableObject {
     // MARK: - Validate & Add Tip
     func validateAndAddTip() {
         guard Double(billAmount) != nil else {
-            showInvalidAmountAlert = true
+            alertTitle = UIStrings.invalidAmount
+            alertMessage = UIStrings.enterValidAmount
             return
         }
         isLoading = true
@@ -140,7 +143,8 @@ class TipCalculationViewModel: ObservableObject {
                 self.handleAdAndSheet()
             } else {
                 self.isLoading = false
-                self.showInvalidAmountAlert = true
+                self.alertTitle = UIStrings.ssww
+                self.alertMessage = UIStrings.pleaseTryAgain
             }
         }
     }

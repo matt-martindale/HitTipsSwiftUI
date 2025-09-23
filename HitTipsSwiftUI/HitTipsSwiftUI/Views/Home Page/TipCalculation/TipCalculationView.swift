@@ -42,10 +42,24 @@ struct TipCalculationView: View {
                 .padding(.horizontal)
                 .appCornerRadius()
                 .toolbar { keyboardToolbar }
-                .alert(UIStrings.invalidAmount, isPresented: $viewModel.showInvalidAmountAlert) {
-                    Button(UIStrings.ok, role: .cancel) { }
+                .alert(
+                    viewModel.alertTitle ?? "",
+                    isPresented: Binding(
+                        get: { viewModel.alertTitle != nil },
+                        set: { if !$0 {
+                            viewModel.alertTitle = nil
+                            viewModel.alertMessage = nil
+                        }}
+                    )
+                ) {
+                    Button(UIStrings.ok, role: .cancel) {
+                        viewModel.alertTitle = nil
+                        viewModel.alertMessage = nil
+                    }
                 } message: {
-                    Text(UIStrings.enterValidAmount)
+                    if let message = viewModel.alertMessage {
+                        Text(message)
+                    }
                 }
             }
             // Tip Detail Sheet controlled by VM
