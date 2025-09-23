@@ -65,6 +65,10 @@ struct UIStrings {
     
     // Roast settings
     static let roastSettings = "🔥 Roast Settings 🔥"
+    static let roastMe = "🔥 Roast Me"
+    static let hypeMe = "🌟 Hype Me"
+    static let roastMeDescription = "Get a playful burn with a light-hearted insult."
+    static let hypeMeDescription = "Ridiculously flattering hype to boost your ego."
     
     // Tip detail
     static let billAmountLowercase = "Bill Amount"

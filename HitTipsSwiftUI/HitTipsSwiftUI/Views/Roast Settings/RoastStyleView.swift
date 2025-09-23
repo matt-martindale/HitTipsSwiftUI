@@ -27,12 +27,13 @@ struct RoastStyleView: View {
                     .frame(height: 30)
             }
             
+            // Roast style buttons
             HStack(spacing: 18) {
                 Button {
                     print("HTApp: tapped Roast Me")
                     selected = .roast
                 } label: {
-                    Text("🔥 Roast Me")
+                    Text(UIStrings.roastMe)
                         .fontWeight(.medium)
                 }
                 .padding(.horizontal, 20)
@@ -45,7 +46,7 @@ struct RoastStyleView: View {
                     print("HTApp: tapped Hype Me")
                     selected = .hype
                 } label: {
-                    Text("🌟 Hype Me")
+                    Text(UIStrings.hypeMe)
                         .fontWeight(.medium)
                 }
                 .padding(.horizontal, 20)
@@ -54,6 +55,14 @@ struct RoastStyleView: View {
                 .foregroundColor(.white)
                 .appCornerRadius()
             }
+            
+            // Roast style description
+            Text(selected == .roast ? UIStrings.roastMeDescription : UIStrings.hypeMeDescription)
+                .multilineTextAlignment(.center)
+                .font(.HTBody16)
+                .padding()
+            
+            Divider()
             
             Spacer()
             
