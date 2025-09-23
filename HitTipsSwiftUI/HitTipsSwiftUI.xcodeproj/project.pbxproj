@@ -17,6 +17,9 @@
 		C8016CA92E82463400E852AA /* DrawerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8016CA82E82463400E852AA /* DrawerView.swift */; };
 		C8016CAA2E82463400E852AA /* DrawerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8016CA82E82463400E852AA /* DrawerView.swift */; };
 		C8016CAB2E82463400E852AA /* DrawerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8016CA82E82463400E852AA /* DrawerView.swift */; };
+		C8016CAD2E8352EA00E852AA /* RoastStyleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8016CAC2E8352EA00E852AA /* RoastStyleView.swift */; };
+		C8016CAE2E8352EA00E852AA /* RoastStyleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8016CAC2E8352EA00E852AA /* RoastStyleView.swift */; };
+		C8016CAF2E8352EA00E852AA /* RoastStyleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8016CAC2E8352EA00E852AA /* RoastStyleView.swift */; };
 		C84FC47D2E6A232500E13B7A /* Tip.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84FC4702E6A232500E13B7A /* Tip.swift */; };
 		C84FC47E2E6A232500E13B7A /* HitTipsSwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84FC4752E6A232500E13B7A /* HitTipsSwiftUIApp.swift */; };
 		C84FC47F2E6A232500E13B7A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84FC4782E6A232500E13B7A /* ContentView.swift */; };
@@ -129,6 +132,7 @@
 		C8016C9D2E7DC24E00E852AA /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
 		C8016CA32E7E08A000E852AA /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		C8016CA82E82463400E852AA /* DrawerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerView.swift; sourceTree = "<group>"; };
+		C8016CAC2E8352EA00E852AA /* RoastStyleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoastStyleView.swift; sourceTree = "<group>"; };
 		C84FC4332E6A13A900E13B7A /* HitTipsSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HitTipsSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C84FC4452E6A13AA00E13B7A /* HitTipsSwiftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HitTipsSwiftUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C84FC44F2E6A13AA00E13B7A /* HitTipsSwiftUIUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HitTipsSwiftUIUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -216,6 +220,7 @@
 			isa = PBXGroup;
 			children = (
 				C8016CA82E82463400E852AA /* DrawerView.swift */,
+				C8016CAC2E8352EA00E852AA /* RoastStyleView.swift */,
 			);
 			path = "Roast Settings";
 			sourceTree = "<group>";
@@ -539,6 +544,7 @@
 			files = (
 				C852C2A72E71234F00168117 /* BillOutputView.swift in Sources */,
 				C852C2CF2E74CB7F00168117 /* BannerAdView.swift in Sources */,
+				C8016CAE2E8352EA00E852AA /* RoastStyleView.swift in Sources */,
 				C84FC47D2E6A232500E13B7A /* Tip.swift in Sources */,
 				C852C2992E6FBD0100168117 /* CustomPickerWheel.swift in Sources */,
 				C852C28B2E6FACD400168117 /* Color+.swift in Sources */,
@@ -584,6 +590,7 @@
 				C852C2AD2E713C3C00168117 /* ViewModifiers.swift in Sources */,
 				C852C29F2E70DFE300168117 /* UIConstants.swift in Sources */,
 				C852C28D2E6FACD400168117 /* Color+.swift in Sources */,
+				C8016CAD2E8352EA00E852AA /* RoastStyleView.swift in Sources */,
 				C8016CAA2E82463400E852AA /* DrawerView.swift in Sources */,
 				C852C2852E6E0AF200168117 /* TipCalculationViewModel.swift in Sources */,
 				C852C2C02E74B08D00168117 /* LoaderView.swift in Sources */,
@@ -615,6 +622,7 @@
 				C84FC4932E6A32A400E13B7A /* HomeViewModel.swift in Sources */,
 				C8016CA92E82463400E852AA /* DrawerView.swift in Sources */,
 				C852C2842E6E0AF200168117 /* TipCalculationViewModel.swift in Sources */,
+				C8016CAF2E8352EA00E852AA /* RoastStyleView.swift in Sources */,
 				C852C2D62E74D4FB00168117 /* ReceiptRow.swift in Sources */,
 				C852C2CD2E74CB7F00168117 /* BannerAdView.swift in Sources */,
 				C852C2AC2E713C3C00168117 /* ViewModifiers.swift in Sources */,
