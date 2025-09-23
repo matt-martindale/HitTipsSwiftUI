@@ -47,51 +47,53 @@ struct HomeView: View {
                     .padding()
                     .tint(.primary)
                     
-                    // --- Drawer overlay ---
-                    DrawerView(minHeight: 60, maxHeight: 800, isExpanded: $drawerExpanded) {
-                        VStack() {
-                            Text(UIStrings.roastSettings)
-                                .font(.HTBody18)
-                                .fontWeight(.medium)
-                                .padding(.bottom, 20)
-                            
-                            HStack(spacing: 12) {
-                                Button {
-                                    print("HTApp: tapped Roast Me")
-                                } label: {
-                                    Text("🔥 Roast Me")
-                                        .fontWeight(.medium)
-                                }
-                                .padding(.horizontal, 20)
-                                .padding(.vertical, 12)
-                                .background(.htBrown)
-                                .foregroundColor(.white)
-                                .appCornerRadius()
+                    if false {
+                        // --- Drawer overlay ---
+                        DrawerView(minHeight: 60, maxHeight: 800, isExpanded: $drawerExpanded) {
+                            VStack() {
+                                Text(UIStrings.roastSettings)
+                                    .font(.HTBody18)
+                                    .fontWeight(.medium)
+                                    .padding(.bottom, 20)
                                 
-                                Button {
-                                    print("HTApp: tapped Hype Me")
-                                } label: {
-                                    Text("🌟 Hype Me")
-                                        .fontWeight(.medium)
+                                HStack(spacing: 12) {
+                                    Button {
+                                        print("HTApp: tapped Roast Me")
+                                    } label: {
+                                        Text("🔥 Roast Me")
+                                            .fontWeight(.medium)
+                                    }
+                                    .padding(.horizontal, 20)
+                                    .padding(.vertical, 12)
+                                    .background(.htBrown)
+                                    .foregroundColor(.white)
+                                    .appCornerRadius()
+                                    
+                                    Button {
+                                        print("HTApp: tapped Hype Me")
+                                    } label: {
+                                        Text("🌟 Hype Me")
+                                            .fontWeight(.medium)
+                                    }
+                                    .padding(.horizontal, 20)
+                                    .padding(.vertical, 12)
+                                    .background(.htOrange)
+                                    .foregroundColor(.white)
+                                    .appCornerRadius()
                                 }
-                                .padding(.horizontal, 20)
-                                .padding(.vertical, 12)
-                                .background(.htOrange)
+                                
+                                Button(drawerExpanded ? "Collapse" : "Expand") {
+                                    drawerExpanded.toggle()
+                                }
+                                .padding()
+                                .background(Color.blue)
                                 .foregroundColor(.white)
-                                .appCornerRadius()
+                                .cornerRadius(10)
+                                
+                                Spacer()
                             }
-                            
-                            Button(drawerExpanded ? "Collapse" : "Expand") {
-                                drawerExpanded.toggle()
-                            }
-                            .padding()
-                            .background(Color.blue)
-                            .foregroundColor(.white)
-                            .cornerRadius(10)
-                            
-                            Spacer()
+                            .padding(.bottom)
                         }
-                        .padding(.bottom)
                     }
                 }
             }
