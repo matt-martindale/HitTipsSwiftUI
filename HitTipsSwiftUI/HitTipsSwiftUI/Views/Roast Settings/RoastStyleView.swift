@@ -7,11 +7,8 @@
 
 import SwiftUI
 
-enum SelectedRoastStyle {
-    case roast, hype, none
-}
-
 struct RoastStyleView: View {
+    @EnvironmentObject var roastSettings: RoastSettings
     @Binding var drawerExpanded: Bool
     @State private var selected: SelectedRoastStyle = .roast
     
@@ -32,6 +29,7 @@ struct RoastStyleView: View {
                 Button {
                     print("HTApp: tapped Roast Me")
                     selected = .roast
+                    roastSettings.roastStyle = .roast
                 } label: {
                     Text(UIStrings.roastMe)
                         .fontWeight(.medium)
@@ -45,6 +43,7 @@ struct RoastStyleView: View {
                 Button {
                     print("HTApp: tapped Hype Me")
                     selected = .hype
+                    roastSettings.roastStyle = .hype
                 } label: {
                     Text(UIStrings.hypeMe)
                         .fontWeight(.medium)

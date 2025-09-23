@@ -20,6 +20,7 @@
 		C8016CAD2E8352EA00E852AA /* RoastStyleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8016CAC2E8352EA00E852AA /* RoastStyleView.swift */; };
 		C8016CAE2E8352EA00E852AA /* RoastStyleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8016CAC2E8352EA00E852AA /* RoastStyleView.swift */; };
 		C8016CAF2E8352EA00E852AA /* RoastStyleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8016CAC2E8352EA00E852AA /* RoastStyleView.swift */; };
+		C8016CB12E835CFA00E852AA /* RoastSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8016CB02E835CFA00E852AA /* RoastSettings.swift */; };
 		C84FC47D2E6A232500E13B7A /* Tip.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84FC4702E6A232500E13B7A /* Tip.swift */; };
 		C84FC47E2E6A232500E13B7A /* HitTipsSwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84FC4752E6A232500E13B7A /* HitTipsSwiftUIApp.swift */; };
 		C84FC47F2E6A232500E13B7A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84FC4782E6A232500E13B7A /* ContentView.swift */; };
@@ -133,6 +134,7 @@
 		C8016CA32E7E08A000E852AA /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		C8016CA82E82463400E852AA /* DrawerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerView.swift; sourceTree = "<group>"; };
 		C8016CAC2E8352EA00E852AA /* RoastStyleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoastStyleView.swift; sourceTree = "<group>"; };
+		C8016CB02E835CFA00E852AA /* RoastSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoastSettings.swift; sourceTree = "<group>"; };
 		C84FC4332E6A13A900E13B7A /* HitTipsSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HitTipsSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C84FC4452E6A13AA00E13B7A /* HitTipsSwiftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HitTipsSwiftUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C84FC44F2E6A13AA00E13B7A /* HitTipsSwiftUIUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HitTipsSwiftUIUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -250,6 +252,7 @@
 			children = (
 				C84FC4702E6A232500E13B7A /* Tip.swift */,
 				C852C2C12E74B62500168117 /* AppSettings.swift */,
+				C8016CB02E835CFA00E852AA /* RoastSettings.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -563,6 +566,7 @@
 				C852C2952E6FB53400168117 /* Font+.swift in Sources */,
 				C8016C9F2E7DC24E00E852AA /* FirestoreManager.swift in Sources */,
 				C852C27F2E6BD2E700168117 /* APIService.swift in Sources */,
+				C8016CB12E835CFA00E852AA /* RoastSettings.swift in Sources */,
 				C852C2DA2E772C1A00168117 /* HistoryListItemView.swift in Sources */,
 				C852C2832E6E0AF200168117 /* TipCalculationViewModel.swift in Sources */,
 				C8016CAB2E82463400E852AA /* DrawerView.swift in Sources */,

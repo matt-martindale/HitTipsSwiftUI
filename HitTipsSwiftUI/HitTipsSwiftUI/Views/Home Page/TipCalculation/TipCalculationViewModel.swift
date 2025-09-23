@@ -32,6 +32,7 @@ class TipCalculationViewModel: ObservableObject {
     @Published var loaderMessage = UIStrings.loading
     @Published var alertTitle: String? = nil
     @Published var alertMessage: String? = nil
+    @ObservedObject var roastSettings: RoastSettings
 
     private let apiService: APIService
     private let fireStoreManager: FirestoreManager
@@ -40,10 +41,12 @@ class TipCalculationViewModel: ObservableObject {
 
     init(apiService: APIService = APIService(),
          fireStoreManager: FirestoreManager = FirestoreManager(),
-         context: ModelContext) {
+         context: ModelContext,
+         roastSettings: RoastSettings) {
         self.apiService = apiService
         self.fireStoreManager = fireStoreManager
         self.context = context
+        self.roastSettings = roastSettings
 
         loadLastTipPercentage()
         adManager.loadAd()
@@ -132,6 +135,7 @@ class TipCalculationViewModel: ObservableObject {
 
     private func fetchRoast() {
         loaderMessage = UIStrings.randomFetchingRoastArray
+        print("HTApp: \(roastSettings.roastStyle.rawValue) style selected")
         apiService.callFirebaseApi(prompt: fetchPrompt()) { [weak self] response in
             guard let self = self else { return }
 

@@ -12,8 +12,10 @@ struct HomeView: View {
     @Environment(\.modelContext) private var context
     @Query(sort: \Tip.date, order: .reverse) private var tips: [Tip]
     
-    let viewModel = HomeViewModel()
     @State private var drawerExpanded = false
+    @StateObject private var roastSettings = RoastSettings()
+    
+    let viewModel = HomeViewModel()
     
     var body: some View {
         SafeAreaReader { _ in
@@ -39,7 +41,7 @@ struct HomeView: View {
                         }
                         
                         HStack {
-                            TipCalculationView(context: context)
+                            TipCalculationView(context: context, roastSettings: roastSettings)
                         }
                         
                         Spacer()
@@ -51,6 +53,7 @@ struct HomeView: View {
                         // --- Drawer overlay ---
                         DrawerView(minHeight: 60, maxHeight: 800, isExpanded: $drawerExpanded) {
                             RoastStyleView(drawerExpanded: $drawerExpanded)
+                                .environmentObject(roastSettings)
                         }
                     }
                 }

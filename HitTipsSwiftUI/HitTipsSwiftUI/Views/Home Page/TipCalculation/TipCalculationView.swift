@@ -23,8 +23,8 @@ struct TipCalculationView: View {
     @StateObject private var viewModel: TipCalculationViewModel
     @FocusState private var focusedField: FocusedField?
 
-    init(context: ModelContext) {
-        _viewModel = StateObject(wrappedValue: TipCalculationViewModel(context: context))
+    init(context: ModelContext, roastSettings: RoastSettings) {
+        _viewModel = StateObject(wrappedValue: TipCalculationViewModel(context: context, roastSettings: roastSettings))
     }
 
     var body: some View {
