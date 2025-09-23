@@ -61,6 +61,9 @@ struct UIStrings {
     static let invalidAmount = "Invalid Amount"
     static let enterValidAmount = "Please enter a valid bill amount."
     
+    // Roast settings
+    static let roastSettings = "🔥 Roast Settings 🔥"
+    
     // Tip detail
     static let billAmountLowercase = "Bill Amount"
     static let tipAmountLowercase = "Tip Amount"

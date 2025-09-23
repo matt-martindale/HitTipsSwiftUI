@@ -50,9 +50,8 @@ struct HomeView: View {
                     // --- Drawer overlay ---
                     DrawerView(minHeight: 60, maxHeight: 800, isExpanded: $drawerExpanded) {
                         VStack() {
-                            Text("Roast settings")
+                            Text(UIStrings.roastSettings)
                                 .font(.HTBody18)
-                                .foregroundStyle(.secondary)
                                 .padding(.bottom)
                             
                             Text("Swipe up to expand, down to collapse.")
