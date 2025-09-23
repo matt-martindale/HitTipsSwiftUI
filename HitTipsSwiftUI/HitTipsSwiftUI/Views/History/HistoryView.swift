@@ -58,10 +58,12 @@ struct HistoryView: View {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button(role: .destructive) {
                             showingDeleteAllConfirm = true
-                        } label: {
+                        }
+                        label: {
                             Image(systemName: "trash")
                                 .tint(.primary)
                         }
+                        .disabled(tip.isEmpty)
                     }
                 }
                 // Delete All confirmation
