@@ -62,7 +62,7 @@ struct DrawerView<Content: View>: View {
                 }
                 .frame(width: geo.size.width, height: maxHeight, alignment: .top)
                 .background(RoundedRectangle(cornerRadius: 20, style: .continuous)
-                    .fill(Color(.htGray)))
+                    .fill(Color(.htGray2)))
                 .offset(y: offset)
                 .onAppear {
                     offset = collapsedOffset

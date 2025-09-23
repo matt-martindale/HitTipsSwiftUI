@@ -52,11 +52,12 @@ struct HomeView: View {
                         VStack() {
                             Text("Roast settings")
                                 .font(.HTBody18)
+                                .foregroundStyle(.secondary)
                                 .padding(.bottom)
                             
                             Text("Swipe up to expand, down to collapse.")
                                 .multilineTextAlignment(.center)
-                                .foregroundColor(.secondary)
+                                .foregroundStyle(.secondary)
                             
                             Button(drawerExpanded ? "Collapse" : "Expand") {
                                 withAnimation(.spring(response: 0.35, dampingFraction: 0.85)) {
