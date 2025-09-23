@@ -52,16 +52,37 @@ struct HomeView: View {
                         VStack() {
                             Text(UIStrings.roastSettings)
                                 .font(.HTBody18)
-                                .padding(.bottom)
+                                .fontWeight(.medium)
+                                .padding(.bottom, 20)
                             
-                            Text("Swipe up to expand, down to collapse.")
-                                .multilineTextAlignment(.center)
-                                .foregroundStyle(.secondary)
+                            HStack(spacing: 12) {
+                                Button {
+                                    print("HTApp: tapped Roast Me")
+                                } label: {
+                                    Text("🔥 Roast Me")
+                                        .fontWeight(.medium)
+                                }
+                                .padding(.horizontal, 20)
+                                .padding(.vertical, 12)
+                                .background(.htBrown)
+                                .foregroundColor(.white)
+                                .appCornerRadius()
+                                
+                                Button {
+                                    print("HTApp: tapped Hype Me")
+                                } label: {
+                                    Text("🌟 Hype Me")
+                                        .fontWeight(.medium)
+                                }
+                                .padding(.horizontal, 20)
+                                .padding(.vertical, 12)
+                                .background(.htOrange)
+                                .foregroundColor(.white)
+                                .appCornerRadius()
+                            }
                             
                             Button(drawerExpanded ? "Collapse" : "Expand") {
-                                withAnimation(.spring(response: 0.35, dampingFraction: 0.85)) {
-                                    drawerExpanded.toggle()
-                                }
+                                drawerExpanded.toggle()
                             }
                             .padding()
                             .background(Color.blue)
