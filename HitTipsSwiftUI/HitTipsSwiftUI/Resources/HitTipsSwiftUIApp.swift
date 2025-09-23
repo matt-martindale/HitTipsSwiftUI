@@ -27,6 +27,7 @@ struct HitTipsSwiftUIApp: App {
     init() {
         MobileAds.shared.start()
         FirebaseApp.configure()
+        UITabBar.setSolidBackground()
     }
     
     var body: some Scene {

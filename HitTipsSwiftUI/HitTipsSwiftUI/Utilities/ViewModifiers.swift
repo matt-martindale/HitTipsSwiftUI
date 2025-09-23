@@ -35,3 +35,36 @@ extension UIApplication {
         return topController
     }
 }
+
+struct SafeAreaInsetsKey: EnvironmentKey {
+    static var defaultValue: EdgeInsets = EdgeInsets()
+}
+
+extension EnvironmentValues {
+    var safeAreaInsets: EdgeInsets {
+        get { self[SafeAreaInsetsKey.self] }
+        set { self[SafeAreaInsetsKey.self] = newValue }
+    }
+}
+
+struct SafeAreaReader<Content: View>: View {
+    let content: (EdgeInsets) -> Content
+    
+    var body: some View {
+        GeometryReader { geo in
+            content(geo.safeAreaInsets)
+                .environment(\.safeAreaInsets, geo.safeAreaInsets)
+        }
+    }
+}
+
+extension UITabBar {
+    static func setSolidBackground() {
+        let appearance = UITabBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = UIColor.systemBackground
+        
+        UITabBar.appearance().standardAppearance = appearance
+        UITabBar.appearance().scrollEdgeAppearance = appearance
+    }
+}
