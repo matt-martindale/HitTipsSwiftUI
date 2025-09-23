@@ -28,11 +28,9 @@ struct DrawerView<Content: View>: View {
     }
     
     private var collapsedOffset: CGFloat {
-        // how much of the drawer is hidden when collapsed
         maxHeight - (minHeight + safeInsets.bottom)
     }
     
-    /// 0 = collapsed, 1 = expanded
     private var progress: CGFloat {
         guard collapsedOffset > 0 else { return 1 }
         return 1 - (offset / collapsedOffset)
@@ -41,21 +39,17 @@ struct DrawerView<Content: View>: View {
     var body: some View {
         GeometryReader { geo in
             ZStack(alignment: .bottom) {
-                // Dimmer behind the drawer
                 if progress > 0 {
                     Color.black
                         .opacity(Double(progress) * 0.4)
                         .ignoresSafeArea()
                         .onTapGesture {
                             withAnimation(.spring(response: 0.35, dampingFraction: 0.85)) {
-                                offset = collapsedOffset
-                                lastOffset = collapsedOffset
-                                isExpanded = false
+                                collapse()
                             }
                         }
                 }
                 
-                // Drawer (always fully drawn; revealed by offset)
                 VStack(spacing: 0) {
                     Capsule()
                         .fill(Color.gray.opacity(0.6))
@@ -71,50 +65,42 @@ struct DrawerView<Content: View>: View {
                     .fill(Color(.htGray)))
                 .offset(y: offset)
                 .onAppear {
-                    // start collapsed
                     offset = collapsedOffset
                     lastOffset = collapsedOffset
+                }
+                .onChange(of: isExpanded) { newValue in
+                    withAnimation(.spring(response: 0.35, dampingFraction: 0.85)) {
+                        if newValue {
+                            expand()
+                        } else {
+                            collapse()
+                        }
+                        lastOffset = offset
+                    }
                 }
                 .gesture(
                     DragGesture()
                         .onChanged { value in
-                            // follow finger relative to where the drawer started for THIS drag
                             let newOffset = lastOffset + value.translation.height
                             offset = min(max(newOffset, 0), collapsedOffset)
                         }
                         .onEnded { value in
                             let mid = collapsedOffset / 2
-                            
-                            // Use projected vs current translation as a velocity proxy
-                            // Negative = flicking up fast; Positive = flicking down fast
                             let projected = value.predictedEndTranslation.height
                             let current   = value.translation.height
                             let impulse   = projected - current
-                            
-                            // Tune this threshold to taste (pts of extra travel predicted)
-                            let flickThreshold: CGFloat = 220
+                            let flickThreshold: CGFloat = 280
                             
                             withAnimation(.spring(response: 0.35, dampingFraction: 0.85)) {
                                 if impulse < -flickThreshold {
-                                    // fast upward flick → expand
-                                    offset = 0
-                                    isExpanded = true
+                                    expand()
                                 } else if impulse > flickThreshold {
-                                    // fast downward flick → collapse
-                                    offset = collapsedOffset
-                                    isExpanded = false
+                                    collapse()
                                 } else {
-                                    // slow drag → snap by position
-                                    if offset < mid {
-                                        offset = 0
-                                        isExpanded = true
-                                    } else {
-                                        offset = collapsedOffset
-                                        isExpanded = false
-                                    }
+                                    if offset < mid { expand() }
+                                    else { collapse() }
                                 }
                             }
-                            // new baseline for the next drag
                             lastOffset = offset
                         }
                 )
@@ -122,4 +108,16 @@ struct DrawerView<Content: View>: View {
         }
         .ignoresSafeArea(edges: .bottom)
     }
+    
+    // MARK: - Internal controls
+    private func expand() {
+        offset = 0
+        isExpanded = true
+    }
+    
+    private func collapse() {
+        offset = collapsedOffset
+        isExpanded = false
+    }
 }
+

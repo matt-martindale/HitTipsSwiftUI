@@ -48,17 +48,20 @@ struct HomeView: View {
                     .tint(.primary)
                     
                     // --- Drawer overlay ---
-                    DrawerView(minHeight: 70, maxHeight: 800, isExpanded: $drawerExpanded) {
+                    DrawerView(minHeight: 60, maxHeight: 800, isExpanded: $drawerExpanded) {
                         VStack() {
                             Text("Roast settings")
-                                .font(.HTBody20)
+                                .font(.HTBody18)
+                                .padding(.bottom)
                             
                             Text("Swipe up to expand, down to collapse.")
                                 .multilineTextAlignment(.center)
                                 .foregroundColor(.secondary)
                             
                             Button(drawerExpanded ? "Collapse" : "Expand") {
-                                drawerExpanded.toggle()
+                                withAnimation(.spring(response: 0.35, dampingFraction: 0.85)) {
+                                    drawerExpanded.toggle()
+                                }
                             }
                             .padding()
                             .background(Color.blue)
@@ -67,7 +70,7 @@ struct HomeView: View {
                             
                             Spacer()
                         }
-                        .padding()
+                        .padding(.bottom)
                     }
                 }
             }
