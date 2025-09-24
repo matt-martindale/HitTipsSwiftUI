@@ -21,6 +21,9 @@
 		C8016CAE2E8352EA00E852AA /* RoastStyleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8016CAC2E8352EA00E852AA /* RoastStyleView.swift */; };
 		C8016CAF2E8352EA00E852AA /* RoastStyleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8016CAC2E8352EA00E852AA /* RoastStyleView.swift */; };
 		C8016CB12E835CFA00E852AA /* RoastSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8016CB02E835CFA00E852AA /* RoastSettings.swift */; };
+		C8016CB32E83628700E852AA /* RoastService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8016CB22E83628700E852AA /* RoastService.swift */; };
+		C8016CB42E83628700E852AA /* RoastService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8016CB22E83628700E852AA /* RoastService.swift */; };
+		C8016CB52E83628700E852AA /* RoastService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8016CB22E83628700E852AA /* RoastService.swift */; };
 		C84FC47D2E6A232500E13B7A /* Tip.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84FC4702E6A232500E13B7A /* Tip.swift */; };
 		C84FC47E2E6A232500E13B7A /* HitTipsSwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84FC4752E6A232500E13B7A /* HitTipsSwiftUIApp.swift */; };
 		C84FC47F2E6A232500E13B7A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84FC4782E6A232500E13B7A /* ContentView.swift */; };
@@ -135,6 +138,7 @@
 		C8016CA82E82463400E852AA /* DrawerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerView.swift; sourceTree = "<group>"; };
 		C8016CAC2E8352EA00E852AA /* RoastStyleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoastStyleView.swift; sourceTree = "<group>"; };
 		C8016CB02E835CFA00E852AA /* RoastSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoastSettings.swift; sourceTree = "<group>"; };
+		C8016CB22E83628700E852AA /* RoastService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoastService.swift; sourceTree = "<group>"; };
 		C84FC4332E6A13A900E13B7A /* HitTipsSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HitTipsSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C84FC4452E6A13AA00E13B7A /* HitTipsSwiftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HitTipsSwiftUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C84FC44F2E6A13AA00E13B7A /* HitTipsSwiftUIUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HitTipsSwiftUIUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -311,6 +315,7 @@
 				C8DB239C2E77922100F852FF /* HTAdManager.swift */,
 				C8DB23982E7763D900F852FF /* InterstitialAdManager.swift */,
 				C8016CA32E7E08A000E852AA /* UserDefaultsManager.swift */,
+				C8016CB22E83628700E852AA /* RoastService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -576,6 +581,7 @@
 				C8DB23992E7763D900F852FF /* InterstitialAdManager.swift in Sources */,
 				C852C2BE2E74B08D00168117 /* LoaderView.swift in Sources */,
 				C852C2C22E74B62500168117 /* AppSettings.swift in Sources */,
+				C8016CB52E83628700E852AA /* RoastService.swift in Sources */,
 				C84FC48D2E6A2F7200E13B7A /* SplashScreenView.swift in Sources */,
 				C852C2892E6E0EA700168117 /* HTTextField.swift in Sources */,
 				C852C2912E6FAF5900168117 /* HTPickerView.swift in Sources */,
@@ -588,6 +594,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C852C2E22E772CE800168117 /* Date+.swift in Sources */,
+				C8016CB32E83628700E852AA /* RoastService.swift in Sources */,
 				C852C2932E6FB53400168117 /* Font+.swift in Sources */,
 				C852C2882E6E0EA700168117 /* HTTextField.swift in Sources */,
 				C852C2A42E71229200168117 /* UIStrings.swift in Sources */,
@@ -622,6 +629,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C8016CB42E83628700E852AA /* RoastService.swift in Sources */,
 				C84FC4862E6A232500E13B7A /* HomeView.swift in Sources */,
 				C84FC4932E6A32A400E13B7A /* HomeViewModel.swift in Sources */,
 				C8016CA92E82463400E852AA /* DrawerView.swift in Sources */,

@@ -140,7 +140,7 @@ export const callExternalApiDev = onCall(
             content: [
               {
                 type: "input_text",
-                text: "Response should be short, creative and have one property.",
+                text: "You are a tipping calculator that will Roast the following restaurant tip like a shakespearean bard. Response should be 1-3 sentences.",
               },
             ],
           },
