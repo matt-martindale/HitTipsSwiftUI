@@ -79,7 +79,7 @@ export const callExternalApi = onCall(
           "Content-Type": "application/json",
           Authorization: `Bearer ${apiKey}`,
         },
-          timeout: 5000
+          timeout: 10000
       });
 
       console.log("Full API Response:", JSON.stringify(response.data, null, 2));
@@ -156,21 +156,19 @@ export const callExternalApiDev = onCall(
           "Content-Type": "application/json",
           Authorization: `Bearer ${apiKey}`,
         },
-        timeout: 5000,
+        timeout: 10000,
       });
 
       const text = response.data?.output?.[0]?.content?.[0]?.text;
       if (!text) {
-        throw new HttpsError("internal", "No text found in OpenAI response");
+          console.warn("[DEV] No text in response, using fallback.");
+          return `[DEV - fallback] Alas, no roast could be conjured this time, dear patron.`;
       }
 
       return `[DEV] ${text}`;
     } catch (error: any) {
-      console.error("[DEV] External API error:", error.response?.data || error.message);
-      throw new HttpsError(
-        "internal",
-        error.response?.data?.error?.message || "Failed to call external API (dev)"
-      );
+        console.error("[DEV] External API error:", error.response?.data || error.message);
+        return `[DEV - fallback] The roast gods are silent, but bravely tip nonetheless.`;
     }
   }
 );

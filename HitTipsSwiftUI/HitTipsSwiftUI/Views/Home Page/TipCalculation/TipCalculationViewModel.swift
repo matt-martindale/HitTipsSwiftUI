@@ -161,7 +161,6 @@ class TipCalculationViewModel: ObservableObject {
                 }
             }
         }
-        //        fetchRoast()
     }
     
     private func makeTip(roast: String) -> Tip {
@@ -185,26 +184,6 @@ class TipCalculationViewModel: ObservableObject {
             let finalPercent = (adjustedTip / bill) * 100
             return Int(finalPercent.rounded())
         }
-    
-//    private func fetchRoast() {
-//        loaderMessage = UIStrings.randomFetchingRoastArray
-//        print("HTApp: \(roastSettings.roastStyle.rawValue) style selected")
-//        apiService.callFirebaseApi(prompt: fetchPrompt()) { [weak self] response in
-//            guard let self = self else { return }
-//            
-//            if let response = response {
-//                self.loaderMessage = UIStrings.processingResponse
-//                self.roast = response
-//                self.addTip()
-//                self.isLoading = false
-//                self.handleAdAndSheet()
-//            } else {
-//                self.isLoading = false
-//                self.alertTitle = UIStrings.ssww
-//                self.alertMessage = UIStrings.pleaseTryAgain
-//            }
-//        }
-//    }
     
     private func addTip() {
         guard let bill = Double(billAmount),
