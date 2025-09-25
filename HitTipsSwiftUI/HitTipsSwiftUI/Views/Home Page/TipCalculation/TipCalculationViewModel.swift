@@ -5,7 +5,7 @@
 //  Created by Matt Martindale on 9/7/25.
 //
 
-import SwiftData
+import CoreData
 import FirebaseFunctions
 import SwiftUI
 import GoogleMobileAds
@@ -29,12 +29,12 @@ class TipCalculationViewModel: ObservableObject {
     @Published var alertTitle: String? = nil
     @Published var alertMessage: String? = nil
     
-    private let context: ModelContext
+    private var context: NSManagedObjectContext
     private let adManager = InterstitialAdManager()
     private let roastService: RoastProviding
-    private let roastSettings: RoastSettings
+    @ObservedObject var roastSettings: RoastSettings
     
-    init(context: ModelContext,
+    init(context: NSManagedObjectContext,
          roastService: RoastProviding,
          roastSettings: RoastSettings) {
         self.context = context
@@ -43,6 +43,10 @@ class TipCalculationViewModel: ObservableObject {
         loadLastTipPercentage()
         adManager.loadAd()
     }
+    
+    func setContext(_ context: NSManagedObjectContext) {
+            self.context = context
+        }
     
     var finalTipPercentageForTip: Int {
         guard let bill = Double(billAmount), bill > 0 else { return tipPercent }
@@ -89,20 +93,20 @@ class TipCalculationViewModel: ObservableObject {
     
     private func determineTipTier() -> TipTier {
             switch tipPercent {
-            case 0...10: return .terrible
-            case 11...19: return .bad
-            case 20...29: return .decent
-            case 30...99: return .good
-            default: return .bad
+            case 0...10: return TipTier.terrible
+            case 11...19: return TipTier.bad
+            case 20...29: return TipTier.decent
+            case 30...99: return TipTier.good
+            default: return TipTier.bad
             }
         }
     
     // MARK: - Save/Load Last Tip Percentage
     private func loadLastTipPercentage() {
-        let request = FetchDescriptor<AppSettings>()
+        let request: NSFetchRequest<AppSettings> = AppSettings.fetchRequest()
         do {
             if let settings = try context.fetch(request).first {
-                tipPercent = settings.lastTipPercentage
+                tipPercent = Int(settings.lastTipPercentage)
             } else {
                 tipPercent = 15
             }
@@ -111,15 +115,16 @@ class TipCalculationViewModel: ObservableObject {
             tipPercent = 15
         }
     }
-    
+
     private func saveLastTipPercentage() {
-        let request = FetchDescriptor<AppSettings>()
+        let request: NSFetchRequest<AppSettings> = AppSettings.fetchRequest()
         do {
             if let existing = try context.fetch(request).first {
-                existing.lastTipPercentage = tipPercent
+                existing.lastTipPercentage = Int32(tipPercent)
             } else {
-                let settings = AppSettings(lastTipPercentage: tipPercent)
-                context.insert(settings)
+                let settings = AppSettings(context: context)
+                settings.id = UUID()
+                settings.lastTipPercentage = Int32(tipPercent)
             }
             try context.save()
         } catch {
@@ -149,12 +154,17 @@ class TipCalculationViewModel: ObservableObject {
                     
                     let newTip = self.makeTip(roast: response)
                     self.tip = newTip
-                    self.context.insert(newTip)
                     
-                    // Increment ad counter when a tip is successfully added
-                    UserDefaultsManager.shared.incrementAdCount()
+                    do {
+                        try self.context.save()   // ✅ save to Core Data
+                        UserDefaultsManager.shared.incrementAdCount()
+                        self.handleAdAndSheet()
+                    } catch {
+                        print("HTApp: Failed to save tip:", error)
+                        self.alertTitle = "Save Failed"
+                        self.alertMessage = error.localizedDescription
+                    }
                     
-                    self.handleAdAndSheet()
                 } else {
                     self.alertTitle = UIStrings.ssww
                     self.alertMessage = UIStrings.pleaseTryAgain
@@ -164,19 +174,26 @@ class TipCalculationViewModel: ObservableObject {
     }
     
     private func makeTip(roast: String) -> Tip {
-            let bill = Double(billAmount) ?? 0
-            return Tip(
-                roast: roast,
-                billAmount: String(format: "%.2f", bill),
-                totalBill: totalBill,
-                date: Date(),
-                party: party,
-                pricePerPerson: pricePerPerson,
-                tipPerPerson: tipPerPerson,
-                tipAmount: tipAmount,
-                tipPercentage: finalTipPercentage
-            )
-        }
+        let bill = Double(billAmount) ?? 0
+        
+        let newTip = Tip(context: context)
+        newTip.id = UUID()
+        newTip.roast = roast
+        newTip.billAmount = String(format: "%.2f", bill)
+        newTip.totalBill = totalBill
+        newTip.date = Date()
+        newTip.party = Int32(party)
+        newTip.pricePerPerson = pricePerPerson
+        newTip.tipPerPerson = tipPerPerson
+        newTip.tipAmount = tipAmount
+        newTip.tipPercentage = Int32(finalTipPercentage)
+        newTip.isFavorite = false
+        newTip.roastStyle = roastSettings.roastStyle.rawValue
+        newTip.tipTier = roastSettings.tipTier.rawValue
+        
+        return newTip
+    }
+
     
     var finalTipPercentage: Int {
             guard let bill = Double(billAmount), bill > 0 else { return tipPercent }
@@ -185,28 +202,40 @@ class TipCalculationViewModel: ObservableObject {
             return Int(finalPercent.rounded())
         }
     
-    private func addTip() {
-        guard let bill = Double(billAmount),
-              let roast = roast else { return }
-        
-        let newTip = Tip(
-            roast: roast,
-            billAmount: String(format: "%.2f", bill),
-            totalBill: totalBill,
-            date: Date(),
-            party: party,
-            pricePerPerson: pricePerPerson,
-            tipPerPerson: tipPerPerson,
-            tipAmount: tipAmount,
-            tipPercentage: finalTipPercentageForTip
-        )
-        
-        self.tip = newTip
-        context.insert(newTip)
-        
-        // Increment ad counter when a tip is successfully added
-        UserDefaultsManager.shared.incrementAdCount()
-    }
+//    private func addTip() {
+//        guard let bill = Double(billAmount),
+//              let roast = roast else { return }
+//        
+//        let newTip = Tip(context: context)
+//        newTip.id = UUID()
+//        newTip.roast = roast
+//        newTip.billAmount = String(format: "%.2f", bill)
+//        newTip.totalBill = totalBill
+//        newTip.date = Date()
+//        newTip.party = Int32(party)
+//        newTip.pricePerPerson = pricePerPerson
+//        newTip.tipPerPerson = tipPerPerson
+//        newTip.tipAmount = tipAmount
+//        newTip.tipPercentage = Int32(finalTipPercentageForTip)
+//        newTip.isFavorite = false
+//        
+//        // ✅ Attach RoastSettings snapshot
+//        let settings = RoastSettings(context: context)
+//        settings.roastStyle = roastSettings.roastStyle
+//        settings.tipTier = roastSettings.tipTier
+//        newTip.roastSettings = settings
+//        
+//        self.tip = newTip
+//        
+//        do {
+//            try context.save()   // persist changes
+//            UserDefaultsManager.shared.incrementAdCount()
+//        } catch {
+//            print("HTApp: Failed to save tip:", error)
+//            alertTitle = "Save Failed"
+//            alertMessage = error.localizedDescription
+//        }
+//    }
     
     // MARK: - Ad + Sheet Coordination
     private func handleAdAndSheet() {

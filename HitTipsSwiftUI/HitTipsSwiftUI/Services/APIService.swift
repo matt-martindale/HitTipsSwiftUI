@@ -37,7 +37,7 @@ class APIService: ObservableObject {
     
     private func callApiAfterSignIn(prompt: String, model: String, completion: @escaping (String?) -> Void) {
         let functions = Functions.functions(region: "us-central1")
-        functions.useEmulator(withHost: "127.0.0.1", port: 5001)
+//        functions.useEmulator(withHost: "127.0.0.1", port: 5001)
         
         let data: [String: Any] = [
             "prompt": prompt,

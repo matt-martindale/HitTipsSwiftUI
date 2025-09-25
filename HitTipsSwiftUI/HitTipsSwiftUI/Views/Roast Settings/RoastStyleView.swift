@@ -29,7 +29,7 @@ struct RoastStyleView: View {
                 Button {
                     print("HTApp: tapped Roast Me")
                     selected = .roast
-                    roastSettings.roastStyle = .roast
+                    roastSettings.roastStyle = SelectedRoastStyle.roast
                 } label: {
                     Text(UIStrings.roastMe)
                         .fontWeight(.medium)
@@ -42,15 +42,15 @@ struct RoastStyleView: View {
                 
                 Button {
                     print("HTApp: tapped Hype Me")
-                    selected = .hype
-                    roastSettings.roastStyle = .hype
+                    selected = .uplifting
+                    roastSettings.roastStyle = SelectedRoastStyle.uplifting
                 } label: {
                     Text(UIStrings.hypeMe)
                         .fontWeight(.medium)
                 }
                 .padding(.horizontal, 20)
                 .padding(.vertical, 12)
-                .background(selected == .hype ? .htOrange : .htBrown)
+                .background(selected == .uplifting ? .htOrange : .htBrown)
                 .foregroundColor(.white)
                 .appCornerRadius()
             }

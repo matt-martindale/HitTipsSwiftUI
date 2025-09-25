@@ -6,15 +6,12 @@
 //
 
 import SwiftUI
-import SwiftData
+import CoreData
 
 struct HomeView: View {
-    @Environment(\.modelContext) private var context
-    @Query(sort: \Tip.date, order: .reverse) private var tips: [Tip]
-    
+    @Environment(\.managedObjectContext) private var context
+    @EnvironmentObject var roastSettings: RoastSettings
     @State private var drawerExpanded = false
-    @StateObject private var roastSettings = RoastSettings()
-    
     let viewModel = HomeViewModel()
     
     var body: some View {
@@ -41,7 +38,7 @@ struct HomeView: View {
                         }
                         
                         HStack {
-                            TipCalculationView(context: context, roastSettings: roastSettings)
+                            TipCalculationView(roastSettings: roastSettings)
                         }
                         
                         Spacer()
@@ -49,12 +46,9 @@ struct HomeView: View {
                     .padding()
                     .tint(.primary)
                     
-                    if true { // Toggle for roast drawer
-                        // --- Drawer overlay ---
-                        DrawerView(minHeight: 60, maxHeight: 800, isExpanded: $drawerExpanded) {
-                            RoastStyleView(drawerExpanded: $drawerExpanded)
-                                .environmentObject(roastSettings)
-                        }
+                    // --- Drawer overlay ---
+                    DrawerView(minHeight: 60, maxHeight: 800, isExpanded: $drawerExpanded) {
+                        RoastStyleView(drawerExpanded: $drawerExpanded)
                     }
                 }
             }
@@ -64,5 +58,5 @@ struct HomeView: View {
 
 #Preview {
     HomeView()
-        .modelContainer(for: Tip.self, inMemory: true)
+        .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
 }
