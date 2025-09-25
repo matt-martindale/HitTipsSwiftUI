@@ -14,6 +14,7 @@ enum TipDetailEntryPoint {
 
 struct TipDetailView: View {
     @Environment(\.managedObjectContext) private var context
+    @Environment(\.colorScheme) private var colorScheme
     @ObservedObject private var tip: Tip
     @State private var animateHeart: Bool = false
     private let entryPoint: TipDetailEntryPoint
@@ -24,39 +25,45 @@ struct TipDetailView: View {
     }
     
     var body: some View {
-        VStack(spacing: 0) {
-            if entryPoint == .sheet {
-                // Top buttons when in sheet
-                topButtons
-                    .padding(.top)
+        ZStack {
+            GeometryReader { geo in
+                Image("HitTipsLogoTransparent")
+                    .resizable()
+                    .scaledToFit() // ✅ maintain aspect ratio, no overflow
+                    .frame(width: geo.size.width * 1.5) // scale relative to screen, not beyond
+                    .opacity(colorScheme == .dark ? 0.1 : 0.05)
+                    .rotationEffect(.degrees(15))
+                    .position(x: geo.size.width / 2, y: geo.size.height / 2) // center it
             }
+            .ignoresSafeArea()
             
-            // Scrollable roast text
-            ScrollView {
-                Text(tip.roast)
-                    .padding()
-                    .font(.HTBody24)
-                    .multilineTextAlignment(.leading)
-                    .frame(maxWidth: .infinity, alignment: .leading)
+            VStack(spacing: 0) {
+                if entryPoint == .sheet {
+                    topButtons
+                        .padding(.top)
+                }
+                
+                ScrollView {
+                    Text(tip.roast)
+                        .padding()
+                        .font(.HTBody24)
+                        .multilineTextAlignment(.leading)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                .frame(maxWidth: .infinity)
+                .overlay(alignment: .bottom) {   // ✅ Floating card
+                    receiptSection
+                        .padding(.vertical, 20)
+                        .padding(.horizontal)
+                        .frame(maxWidth: 600)
+                        .background(.clear)
+//                        .shadow(radius: 4)
+                        .padding(.bottom, 8) // keeps above home indicator
+                }
             }
-            
-            .safeAreaInset(edge: .bottom) {
-                receiptSection
-                    .padding(.vertical, 20)
-                    .padding(.horizontal)
-                    .background(Color(.systemBackground))
-                    .frame(maxWidth: 600)
-            }
+            .frame(maxWidth: 600)
+            .padding(.horizontal)
         }
-        .frame(maxWidth: 600)
-        .padding(.horizontal)
-        .background(
-            Image("HitTipsLogoTransparent")
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .rotationEffect(.degrees(15))
-                .opacity(0.05)
-        )
         .if(entryPoint == .navigation) { view in
             view.toolbar {
                 ToolbarItemGroup(placement: .topBarTrailing) {
@@ -160,7 +167,7 @@ struct TipDetailView: View {
     
 }
 
-#Preview {
-    TipDetailView(tip: .preview, entryPoint: .sheet)
-        .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
-}
+//#Preview {
+//    TipDetailView(tip: .preview, entryPoint: .sheet)
+//        .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+//}
