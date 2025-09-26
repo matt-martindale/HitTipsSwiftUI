@@ -21,13 +21,13 @@ struct Persona: Identifiable {
         Persona(name: "Sarcastic Comedian", description: "Roasts you with witty one-liners", emoji: "🎤", imageName: "comedian", isPremium: false),
         Persona(name: "French Waiter", description: "Judges your tip with a snobby accent", emoji: "🍷", imageName: "french waiter", isPremium: false),
         Persona(name: "Fabulous Diva", description: "Throws shade with dramatic flair", emoji: "👩‍🎤", imageName: "diva", isPremium: false),
+        Persona(name: "Angsty Teen", description: "Rolls eyes and mocks everything you do", emoji: "🙅‍♀️", imageName: "angsty teen", isPremium: false),
         Persona(name: "Gordon Ramsay", description: "Yells at you like a famous chef", emoji: "👨‍🍳", imageName: "gordon ramsey", isPremium: true),
+        Persona(name: "Shakespearean Bard", description: "Insults you in dramatic Old English verse", emoji: "🎭", imageName: "shakespearean bard", isPremium: true),
         Persona(name: "Drill Sergeant", description: "Barks orders and insults like in boot camp", emoji: "👮", imageName: "drill sergeant", isPremium: true),
         Persona(name: "AI Robot", description: "Delivers cold, mechanical burns", emoji: "🤖", imageName: "ai robot", isPremium: true),
         Persona(name: "Corporate Boss", description: "Disappoints you, like a boss", emoji: "☠️", imageName: "corporate boss", isPremium: true),
-        Persona(name: "Angsty Teen", description: "Rolls eyes and mocks everything you do", emoji: "🙅‍♀️", imageName: "angsty teen", isPremium: true),
-        Persona(name: "News Anchor", description: "Reports your failure with breaking news", emoji: "👩‍💼", imageName: "news anchor", isPremium: true),
-        Persona(name: "Shakespearean Bard", description: "Insults you in dramatic Old English verse", emoji: "🎭", imageName: "shakespearean bard", isPremium: true)
+        Persona(name: "News Anchor", description: "Reports your failure with breaking news", emoji: "👩‍💼", imageName: "news anchor", isPremium: true)
         ]
     
     /* Future Personas:
