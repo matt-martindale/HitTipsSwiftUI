@@ -8,15 +8,11 @@
 import SwiftUI
 
 struct HistoryListItemView: View {
-    private var tip: Tip
-    
-    init(tip: Tip) {
-        self.tip = tip
-    }
+    @ObservedObject var tip: Tip
     
     var body: some View {
         HStack {
-            Text(tip.date.toString())
+            Text(tip.safeDate.toString())
                 .font(.HTBody16)
             Spacer()
             Text("$" + String(format: "%.2f", tip.totalBill))
@@ -34,6 +30,14 @@ struct HistoryListItemView: View {
 }
 
 #Preview {
-    HistoryListItemView(tip: Tip(roast: "That tip was so small, it could fit in a fortune cookie and still leave the waiter wondering what he did wrong!", billAmount: "100.00", totalBill: 110.00, party: 2, pricePerPerson: 50, tipPerPerson: 5.25, tipAmount: 10, tipPercentage: 10, isFavorite: true))
-    HistoryListItemView(tip: Tip(roast: "That tip was so small, it could fit in a fortune cookie and still leave the waiter wondering what he did wrong!", billAmount: "100.00", totalBill: 110.00, party: 2, pricePerPerson: 50, tipPerPerson: 5.25, tipAmount: 10, tipPercentage: 10, isFavorite: false))
+    let context = PersistenceController.preview.container.viewContext
+    let sampleTip = Tip(context: context)
+    sampleTip.id = UUID()
+    sampleTip.date = Date()
+    sampleTip.totalBill = 42.0
+    sampleTip.tipPercentage = 20
+    sampleTip.isFavorite = true
+    
+    return HistoryListItemView(tip: sampleTip)
+        .environment(\.managedObjectContext, context)
 }

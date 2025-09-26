@@ -6,35 +6,28 @@
 //
 
 import SwiftUI
-import SwiftData
+import CoreData
 import Firebase
 import GoogleMobileAds
-
-var sharedModelContainer: ModelContainer = {
-    do {
-        return try ModelContainer(for: Tip.self, AppSettings.self) // ✅ modern API
-    } catch {
-        fatalError("Could not create ModelContainer: \(error)")
-    }
-}()
-
 
 @main
 struct HitTipsSwiftUIApp: App {
     
-    @StateObject private var fireStoreManager = FirestoreManager()
+    let persistenceController = PersistenceController.shared
+    @StateObject private var roastSettings = RoastSettings()
     
     init() {
         MobileAds.shared.start()
         FirebaseApp.configure()
         UITabBar.setSolidBackground()
+
     }
     
     var body: some Scene {
         WindowGroup {
             SplashScreen()
-                .environmentObject(fireStoreManager)
-                .modelContainer(sharedModelContainer)
+                .environmentObject(roastSettings)
+                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }

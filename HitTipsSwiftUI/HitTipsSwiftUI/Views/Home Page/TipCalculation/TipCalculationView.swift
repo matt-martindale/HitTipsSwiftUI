@@ -13,24 +13,27 @@
 //
 
 import SwiftUI
-import SwiftData
+import CoreData
 
 enum FocusedField {
     case billAmount, party, tipPercent
 }
 
 struct TipCalculationView: View {
+    @Environment(\.managedObjectContext) private var context
     @StateObject private var viewModel: TipCalculationViewModel
     @FocusState private var focusedField: FocusedField?
-
-    init(context: ModelContext, roastSettings: RoastSettings) {
+    
+    init(roastSettings: RoastSettings) {
         _viewModel = StateObject(
             wrappedValue: TipCalculationViewModel(
-                context: context,
+                context: PersistenceController.shared.container.viewContext, // placeholder, replaced in body
                 roastService: RoastService(apiService: APIService()),
-                roastSettings: roastSettings))
+                roastSettings: roastSettings
+            )
+        )
     }
-
+    
     var body: some View {
         LoaderView(isLoading: $viewModel.isLoading, message: $viewModel.loaderMessage) {
             NavigationStack {
@@ -75,10 +78,14 @@ struct TipCalculationView: View {
                 }
             }
         }
+        .onAppear {
+            viewModel.setContext(context)
+            viewModel.calculateTip()
+        }
     }
-
+    
     // MARK: - Subviews
-
+    
     private var billAmountField: some View {
         HTTextField(title: UIStrings.billAmountCap, value: $viewModel.billAmount, keyboardType: .decimalPad)
             .focused($focusedField, equals: .billAmount)
@@ -91,21 +98,21 @@ struct TipCalculationView: View {
             }
             .padding(.top)
     }
-
+    
     private var partyTipPickers: some View {
         HStack {
             HTPickerView(selectedNumber: $viewModel.party, upperLimit: 99, icon: "person.2.fill", iconLeading: true)
                 .focused($focusedField, equals: .party)
                 .onChange(of: viewModel.party) { _ in viewModel.calculateTip() }
-
+            
             AnimatedNumberView(value: viewModel.tipAmount, title: UIStrings.tipAmountCap, hasBackground: false)
-
+            
             HTPickerView(selectedNumber: $viewModel.tipPercent, upperLimit: 99, icon: "percent", iconLeading: false)
                 .focused($focusedField, equals: .tipPercent)
                 .onChange(of: viewModel.tipPercent) { _ in viewModel.calculateTip() }
         }
     }
-
+    
     private var billOutputView: some View {
         BillOutputView(
             tipPerPerson: $viewModel.tipPerPerson,
@@ -115,7 +122,7 @@ struct TipCalculationView: View {
             viewModel.applyRounding(action)
         }
     }
-
+    
     private var confirmButton: some View {
         Button {
             viewModel.validateAndAddTip()
@@ -131,7 +138,7 @@ struct TipCalculationView: View {
         }
         .padding()
     }
-
+    
     private var keyboardToolbar: some ToolbarContent {
         ToolbarItemGroup(placement: .keyboard) {
             Spacer()

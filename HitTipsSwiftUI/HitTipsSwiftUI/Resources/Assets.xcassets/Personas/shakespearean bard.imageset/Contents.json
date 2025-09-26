@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "shakespearean bard.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

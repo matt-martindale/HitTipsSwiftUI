@@ -17,14 +17,27 @@
 		C8016CA92E82463400E852AA /* DrawerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8016CA82E82463400E852AA /* DrawerView.swift */; };
 		C8016CAA2E82463400E852AA /* DrawerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8016CA82E82463400E852AA /* DrawerView.swift */; };
 		C8016CAB2E82463400E852AA /* DrawerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8016CA82E82463400E852AA /* DrawerView.swift */; };
-		C8016CAD2E8352EA00E852AA /* RoastStyleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8016CAC2E8352EA00E852AA /* RoastStyleView.swift */; };
-		C8016CAE2E8352EA00E852AA /* RoastStyleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8016CAC2E8352EA00E852AA /* RoastStyleView.swift */; };
-		C8016CAF2E8352EA00E852AA /* RoastStyleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8016CAC2E8352EA00E852AA /* RoastStyleView.swift */; };
-		C8016CB12E835CFA00E852AA /* RoastSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8016CB02E835CFA00E852AA /* RoastSettings.swift */; };
+		C8016CAD2E8352EA00E852AA /* RoastSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8016CAC2E8352EA00E852AA /* RoastSettingsView.swift */; };
+		C8016CAE2E8352EA00E852AA /* RoastSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8016CAC2E8352EA00E852AA /* RoastSettingsView.swift */; };
+		C8016CAF2E8352EA00E852AA /* RoastSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8016CAC2E8352EA00E852AA /* RoastSettingsView.swift */; };
 		C8016CB32E83628700E852AA /* RoastService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8016CB22E83628700E852AA /* RoastService.swift */; };
 		C8016CB42E83628700E852AA /* RoastService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8016CB22E83628700E852AA /* RoastService.swift */; };
 		C8016CB52E83628700E852AA /* RoastService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8016CB22E83628700E852AA /* RoastService.swift */; };
-		C84FC47D2E6A232500E13B7A /* Tip.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84FC4702E6A232500E13B7A /* Tip.swift */; };
+		C8016CB82E846ECE00E852AA /* HitTipsModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C8016CB62E846ECE00E852AA /* HitTipsModel.xcdatamodeld */; };
+		C8016CB92E846ECE00E852AA /* HitTipsModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C8016CB62E846ECE00E852AA /* HitTipsModel.xcdatamodeld */; };
+		C8016CBA2E846ECE00E852AA /* HitTipsModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C8016CB62E846ECE00E852AA /* HitTipsModel.xcdatamodeld */; };
+		C8016CCE2E84718500E852AA /* Tip+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8016CCD2E84718500E852AA /* Tip+CoreData.swift */; };
+		C8016CD02E8471C000E852AA /* AppSettings+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8016CCF2E8471C000E852AA /* AppSettings+CoreData.swift */; };
+		C8016CD22E8471D900E852AA /* RoastSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8016CD12E8471D900E852AA /* RoastSettings.swift */; };
+		C8016CD42E84726600E852AA /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8016CD32E84726600E852AA /* PersistenceController.swift */; };
+		C8016CD62E847A4C00E852AA /* Tip+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8016CD52E847A4C00E852AA /* Tip+Preview.swift */; };
+		C82EF1CD2E85F22F006A5E43 /* PersonaPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82EF1CC2E85F22F006A5E43 /* PersonaPickerView.swift */; };
+		C82EF1CE2E85F22F006A5E43 /* PersonaPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82EF1CC2E85F22F006A5E43 /* PersonaPickerView.swift */; };
+		C82EF1CF2E85F22F006A5E43 /* PersonaPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82EF1CC2E85F22F006A5E43 /* PersonaPickerView.swift */; };
+		C82EF1D12E85F4D4006A5E43 /* Persona.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82EF1D02E85F4D4006A5E43 /* Persona.swift */; };
+		C82EF1D32E85FADC006A5E43 /* PersonaCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82EF1D22E85FADC006A5E43 /* PersonaCardView.swift */; };
+		C82EF1D42E85FADC006A5E43 /* PersonaCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82EF1D22E85FADC006A5E43 /* PersonaCardView.swift */; };
+		C82EF1D52E85FADC006A5E43 /* PersonaCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82EF1D22E85FADC006A5E43 /* PersonaCardView.swift */; };
 		C84FC47E2E6A232500E13B7A /* HitTipsSwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84FC4752E6A232500E13B7A /* HitTipsSwiftUIApp.swift */; };
 		C84FC47F2E6A232500E13B7A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84FC4782E6A232500E13B7A /* ContentView.swift */; };
 		C84FC4802E6A232500E13B7A /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84FC4792E6A232500E13B7A /* HistoryView.swift */; };
@@ -90,7 +103,6 @@
 		C852C2BE2E74B08D00168117 /* LoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C852C2BD2E74B08D00168117 /* LoaderView.swift */; };
 		C852C2BF2E74B08D00168117 /* LoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C852C2BD2E74B08D00168117 /* LoaderView.swift */; };
 		C852C2C02E74B08D00168117 /* LoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C852C2BD2E74B08D00168117 /* LoaderView.swift */; };
-		C852C2C22E74B62500168117 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C852C2C12E74B62500168117 /* AppSettings.swift */; };
 		C852C2C52E74C84500168117 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = C852C2C42E74C84500168117 /* GoogleMobileAds */; };
 		C852C2C92E74CA8600168117 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C852C2C82E74CA8600168117 /* Info.plist */; };
 		C852C2CD2E74CB7F00168117 /* BannerAdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C852C2CC2E74CB7F00168117 /* BannerAdView.swift */; };
@@ -136,13 +148,20 @@
 		C8016C9D2E7DC24E00E852AA /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
 		C8016CA32E7E08A000E852AA /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		C8016CA82E82463400E852AA /* DrawerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerView.swift; sourceTree = "<group>"; };
-		C8016CAC2E8352EA00E852AA /* RoastStyleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoastStyleView.swift; sourceTree = "<group>"; };
-		C8016CB02E835CFA00E852AA /* RoastSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoastSettings.swift; sourceTree = "<group>"; };
+		C8016CAC2E8352EA00E852AA /* RoastSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoastSettingsView.swift; sourceTree = "<group>"; };
 		C8016CB22E83628700E852AA /* RoastService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoastService.swift; sourceTree = "<group>"; };
+		C8016CB72E846ECE00E852AA /* HitTipsModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HitTipsModel.xcdatamodel; sourceTree = "<group>"; };
+		C8016CCD2E84718500E852AA /* Tip+CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tip+CoreData.swift"; sourceTree = "<group>"; };
+		C8016CCF2E8471C000E852AA /* AppSettings+CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppSettings+CoreData.swift"; sourceTree = "<group>"; };
+		C8016CD12E8471D900E852AA /* RoastSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoastSettings.swift; sourceTree = "<group>"; };
+		C8016CD32E84726600E852AA /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
+		C8016CD52E847A4C00E852AA /* Tip+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tip+Preview.swift"; sourceTree = "<group>"; };
+		C82EF1CC2E85F22F006A5E43 /* PersonaPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaPickerView.swift; sourceTree = "<group>"; };
+		C82EF1D02E85F4D4006A5E43 /* Persona.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persona.swift; sourceTree = "<group>"; };
+		C82EF1D22E85FADC006A5E43 /* PersonaCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaCardView.swift; sourceTree = "<group>"; };
 		C84FC4332E6A13A900E13B7A /* HitTipsSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HitTipsSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C84FC4452E6A13AA00E13B7A /* HitTipsSwiftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HitTipsSwiftUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C84FC44F2E6A13AA00E13B7A /* HitTipsSwiftUIUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HitTipsSwiftUIUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		C84FC4702E6A232500E13B7A /* Tip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tip.swift; sourceTree = "<group>"; };
 		C84FC4722E6A232500E13B7A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C84FC4742E6A232500E13B7A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C84FC4752E6A232500E13B7A /* HitTipsSwiftUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HitTipsSwiftUIApp.swift; sourceTree = "<group>"; };
@@ -166,7 +185,6 @@
 		C852C2A62E71234F00168117 /* BillOutputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillOutputView.swift; sourceTree = "<group>"; };
 		C852C2AA2E713C3C00168117 /* ViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModifiers.swift; sourceTree = "<group>"; };
 		C852C2BD2E74B08D00168117 /* LoaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderView.swift; sourceTree = "<group>"; };
-		C852C2C12E74B62500168117 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		C852C2C82E74CA8600168117 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C852C2CC2E74CB7F00168117 /* BannerAdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerAdView.swift; sourceTree = "<group>"; };
 		C852C2D12E74D28800168117 /* TipDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipDetailView.swift; sourceTree = "<group>"; };
@@ -226,7 +244,9 @@
 			isa = PBXGroup;
 			children = (
 				C8016CA82E82463400E852AA /* DrawerView.swift */,
-				C8016CAC2E8352EA00E852AA /* RoastStyleView.swift */,
+				C8016CAC2E8352EA00E852AA /* RoastSettingsView.swift */,
+				C82EF1CC2E85F22F006A5E43 /* PersonaPickerView.swift */,
+				C82EF1D22E85FADC006A5E43 /* PersonaCardView.swift */,
 			);
 			path = "Roast Settings";
 			sourceTree = "<group>";
@@ -254,9 +274,12 @@
 		C84FC4712E6A232500E13B7A /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				C84FC4702E6A232500E13B7A /* Tip.swift */,
-				C852C2C12E74B62500168117 /* AppSettings.swift */,
-				C8016CB02E835CFA00E852AA /* RoastSettings.swift */,
+				C8016CCF2E8471C000E852AA /* AppSettings+CoreData.swift */,
+				C8016CD32E84726600E852AA /* PersistenceController.swift */,
+				C8016CCD2E84718500E852AA /* Tip+CoreData.swift */,
+				C8016CD52E847A4C00E852AA /* Tip+Preview.swift */,
+				C8016CD12E8471D900E852AA /* RoastSettings.swift */,
+				C82EF1D02E85F4D4006A5E43 /* Persona.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -303,6 +326,7 @@
 				C84FC4732E6A232500E13B7A /* Preview Content */,
 				C852C2C82E74CA8600168117 /* Info.plist */,
 				C852C2712E6B94BF00168117 /* GoogleService-Info.plist */,
+				C8016CB62E846ECE00E852AA /* HitTipsModel.xcdatamodeld */,
 			);
 			path = HitTipsSwiftUI;
 			sourceTree = "<group>";
@@ -552,26 +576,31 @@
 			files = (
 				C852C2A72E71234F00168117 /* BillOutputView.swift in Sources */,
 				C852C2CF2E74CB7F00168117 /* BannerAdView.swift in Sources */,
-				C8016CAE2E8352EA00E852AA /* RoastStyleView.swift in Sources */,
-				C84FC47D2E6A232500E13B7A /* Tip.swift in Sources */,
+				C8016CAE2E8352EA00E852AA /* RoastSettingsView.swift in Sources */,
+				C82EF1CF2E85F22F006A5E43 /* PersonaPickerView.swift in Sources */,
 				C852C2992E6FBD0100168117 /* CustomPickerWheel.swift in Sources */,
+				C82EF1D52E85FADC006A5E43 /* PersonaCardView.swift in Sources */,
 				C852C28B2E6FACD400168117 /* Color+.swift in Sources */,
 				C84FC47E2E6A232500E13B7A /* HitTipsSwiftUIApp.swift in Sources */,
+				C8016CD22E8471D900E852AA /* RoastSettings.swift in Sources */,
+				C8016CD02E8471C000E852AA /* AppSettings+CoreData.swift in Sources */,
 				C8016CA42E7E08A000E852AA /* UserDefaultsManager.swift in Sources */,
 				C8DB239E2E77922100F852FF /* HTAdManager.swift in Sources */,
 				C84FC4972E6A3E3600E13B7A /* TipCalculationView.swift in Sources */,
 				C84FC4912E6A32A400E13B7A /* HomeViewModel.swift in Sources */,
 				C852C2A32E71229200168117 /* UIStrings.swift in Sources */,
+				C82EF1D12E85F4D4006A5E43 /* Persona.swift in Sources */,
 				C852C2E02E772CE800168117 /* Date+.swift in Sources */,
 				C84FC47F2E6A232500E13B7A /* ContentView.swift in Sources */,
 				C84FC4802E6A232500E13B7A /* HistoryView.swift in Sources */,
 				C852C2D72E74D4FB00168117 /* ReceiptRow.swift in Sources */,
 				C852C2A02E70DFE300168117 /* UIConstants.swift in Sources */,
+				C8016CD42E84726600E852AA /* PersistenceController.swift in Sources */,
 				C84FC4812E6A232500E13B7A /* HomeView.swift in Sources */,
+				C8016CD62E847A4C00E852AA /* Tip+Preview.swift in Sources */,
 				C852C2952E6FB53400168117 /* Font+.swift in Sources */,
 				C8016C9F2E7DC24E00E852AA /* FirestoreManager.swift in Sources */,
 				C852C27F2E6BD2E700168117 /* APIService.swift in Sources */,
-				C8016CB12E835CFA00E852AA /* RoastSettings.swift in Sources */,
 				C852C2DA2E772C1A00168117 /* HistoryListItemView.swift in Sources */,
 				C852C2832E6E0AF200168117 /* TipCalculationViewModel.swift in Sources */,
 				C8016CAB2E82463400E852AA /* DrawerView.swift in Sources */,
@@ -580,11 +609,12 @@
 				C852C29B2E70977100168117 /* View+.swift in Sources */,
 				C8DB23992E7763D900F852FF /* InterstitialAdManager.swift in Sources */,
 				C852C2BE2E74B08D00168117 /* LoaderView.swift in Sources */,
-				C852C2C22E74B62500168117 /* AppSettings.swift in Sources */,
 				C8016CB52E83628700E852AA /* RoastService.swift in Sources */,
+				C8016CB82E846ECE00E852AA /* HitTipsModel.xcdatamodeld in Sources */,
 				C84FC48D2E6A2F7200E13B7A /* SplashScreenView.swift in Sources */,
 				C852C2892E6E0EA700168117 /* HTTextField.swift in Sources */,
 				C852C2912E6FAF5900168117 /* HTPickerView.swift in Sources */,
+				C8016CCE2E84718500E852AA /* Tip+CoreData.swift in Sources */,
 				C852C2E42E773D2E00168117 /* HistoryViewHeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -594,14 +624,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				C852C2E22E772CE800168117 /* Date+.swift in Sources */,
+				C8016CB92E846ECE00E852AA /* HitTipsModel.xcdatamodeld in Sources */,
 				C8016CB32E83628700E852AA /* RoastService.swift in Sources */,
+				C82EF1CE2E85F22F006A5E43 /* PersonaPickerView.swift in Sources */,
 				C852C2932E6FB53400168117 /* Font+.swift in Sources */,
 				C852C2882E6E0EA700168117 /* HTTextField.swift in Sources */,
 				C852C2A42E71229200168117 /* UIStrings.swift in Sources */,
 				C852C2AD2E713C3C00168117 /* ViewModifiers.swift in Sources */,
 				C852C29F2E70DFE300168117 /* UIConstants.swift in Sources */,
 				C852C28D2E6FACD400168117 /* Color+.swift in Sources */,
-				C8016CAD2E8352EA00E852AA /* RoastStyleView.swift in Sources */,
+				C8016CAD2E8352EA00E852AA /* RoastSettingsView.swift in Sources */,
 				C8016CAA2E82463400E852AA /* DrawerView.swift in Sources */,
 				C852C2852E6E0AF200168117 /* TipCalculationViewModel.swift in Sources */,
 				C852C2C02E74B08D00168117 /* LoaderView.swift in Sources */,
@@ -616,6 +648,7 @@
 				C852C2A82E71234F00168117 /* BillOutputView.swift in Sources */,
 				C852C2D82E74D4FB00168117 /* ReceiptRow.swift in Sources */,
 				C8DB239A2E7763D900F852FF /* InterstitialAdManager.swift in Sources */,
+				C82EF1D42E85FADC006A5E43 /* PersonaCardView.swift in Sources */,
 				C84FC4852E6A232500E13B7A /* ContentView.swift in Sources */,
 				C852C2902E6FAF5900168117 /* HTPickerView.swift in Sources */,
 				C8016CA52E7E08A000E852AA /* UserDefaultsManager.swift in Sources */,
@@ -629,13 +662,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C82EF1CD2E85F22F006A5E43 /* PersonaPickerView.swift in Sources */,
 				C8016CB42E83628700E852AA /* RoastService.swift in Sources */,
 				C84FC4862E6A232500E13B7A /* HomeView.swift in Sources */,
 				C84FC4932E6A32A400E13B7A /* HomeViewModel.swift in Sources */,
 				C8016CA92E82463400E852AA /* DrawerView.swift in Sources */,
 				C852C2842E6E0AF200168117 /* TipCalculationViewModel.swift in Sources */,
-				C8016CAF2E8352EA00E852AA /* RoastStyleView.swift in Sources */,
+				C8016CAF2E8352EA00E852AA /* RoastSettingsView.swift in Sources */,
 				C852C2D62E74D4FB00168117 /* ReceiptRow.swift in Sources */,
+				C8016CBA2E846ECE00E852AA /* HitTipsModel.xcdatamodeld in Sources */,
 				C852C2CD2E74CB7F00168117 /* BannerAdView.swift in Sources */,
 				C852C2AC2E713C3C00168117 /* ViewModifiers.swift in Sources */,
 				C852C2982E6FBD0100168117 /* CustomPickerWheel.swift in Sources */,
@@ -652,6 +687,7 @@
 				C852C27E2E6BD2E700168117 /* APIService.swift in Sources */,
 				C8DB239D2E77922100F852FF /* HTAdManager.swift in Sources */,
 				C852C28C2E6FACD400168117 /* Color+.swift in Sources */,
+				C82EF1D32E85FADC006A5E43 /* PersonaCardView.swift in Sources */,
 				C852C28F2E6FAF5900168117 /* HTPickerView.swift in Sources */,
 				C852C2BF2E74B08D00168117 /* LoaderView.swift in Sources */,
 				C852C2D42E74D28800168117 /* TipDetailView.swift in Sources */,
@@ -1032,6 +1068,19 @@
 			productName = GoogleMobileAds;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		C8016CB62E846ECE00E852AA /* HitTipsModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				C8016CB72E846ECE00E852AA /* HitTipsModel.xcdatamodel */,
+			);
+			currentVersion = C8016CB72E846ECE00E852AA /* HitTipsModel.xcdatamodel */;
+			path = HitTipsModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = C84FC42B2E6A13A900E13B7A /* Project object */;
 }

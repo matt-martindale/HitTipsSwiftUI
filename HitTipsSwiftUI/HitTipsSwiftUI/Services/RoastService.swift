@@ -21,8 +21,9 @@ final class RoastService: RoastProviding {
     
     func fetchRoast(settings: RoastSettings, completion: @escaping (String?) -> Void) {
         let prompt = """
-        Give me a \(settings.roastStyle.rawValue) style roast.
-        Tip tier: \(settings.tipTier.rawValue).
+        Give me a \(settings.roastStyle) style roast.
+        Tip tier: \(settings.tipTier).
+        In the tone of a \(settings.selectedPersona?.name ?? "sarcastic comedian")
         """
         
         print("HTApp: prompt - \(prompt)")

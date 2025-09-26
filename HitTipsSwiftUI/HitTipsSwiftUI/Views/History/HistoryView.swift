@@ -6,101 +6,134 @@
 //
 
 import SwiftUI
-import SwiftData
-import GoogleMobileAds
+import CoreData
 
 struct HistoryView: View {
-    @Environment(\.modelContext) private var modelContext
-    @Query(sort: \Tip.date, order: .reverse) private var tip: [Tip]
+    @Environment(\.managedObjectContext) private var context
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \Tip.date, ascending: false)],
+        animation: .default
+    ) private var tips: FetchedResults<Tip>
+    
     @State private var showingDeleteAllConfirm = false
     
     var body: some View {
         NavigationStack {
             ZStack {
-                Group {
-                    if tip.isEmpty {
-                        // Empty state card
-                        VStack {
-                            Image(systemName: "newspaper")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 100)
-                                .foregroundStyle(.gray)
-                            Text(UIStrings.noSavedTips)
-                                .font(.title2)
-                                .foregroundStyle(.gray)
-                        }
-                        .padding(30)
-                        .background(Color.gray.opacity(0.2))
-                        .cornerRadius(12)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    } else {
-                        // List of tips
-                        List {
-                            Section(header: HistoryViewHeaderView()
-                                .foregroundStyle(.gray)
-                                .padding(.vertical, 4)
-                            ) {
-                                ForEach(tip) { tip in
-                                    NavigationLink {
-                                        TipDetailView(tip: tip)
-                                    } label: {
-                                        HistoryListItemView(tip: tip)
-                                    }
-                                }
-                                .onDelete(perform: deleteItems)
-                            }
+                content
+                    .navigationTitle(UIStrings.history)
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            deleteAllButton
                         }
                     }
-                }
-                .navigationTitle(UIStrings.history)
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button(role: .destructive) {
-                            showingDeleteAllConfirm = true
+                    .confirmationDialog(
+                        UIStrings.deleteAllTips,
+                        isPresented: $showingDeleteAllConfirm,
+                        titleVisibility: .visible
+                    ) {
+                        Button("Delete All", role: .destructive) {
+                            deleteAllItems()
                         }
-                        label: {
-                            Image(systemName: "trash")
-                                .tint(.primary)
-                        }
-                        .disabled(tip.isEmpty)
+                        Button("Cancel", role: .cancel) {}
                     }
-                }
-                // Delete All confirmation
-                .confirmationDialog(
-                    UIStrings.deleteAllTips,
-                    isPresented: $showingDeleteAllConfirm,
-                    titleVisibility: .visible
-                ) {
-                    Button("Delete All", role: .destructive) {
-                        deleteAllItems()
-                    }
-                    Button("Cancel", role: .cancel) {}
-                }
-                VStack {
-                    Spacer()
-                    // Banner ad
-                    BannerAdView(adUnitID: HTAdManager.historyAdBanner)
-                        .frame(height: 50)
-                        .frame(maxWidth: .infinity)
-                        .padding(.horizontal)
-                }
+                
+                bannerAd
             }
         }
         .tint(.primary)
     }
     
-    // MARK: - Actions
+    // MARK: - Subviews
     
+    @ViewBuilder
+    private var content: some View {
+        if tips.isEmpty {
+            emptyState
+        } else {
+            tipsList
+        }
+    }
+    
+    private var emptyState: some View {
+        VStack {
+            Image(systemName: "newspaper")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 100)
+                .foregroundStyle(.gray)
+            Text(UIStrings.noSavedTips)
+                .font(.title2)
+                .foregroundStyle(.gray)
+        }
+        .padding(30)
+        .background(Color.gray.opacity(0.2))
+        .cornerRadius(12)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+    
+    private var tipsList: some View {
+        List {
+            Section(
+                header: HistoryViewHeaderView()
+                    .foregroundStyle(.gray)
+                    .padding(.vertical, 4)
+            ) {
+                ForEach(tips) { tip in
+                    NavigationLink {
+                        TipDetailView(tip: tip)
+                    } label: {
+                        HistoryListItemView(tip: tip)
+                    }
+                }
+                .onDelete(perform: deleteItems)
+            }
+        }
+    }
+    
+    private var deleteAllButton: some View {
+        Button(role: .destructive) {
+            showingDeleteAllConfirm = true
+        } label: {
+            Image(systemName: "trash")
+                .tint(.primary)
+        }
+        .disabled(tips.isEmpty)
+    }
+    
+    private var bannerAd: some View {
+        VStack {
+            Spacer()
+            BannerAdView(adUnitID: HTAdManager.historyAdBanner)
+                .frame(height: 50)
+                .frame(maxWidth: .infinity)
+                .padding(.horizontal)
+        }
+    }
+    
+    // MARK: - Actions
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
-            for index in offsets { modelContext.delete(tip[index]) }
+            for index in offsets {
+                context.delete(tips[index])
+            }
+            saveContext()
         }
     }
     
     private func deleteAllItems() {
         withAnimation {
-            for item in tip { modelContext.delete(item) }
+            let allTips = Array(tips)   // snapshot
+            allTips.forEach { context.delete($0) }
+            saveContext()
+        }
+    }
+    
+    private func saveContext() {
+        do {
+            try context.save()
+        } catch {
+            print("Error saving context after delete: \(error.localizedDescription)")
         }
     }
 }
@@ -108,5 +141,5 @@ struct HistoryView: View {
 // MARK: - Preview
 #Preview {
     HistoryView()
-        .modelContainer(for: Tip.self, inMemory: true)
+        .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
 }

@@ -13,50 +13,57 @@ enum TipDetailEntryPoint {
 }
 
 struct TipDetailView: View {
-    @Environment(\.modelContext) private var modelContext
-    @Bindable private var tip: Tip
+    @Environment(\.managedObjectContext) private var context
+    @Environment(\.colorScheme) private var colorScheme
+    @ObservedObject private var tip: Tip
     @State private var animateHeart: Bool = false
     private let entryPoint: TipDetailEntryPoint
     
     init(tip: Tip, entryPoint: TipDetailEntryPoint = .navigation) {
-        self._tip = Bindable(wrappedValue: tip)
+        self.tip = tip
         self.entryPoint = entryPoint
     }
     
     var body: some View {
-        VStack(spacing: 0) {
-            if entryPoint == .sheet {
-                // Top buttons when in sheet
-                topButtons
-                    .padding(.top)
+        ZStack {
+            GeometryReader { geo in
+                Image("HitTipsLogoTransparent")
+                    .resizable()
+                    .scaledToFit() // ✅ maintain aspect ratio, no overflow
+                    .frame(width: geo.size.width * 1.5) // scale relative to screen, not beyond
+                    .opacity(colorScheme == .dark ? 0.1 : 0.05)
+                    .rotationEffect(.degrees(15))
+                    .position(x: geo.size.width / 2, y: geo.size.height / 2) // center it
             }
+            .ignoresSafeArea()
             
-            // Scrollable roast text
-            ScrollView {
-                Text(tip.roast)
-                    .padding()
-                    .font(.HTBody24)
-                    .multilineTextAlignment(.leading)
-                    .frame(maxWidth: .infinity, alignment: .leading)
+            VStack(spacing: 0) {
+                if entryPoint == .sheet {
+                    topButtons
+                        .padding(.top)
+                }
+                
+                ScrollView {
+                    Text(tip.roast)
+                        .padding()
+                        .font(.HTBody24)
+                        .multilineTextAlignment(.leading)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                .frame(maxWidth: .infinity)
+                .overlay(alignment: .bottom) {   // ✅ Floating card
+                    receiptSection
+                        .padding(.vertical, 20)
+                        .padding(.horizontal)
+                        .frame(maxWidth: 600)
+                        .background(.clear)
+//                        .shadow(radius: 4)
+                        .padding(.bottom, 8) // keeps above home indicator
+                }
             }
-            
-            .safeAreaInset(edge: .bottom) {
-                receiptSection
-                    .padding(.vertical, 20)
-                    .padding(.horizontal)
-                    .background(Color(.systemBackground))
-                    .frame(maxWidth: 600)
-            }
+            .frame(maxWidth: 600)
+            .padding(.horizontal)
         }
-        .frame(maxWidth: 600)
-        .padding(.horizontal)
-        .background(
-            Image("HitTipsLogoTransparent")
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .rotationEffect(.degrees(15))
-                .opacity(0.05)
-        )
         .if(entryPoint == .navigation) { view in
             view.toolbar {
                 ToolbarItemGroup(placement: .topBarTrailing) {
@@ -69,6 +76,7 @@ struct TipDetailView: View {
     // MARK: - Receipt Section
     private var receiptSection: some View {
         VStack(spacing: 8) {
+            ReceiptRow(title: "Roast Style", value: tip.roastStyle)
             ReceiptRow(title: UIStrings.billAmountLowercase, value: "$\(tip.billAmount)")
             ReceiptRow(title: UIStrings.tipAmountLowercase, value: "$\(String(format: "%.2f", tip.tipAmount))")
             ReceiptRow(title: UIStrings.tipPercentLowercase, value: "\(tip.tipPercentage)%")
@@ -123,11 +131,12 @@ struct TipDetailView: View {
         }
         
         do {
-            try modelContext.save()
+            try context.save()   // ✅ Core Data save
         } catch {
             print("HTApp: Failed to save tip: \(error.localizedDescription)")
         }
     }
+
     
     private func shareTapped() {
         // 1. Render TipDetailView as image
@@ -158,17 +167,7 @@ struct TipDetailView: View {
     
 }
 
-#Preview {
-    TipDetailView(
-        tip: Tip(
-            roast: "That tip was so small, it could fit in a fortune cookie and still leave the waiter wondering what he did wrong!",
-            billAmount: "100.00",
-            totalBill: 110.00,
-            party: 2,
-            pricePerPerson: 50,
-            tipPerPerson: 5.25,
-            tipAmount: 10,
-            tipPercentage: 10
-        ), entryPoint: .sheet
-    )
-}
+//#Preview {
+//    TipDetailView(tip: .preview, entryPoint: .sheet)
+//        .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+//}
