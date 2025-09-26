@@ -78,6 +78,15 @@ struct DrawerView<Content: View>: View {
                         lastOffset = offset
                     }
                 }
+                .onTapGesture {
+                    withAnimation(.spring(response: 0.35, dampingFraction: 0.85)) {
+                        if isExpanded {
+                            collapse()
+                        } else {
+                            expand()
+                        }
+                    }
+                }
                 .gesture(
                     DragGesture()
                         .onChanged { value in
