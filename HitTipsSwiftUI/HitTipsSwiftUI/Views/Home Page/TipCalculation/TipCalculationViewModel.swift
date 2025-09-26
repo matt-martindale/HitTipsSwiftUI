@@ -190,6 +190,13 @@ class TipCalculationViewModel: ObservableObject {
         newTip.isFavorite = false
         newTip.roastStyle = roastSettings.roastStyle.rawValue
         newTip.tipTier = roastSettings.tipTier.rawValue
+        if let persona = roastSettings.selectedPersonaID {
+            newTip.personaID = persona
+        }
+        
+        if let persona = newTip.persona {
+            print("HTApp: This tip used persona: \(persona.name)")
+        }
         
         return newTip
     }

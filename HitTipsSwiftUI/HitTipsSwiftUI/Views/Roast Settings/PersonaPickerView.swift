@@ -12,6 +12,8 @@ struct PersonaPickerView: View {
     @State private var selectedPersona: Persona?
     @State private var showUpgradeSheet = false
     
+    @EnvironmentObject var roastSettings: RoastSettings
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             Text("Choose Your Persona")
@@ -21,30 +23,42 @@ struct PersonaPickerView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 16) {
                     ForEach(personas) { persona in
-                        PersonaCardView(
-                            isSelected: selectedPersona?.id == persona.id,
-                            persona: persona
-                        )
-                        .onTapGesture {
-                            if persona.isPremium && !(persona.isFreeTrial || persona.isSeasonalUnlock) {
-                                showUpgradeSheet = true
-                            } else {
-                                selectedPersona = persona
-                            }
-                        }
+                        personaCard(for: persona) // ✅ keep ForEach clean
                     }
                 }
                 .padding(.horizontal)
             }
         }
-        .onAppear {
-//            assignWeeklyFreeTrial()
-//            assignSeasonalUnlocks()
-        }
         .sheet(isPresented: $showUpgradeSheet) {
             // UpgradeView()
         }
     }
+    
+    // MARK: - Card Builder
+    private func personaCard(for persona: Persona) -> some View {
+        let isSelected = roastSettings.selectedPersonaID == persona.id
+        
+        return PersonaCardView(
+            isSelected: isSelected,
+            persona: persona
+        )
+        .onTapGesture {
+            if persona.isPremium && !(persona.isFreeTrial || persona.isSeasonalUnlock) {
+                showUpgradeSheet = true
+            } else {
+                print("HTApp: Selected \(persona.name)")
+                selectedPersona = persona
+                roastSettings.selectedPersonaID = persona.id
+            }
+        }
+    }
+}
+
+#Preview {
+    PersonaPickerView()
+        .environmentObject(RoastSettings()) // ✅ inject environment
+}
+
     
     // MARK: - Helpers
 //    private func assignWeeklyFreeTrial() {
@@ -90,8 +104,4 @@ struct PersonaPickerView: View {
 //            return copy
 //        }
 //    }
-}
-
-#Preview {
-    PersonaPickerView()
-}
+//}

@@ -12,49 +12,66 @@ struct PersonaCardView: View {
     let persona: Persona
     
     var body: some View {
-        VStack(spacing: 6) {
-            // Always top-aligned image
-            Image(persona.imageName)
-                .resizable()
-                .scaledToFill()
-                .frame(height: 80)
-                .padding(.bottom, 4)
-//                .padding(.top, 12)
-
-            VStack(spacing: 4) {
-                Text(persona.name)
-                    .font(.HTBody14)
-                    .fontWeight(.medium)
-                    .multilineTextAlignment(.center)
-                    .lineLimit(2)
-                    .minimumScaleFactor(0.8)
-                    .frame(maxWidth: .infinity)
-
-                Text("Speaks in old English")
-                    .font(.HTBody12)
-                    .multilineTextAlignment(.center)
-                    .lineLimit(3)
-                    .minimumScaleFactor(0.8)
-                    .fixedSize(horizontal: false, vertical: true)
-                    .frame(maxWidth: .infinity)
-            }
-            .padding(4)
-            .frame(minHeight: 60) // 🔑 gives all cards equal text block height
+        ZStack(alignment: .top) {
+            // Card background
+            RoundedRectangle(cornerRadius: 16)
+                .fill(isSelected ? .htOrange2 : .htPersonaBackground)
+                .frame(width: 100, height: 180)
             
-            Spacer() // keeps content pushed up
+            VStack(spacing: 6) {
+                Image(persona.imageName)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(height: 90)
+                    .allowsHitTesting(false)
+                    .background(isSelected ? .htOrange : .htPersonaBackground)
+                    .clipShape(UnevenRoundedRectangle(
+                        topLeadingRadius: 16,
+                        bottomLeadingRadius: 0,
+                        bottomTrailingRadius: 0,
+                        topTrailingRadius: 16
+                    ))
+                
+                // Text content
+                VStack(spacing: 4) {
+                    Text(persona.name)
+                        .foregroundStyle(.white)
+                        .font(.HTBody14)
+                        .fontWeight(.medium)
+                        .multilineTextAlignment(.center)
+                        .lineLimit(2)
+                        .minimumScaleFactor(0.7)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .frame(maxWidth: .infinity)
+
+                    Text(persona.description)
+                        .foregroundStyle(.white)
+                        .font(.HTBody10)
+                        .multilineTextAlignment(.center)
+                        .lineLimit(3)
+                        .minimumScaleFactor(0.7)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .frame(maxWidth: .infinity)
+                }
+                .padding(6)
+                .frame(height: 70)
+                
+                Spacer()
+            }
+            .frame(width: 100, height: 180, alignment: .top)
+            
+            RoundedRectangle(cornerRadius: 16)
+                .fill(.clear)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 16)
+                        .stroke(isSelected ? .htRed : Color.clear, lineWidth: 2)
+                )
+                .frame(width: 100, height: 180)
         }
-        .frame(width: 100, height: 180, alignment: .top)
-        .background(
-            RoundedRectangle(cornerRadius: 16)
-                .fill(isSelected ? .htOrange : Color.gray.opacity(0.25))
-        )
-        .overlay(
-            RoundedRectangle(cornerRadius: 16)
-                .stroke(isSelected ? .htRed : Color.clear, lineWidth: 2)
-        )
+        .frame(width: 100, height: 200)
     }
 }
 
 #Preview {
-    PersonaCardView(isSelected: false, persona: Persona.all[3])
+    PersonaCardView(isSelected: true, persona: Persona.all[1])
 }

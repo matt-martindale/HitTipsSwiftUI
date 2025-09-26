@@ -29,11 +29,20 @@ extension Tip: Identifiable {
     @NSManaged public var isFavorite: Bool
     @NSManaged public var roastStyle: String
     @NSManaged public var tipTier: String
+    @NSManaged public var personaID: UUID?
+
 }
 
 extension Tip {
     var safeDate: Date {
         if self.managedObjectContext == nil { return Date() }
         return self.date
+    }
+}
+
+extension Tip {
+    var persona: Persona? {
+        guard let pid = personaID else { return nil }
+        return Persona.all.first(where: { $0.id == pid })
     }
 }

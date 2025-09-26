@@ -48,7 +48,7 @@ struct HomeView: View {
                     
                     // --- Drawer overlay ---
                     DrawerView(minHeight: 60, maxHeight: 800, isExpanded: $drawerExpanded) {
-                        RoastStyleView(drawerExpanded: $drawerExpanded)
+                        RoastSettingsView(drawerExpanded: $drawerExpanded)
                     }
                 }
             }

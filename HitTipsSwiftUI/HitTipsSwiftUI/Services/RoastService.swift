@@ -23,6 +23,7 @@ final class RoastService: RoastProviding {
         let prompt = """
         Give me a \(settings.roastStyle) style roast.
         Tip tier: \(settings.tipTier).
+        In the tone of a \(settings.selectedPersona?.name ?? "sarcastic comedian")
         """
         
         print("HTApp: prompt - \(prompt)")
