@@ -52,22 +52,65 @@ class SubscriptionManager: ObservableObject {
             }
         }
     }
+    
+    func restorePurchases() {
+        Purchases.shared.restorePurchases { customerInfo, error in
+            if let error = error {
+                print("Restore failed: \(error.localizedDescription)")
+            } else if let customerInfo = customerInfo {
+                if customerInfo.entitlements.active.isEmpty {
+                    print("No active subscriptions found.")
+                } else {
+                    print("Restored successfully! Active entitlements: \(customerInfo.entitlements.active.keys)")
+                    // You can update your app state here, e.g. unlock premium
+                }
+            }
+        }
+    }
+    
+    func pricingDescription(for pkg: Package) -> String {
+        let product = pkg.storeProduct
+        let price = product.localizedPriceString
+        let unit = product.subscriptionPeriod?.durationTitle ?? ""
+        
+        if let trial = product.introductoryDiscount {
+            let trialValue = trial.subscriptionPeriod.value
+            let trialUnit = trial.subscriptionPeriod.unit.localized(for: trialValue)
+            
+            return "Only \(price)/\(unit)after \(trialValue)-\(trialUnit) trial"
+        } else {
+            return "Only \(price)/\(unit)"
+        }
+    }
+
+    func ctaText(for pkg: Package) -> String {
+        let product = pkg.storeProduct
+        if product.introductoryDiscount != nil {
+            return "Start Free Trial"
+        } else {
+            return "Subscribe Now"
+        }
+    }
+
+    
 }
 
-extension SubscriptionPeriod {
-    var durationTitle: String {
-        switch self.unit {
+extension SubscriptionPeriod.Unit {
+    func localized(for value: Int) -> String {
+        switch self {
         case .day: return "day"
         case .week: return "week"
         case .month: return "month"
         case .year: return "year"
-        default: return "Unknown"
+        @unknown default: return ""
         }
     }
-    
-    var periodTitle: String {
-        let periodString = "\(self.value) \(self.durationTitle)"
-        let pluralized = self.value > 1 ? periodString + "s" : periodString
-        return pluralized
+}
+
+extension SubscriptionPeriod {
+    var durationTitle: String {
+        let value = self.value
+        let unit = self.unit.localized(for: value)
+        return "\(unit)"
     }
 }
