@@ -77,7 +77,7 @@ class SubscriptionManager: ObservableObject {
             let trialValue = trial.subscriptionPeriod.value
             let trialUnit = trial.subscriptionPeriod.unit.localized(for: trialValue)
             
-            return "Only \(price)/\(unit)after \(trialValue)-\(trialUnit) trial"
+            return "Only \(price)/\(unit) after \(trialValue)-\(trialUnit) trial"
         } else {
             return "Only \(price)/\(unit)"
         }

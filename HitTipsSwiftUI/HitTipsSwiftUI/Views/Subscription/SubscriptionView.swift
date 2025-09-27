@@ -122,7 +122,7 @@ struct FeatureRow: View {
     var body: some View {
         HStack(spacing: 12) {
             Image(systemName: icon)
-                .foregroundStyle(.blue)
+                .foregroundStyle(.htBlue)
                 .frame(width: 24, height: 24)
             Text(text)
                 .font(.body)
@@ -136,4 +136,5 @@ struct FeatureRow: View {
 
 #Preview {
     SubscriptionView()
+        .environmentObject(SubscriptionManager())
 }
