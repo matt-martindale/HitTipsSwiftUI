@@ -36,19 +36,19 @@ class APIService: ObservableObject {
     }
     
     private func callApiAfterSignIn(prompt: String, model: String, completion: @escaping (String?) -> Void) {
+#if DEBUG
+        let functionName = "callExternalApiDev"   // dev version
         let functions = Functions.functions(region: "us-central1")
-        functions.useEmulator(withHost: "127.0.0.1", port: 5001)
+//        functions.useEmulator(withHost: "127.0.0.1", port: 5001)
+#else
+        let functionName = "callExternalApi"      // prod version
+        let functions = Functions.functions(region: "us-central1")
+#endif
         
         let data: [String: Any] = [
             "prompt": prompt,
             "model": model
         ]
-        
-#if DEBUG
-        let functionName = "callExternalApiDev"   // dev version
-#else
-        let functionName = "callExternalApi"      // prod version
-#endif
         
         functions.httpsCallable(functionName).call(data) { result, error in
             if let error = error {

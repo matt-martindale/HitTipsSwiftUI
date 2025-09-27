@@ -38,6 +38,14 @@
 		C82EF1D32E85FADC006A5E43 /* PersonaCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82EF1D22E85FADC006A5E43 /* PersonaCardView.swift */; };
 		C82EF1D42E85FADC006A5E43 /* PersonaCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82EF1D22E85FADC006A5E43 /* PersonaCardView.swift */; };
 		C82EF1D52E85FADC006A5E43 /* PersonaCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82EF1D22E85FADC006A5E43 /* PersonaCardView.swift */; };
+		C82EF1DE2E872A71006A5E43 /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = C82EF1DD2E872A71006A5E43 /* RevenueCat */; };
+		C82EF1E02E872A71006A5E43 /* RevenueCatUI in Frameworks */ = {isa = PBXBuildFile; productRef = C82EF1DF2E872A71006A5E43 /* RevenueCatUI */; };
+		C82EF1E22E872B23006A5E43 /* SubscriptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82EF1E12E872B23006A5E43 /* SubscriptionManager.swift */; };
+		C82EF1E32E872B23006A5E43 /* SubscriptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82EF1E12E872B23006A5E43 /* SubscriptionManager.swift */; };
+		C82EF1E42E872B23006A5E43 /* SubscriptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82EF1E12E872B23006A5E43 /* SubscriptionManager.swift */; };
+		C82EF1E72E872B54006A5E43 /* SubscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82EF1E62E872B54006A5E43 /* SubscriptionView.swift */; };
+		C82EF1E82E872B54006A5E43 /* SubscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82EF1E62E872B54006A5E43 /* SubscriptionView.swift */; };
+		C82EF1E92E872B54006A5E43 /* SubscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82EF1E62E872B54006A5E43 /* SubscriptionView.swift */; };
 		C84FC47E2E6A232500E13B7A /* HitTipsSwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84FC4752E6A232500E13B7A /* HitTipsSwiftUIApp.swift */; };
 		C84FC47F2E6A232500E13B7A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84FC4782E6A232500E13B7A /* ContentView.swift */; };
 		C84FC4802E6A232500E13B7A /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84FC4792E6A232500E13B7A /* HistoryView.swift */; };
@@ -159,6 +167,8 @@
 		C82EF1CC2E85F22F006A5E43 /* PersonaPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaPickerView.swift; sourceTree = "<group>"; };
 		C82EF1D02E85F4D4006A5E43 /* Persona.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persona.swift; sourceTree = "<group>"; };
 		C82EF1D22E85FADC006A5E43 /* PersonaCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaCardView.swift; sourceTree = "<group>"; };
+		C82EF1E12E872B23006A5E43 /* SubscriptionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionManager.swift; sourceTree = "<group>"; };
+		C82EF1E62E872B54006A5E43 /* SubscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionView.swift; sourceTree = "<group>"; };
 		C84FC4332E6A13A900E13B7A /* HitTipsSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HitTipsSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C84FC4452E6A13AA00E13B7A /* HitTipsSwiftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HitTipsSwiftUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C84FC44F2E6A13AA00E13B7A /* HitTipsSwiftUIUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HitTipsSwiftUIUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -216,7 +226,9 @@
 			files = (
 				C852C2812E6E047200168117 /* FirebaseAppCheck in Frameworks */,
 				C8016CA22E7DEB3600E852AA /* FirebaseAuth in Frameworks */,
+				C82EF1DE2E872A71006A5E43 /* RevenueCat in Frameworks */,
 				C852C27B2E6B9DD100168117 /* FirebaseFunctions in Frameworks */,
+				C82EF1E02E872A71006A5E43 /* RevenueCatUI in Frameworks */,
 				C852C2C52E74C84500168117 /* GoogleMobileAds in Frameworks */,
 				C852C2772E6B956C00168117 /* FirebaseAnalytics in Frameworks */,
 				C852C2792E6B956C00168117 /* FirebaseFirestore in Frameworks */,
@@ -249,6 +261,14 @@
 				C82EF1D22E85FADC006A5E43 /* PersonaCardView.swift */,
 			);
 			path = "Roast Settings";
+			sourceTree = "<group>";
+		};
+		C82EF1E52E872B47006A5E43 /* Subscription */ = {
+			isa = PBXGroup;
+			children = (
+				C82EF1E62E872B54006A5E43 /* SubscriptionView.swift */,
+			);
+			path = Subscription;
 			sourceTree = "<group>";
 		};
 		C84FC42A2E6A13A900E13B7A = {
@@ -304,6 +324,7 @@
 		C84FC47B2E6A232500E13B7A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C82EF1E52E872B47006A5E43 /* Subscription */,
 				C84FC48C2E6A2F7200E13B7A /* SplashScreenView.swift */,
 				C84FC4782E6A232500E13B7A /* ContentView.swift */,
 				C84FC48A2E6A23A400E13B7A /* Home Page */,
@@ -340,6 +361,7 @@
 				C8DB23982E7763D900F852FF /* InterstitialAdManager.swift */,
 				C8016CA32E7E08A000E852AA /* UserDefaultsManager.swift */,
 				C8016CB22E83628700E852AA /* RoastService.swift */,
+				C82EF1E12E872B23006A5E43 /* SubscriptionManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -440,6 +462,8 @@
 				C852C2802E6E047200168117 /* FirebaseAppCheck */,
 				C852C2C42E74C84500168117 /* GoogleMobileAds */,
 				C8016CA12E7DEB3600E852AA /* FirebaseAuth */,
+				C82EF1DD2E872A71006A5E43 /* RevenueCat */,
+				C82EF1DF2E872A71006A5E43 /* RevenueCatUI */,
 			);
 			productName = HitTipsSwiftUI;
 			productReference = C84FC4332E6A13A900E13B7A /* HitTipsSwiftUI.app */;
@@ -526,6 +550,7 @@
 			packageReferences = (
 				C852C2752E6B956C00168117 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				C852C2C32E74C84500168117 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
+				C82EF1DC2E872A71006A5E43 /* XCRemoteSwiftPackageReference "purchases-ios-spm" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = C84FC4342E6A13A900E13B7A /* Products */;
@@ -575,6 +600,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C852C2A72E71234F00168117 /* BillOutputView.swift in Sources */,
+				C82EF1E82E872B54006A5E43 /* SubscriptionView.swift in Sources */,
 				C852C2CF2E74CB7F00168117 /* BannerAdView.swift in Sources */,
 				C8016CAE2E8352EA00E852AA /* RoastSettingsView.swift in Sources */,
 				C82EF1CF2E85F22F006A5E43 /* PersonaPickerView.swift in Sources */,
@@ -585,6 +611,7 @@
 				C8016CD22E8471D900E852AA /* RoastSettings.swift in Sources */,
 				C8016CD02E8471C000E852AA /* AppSettings+CoreData.swift in Sources */,
 				C8016CA42E7E08A000E852AA /* UserDefaultsManager.swift in Sources */,
+				C82EF1E32E872B23006A5E43 /* SubscriptionManager.swift in Sources */,
 				C8DB239E2E77922100F852FF /* HTAdManager.swift in Sources */,
 				C84FC4972E6A3E3600E13B7A /* TipCalculationView.swift in Sources */,
 				C84FC4912E6A32A400E13B7A /* HomeViewModel.swift in Sources */,
@@ -635,6 +662,7 @@
 				C852C28D2E6FACD400168117 /* Color+.swift in Sources */,
 				C8016CAD2E8352EA00E852AA /* RoastSettingsView.swift in Sources */,
 				C8016CAA2E82463400E852AA /* DrawerView.swift in Sources */,
+				C82EF1E22E872B23006A5E43 /* SubscriptionManager.swift in Sources */,
 				C852C2852E6E0AF200168117 /* TipCalculationViewModel.swift in Sources */,
 				C852C2C02E74B08D00168117 /* LoaderView.swift in Sources */,
 				C852C29D2E70977100168117 /* View+.swift in Sources */,
@@ -654,6 +682,7 @@
 				C8016CA52E7E08A000E852AA /* UserDefaultsManager.swift in Sources */,
 				C84FC4922E6A32A400E13B7A /* HomeViewModel.swift in Sources */,
 				C852C2972E6FBD0100168117 /* CustomPickerWheel.swift in Sources */,
+				C82EF1E72E872B54006A5E43 /* SubscriptionView.swift in Sources */,
 				C84FC48F2E6A2F7200E13B7A /* SplashScreenView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -691,8 +720,10 @@
 				C852C28F2E6FAF5900168117 /* HTPickerView.swift in Sources */,
 				C852C2BF2E74B08D00168117 /* LoaderView.swift in Sources */,
 				C852C2D42E74D28800168117 /* TipDetailView.swift in Sources */,
+				C82EF1E92E872B54006A5E43 /* SubscriptionView.swift in Sources */,
 				C852C29C2E70977100168117 /* View+.swift in Sources */,
 				C852C2872E6E0EA700168117 /* HTTextField.swift in Sources */,
+				C82EF1E42E872B23006A5E43 /* SubscriptionManager.swift in Sources */,
 				C8DB239B2E7763D900F852FF /* InterstitialAdManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1018,6 +1049,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		C82EF1DC2E872A71006A5E43 /* XCRemoteSwiftPackageReference "purchases-ios-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RevenueCat/purchases-ios-spm.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.40.0;
+			};
+		};
 		C852C2752E6B956C00168117 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -1041,6 +1080,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = C852C2752E6B956C00168117 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
+		};
+		C82EF1DD2E872A71006A5E43 /* RevenueCat */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C82EF1DC2E872A71006A5E43 /* XCRemoteSwiftPackageReference "purchases-ios-spm" */;
+			productName = RevenueCat;
+		};
+		C82EF1DF2E872A71006A5E43 /* RevenueCatUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C82EF1DC2E872A71006A5E43 /* XCRemoteSwiftPackageReference "purchases-ios-spm" */;
+			productName = RevenueCatUI;
 		};
 		C852C2762E6B956C00168117 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;

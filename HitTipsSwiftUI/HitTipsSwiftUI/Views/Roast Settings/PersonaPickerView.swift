@@ -13,6 +13,7 @@ struct PersonaPickerView: View {
     @State private var showUpgradeSheet = false
     
     @EnvironmentObject var roastSettings: RoastSettings
+    @EnvironmentObject var subscriptionManager: SubscriptionManager
     
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -30,7 +31,12 @@ struct PersonaPickerView: View {
             }
         }
         .sheet(isPresented: $showUpgradeSheet) {
-            // UpgradeView()
+            SubscriptionView()
+        }
+        .onChange(of: subscriptionManager.isPremiumUser) { isPremium in
+            if isPremium {
+                showUpgradeSheet = false // ✅ auto-dismiss
+            }
         }
     }
     
@@ -43,7 +49,7 @@ struct PersonaPickerView: View {
             persona: persona
         )
         .onTapGesture {
-            if persona.isPremium && !(persona.isFreeTrial || persona.isSeasonalUnlock) {
+            if persona.isPremium && !subscriptionManager.isPremiumUser && !(persona.isFreeTrial || persona.isSeasonalUnlock) {
                 showUpgradeSheet = true
             } else {
                 print("HTApp: Selected \(persona.name)")
