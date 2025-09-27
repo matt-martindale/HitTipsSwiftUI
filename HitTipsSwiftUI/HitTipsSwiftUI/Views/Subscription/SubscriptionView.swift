@@ -30,13 +30,13 @@ struct SubscriptionView: View {
                 
                 // Hero Text
                 VStack(spacing: 8) {
-                    Text("Unlock Premium")
+                    Text(UIStrings.unlockPremium)
                         .font(.largeTitle)
                         .fontWeight(.bold)
                         .multilineTextAlignment(.center)
                         .foregroundStyle(.white)
                     
-                    Text("3-Day Free Trial • Cancel Anytime")
+                    Text(UIStrings.paywallSubtitle)
                         .font(.subheadline)
                         .foregroundStyle(.white.opacity(0.9))
                         .multilineTextAlignment(.center)
@@ -46,15 +46,15 @@ struct SubscriptionView: View {
                 // Feature List
                 VStack(alignment: .leading, spacing: 16) {
                     FeatureRow(icon: "theatermasks.fill",
-                               text: "All Premium Personas")
+                               text: UIStrings.premiumPerk1)
                     FeatureRow(icon: "nosign",
-                               text: "Ad-Free Experience")
+                               text: UIStrings.premiumPerk1)
                     FeatureRow(icon: "brain.head.profile",
-                               text: "Smarter AI Model")
+                               text: UIStrings.premiumPerk3)
                     FeatureRow(icon: "gift.fill",
-                               text: "Seasonal Unlocks (Santa, Dracula & more)")
+                               text: UIStrings.premiumPerk4)
                     FeatureRow(icon: "star.fill",
-                               text: "Priority Access to New Features")
+                               text: UIStrings.premiumPerk5)
                 }
                 .padding()
                 .background(.ultraThinMaterial)
@@ -75,7 +75,7 @@ struct SubscriptionView: View {
                             // trigger subscription purchase
                             subscriptionManager.purchase(pkg)
                         }) {
-                            Text("Start Free Trial")
+                            Text(UIStrings.paywallCTA)
                                 .font(.headline)
                                 .frame(maxWidth: .infinity)
                                 .padding()
@@ -85,21 +85,42 @@ struct SubscriptionView: View {
                         }
                     } else {
                         // Fallback while offerings are loading
-                        ProgressView("Loading plans…")
+                        ProgressView(UIStrings.paywallLoading)
                             .foregroundStyle(.white)
                     }
                 }
                 
                 // Restore + Legal
                 VStack(spacing: 4) {
-                    Button("Restore Purchases") {
-                        // handle restore
-                        subscriptionManager.restorePurchases()
+                    HStack {
+                        Button(UIStrings.restorePurchases) {
+                            subscriptionManager.restorePurchases()
+                        }
+                        .font(.footnote)
+                        .foregroundStyle(.white.opacity(0.9))
+                        
+                        Text("•")
+                            .font(.footnote)
+                            .foregroundStyle(.white.opacity(0.8))
+                        
+                        Button(UIStrings.termsOfUse) {
+                            subscriptionManager.restorePurchases()
+                        }
+                        .font(.footnote)
+                        .foregroundStyle(.white.opacity(0.9))
+                        
+                        Text("•")
+                            .font(.footnote)
+                            .foregroundStyle(.white.opacity(0.8))
+                        
+                        Button(UIStrings.privacyPolicy) {
+                            subscriptionManager.restorePurchases()
+                        }
+                        .font(.footnote)
+                        .foregroundStyle(.white.opacity(0.9))
                     }
-                    .font(.footnote)
-                    .foregroundStyle(.white.opacity(0.9))
                     
-                    Text("Cancel anytime. Subscription renews automatically at $3.99/month unless canceled at least 24 hours before the end of trial.")
+                    Text(UIStrings.footerTerms)
                         .font(.caption2)
                         .foregroundStyle(.white.opacity(0.7))
                         .multilineTextAlignment(.center)

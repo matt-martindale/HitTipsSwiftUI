@@ -85,4 +85,19 @@ struct UIStrings {
     static let date = "Date"
     static let bill = "Bill"
     static let percent = "Tip %"
+    
+    // Paywall
+    static let unlockPremium = "Unlock Premium"
+    static let paywallSubtitle = "3-Day Free Trial • Cancel Anytime"
+    static let premiumPerk1 = "All Premium Personas"
+    static let premiumPerk2 = "Ad-Free Experience"
+    static let premiumPerk3 = "Smarter AI Model"
+    static let premiumPerk4 = "Seasonal Unlocks (Santa, Dracula & more)"
+    static let premiumPerk5 = "Priority Access to New Features"
+    static let paywallCTA = "Start Free Trial"
+    static let paywallLoading = "Loading plans…"
+    static let restorePurchases = "Restore Purchases"
+    static let termsOfUse = "Terms of Use"
+    static let privacyPolicy = "Privacy Policy"
+    static let footerTerms = "Cancel anytime. Subscription renews automatically at $3.99/month unless canceled at least 24 hours before the end of trial."
 }

@@ -62,7 +62,7 @@ class SubscriptionManager: ObservableObject {
                     print("No active subscriptions found.")
                 } else {
                     print("Restored successfully! Active entitlements: \(customerInfo.entitlements.active.keys)")
-                    // You can update your app state here, e.g. unlock premium
+                    self.isPremiumUser = true
                 }
             }
         }
