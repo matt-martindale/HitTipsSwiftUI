@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct RoastSettingsView: View {
+    @EnvironmentObject private var subscriptionManager: SubscriptionManager
     @EnvironmentObject var roastSettings: RoastSettings
     @Binding var drawerExpanded: Bool
     @State private var selectedStyle: SelectedRoastStyle = .roast
@@ -51,6 +52,11 @@ struct RoastSettingsView: View {
 //            Spacer()
         }
         .padding(.bottom)
+        .onChange(of: drawerExpanded) { expanded in
+            if expanded {
+                subscriptionManager.refreshCustomerInfo()
+            }
+        }
     }
     
     private var roastTypeView: some View {

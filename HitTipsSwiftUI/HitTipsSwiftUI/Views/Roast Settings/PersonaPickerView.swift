@@ -33,11 +33,11 @@ struct PersonaPickerView: View {
         .sheet(isPresented: $showUpgradeSheet) {
             SubscriptionView()
         }
-        .onChange(of: subscriptionManager.isPremiumUser) { isPremium in
-            if isPremium {
-                showUpgradeSheet = false // ✅ auto-dismiss
-            }
-        }
+//        .onChange(of: subscriptionManager.isPremiumUser) { isPremium in
+//            if isPremium {
+//                showUpgradeSheet = false // ✅ auto-dismiss
+//            }
+//        }
     }
     
     // MARK: - Card Builder

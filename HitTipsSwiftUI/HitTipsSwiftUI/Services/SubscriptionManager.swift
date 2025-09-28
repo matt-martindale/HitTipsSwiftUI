@@ -13,6 +13,9 @@ class SubscriptionManager: ObservableObject {
     @Published var offerings: Offerings?
     @Published var isPremiumUser = false
     @Published var price: String?
+    @Published var isLoading = false
+    @Published var errorMessage: String?
+    @Published var successMessage: String?
 
     init() {
         fetchOfferings()
@@ -22,7 +25,11 @@ class SubscriptionManager: ObservableObject {
     func refreshCustomerInfo() {
         Purchases.shared.getCustomerInfo { info, error in
             if let info = info {
-                self.isPremiumUser = info.entitlements["Premium Features"]?.isActive == true
+                if info.entitlements["Premium Features"]?.isActive == true {
+                    self.isPremiumUser = true
+                } else {
+                    self.isPremiumUser = false
+                }
             }
 //            if let info = info {
 //                print("RevenueCat App User ID: \(Purchases.shared.appUserID)")
@@ -50,24 +57,36 @@ class SubscriptionManager: ObservableObject {
     }
 
     func purchase(_ package: Package) {
-        Purchases.shared.purchase(package: package) { result, customerInfo, error, userCancelled in
-            if let info = customerInfo,
+        isLoading = true
+        errorMessage = nil
+        successMessage = nil
+        Purchases.shared.purchase(package: package) { [weak self] result, customerInfo, error, userCancelled in
+            self?.isLoading = false
+            if let error = error {
+                self?.errorMessage = "Purchase failed: \(error.localizedDescription)"
+            } else if let info = customerInfo,
                info.entitlements["Premium Features"]?.isActive == true {
-                self.isPremiumUser = true
+                self?.isPremiumUser = true
+                self?.successMessage = "✅ Premium unlocked!"
             }
         }
     }
     
     func restorePurchases() {
-        Purchases.shared.restorePurchases { customerInfo, error in
+        isLoading = true
+        errorMessage = nil
+        successMessage = nil
+        Purchases.shared.restorePurchases { [weak self] customerInfo, error in
+            self?.isLoading = false
             if let error = error {
-                print("Restore failed: \(error.localizedDescription)")
+                self?.errorMessage = "Restore failed: \(error.localizedDescription)"
             } else if let customerInfo = customerInfo {
                 if customerInfo.entitlements.active.isEmpty {
-                    print("No active subscriptions found.")
+                    self?.errorMessage = "No active subscription found."
                 } else {
                     print("Restored successfully! Active entitlements: \(customerInfo.entitlements.active.keys)")
-                    self.isPremiumUser = true
+                    self?.isPremiumUser = true
+                    self?.successMessage = "✅ Purchases restored!"
                 }
             }
         }

@@ -52,6 +52,9 @@
 		C82EF1F52E899118006A5E43 /* URL+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82EF1F42E899118006A5E43 /* URL+.swift */; };
 		C82EF1F62E899118006A5E43 /* URL+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82EF1F42E899118006A5E43 /* URL+.swift */; };
 		C82EF1F72E899118006A5E43 /* URL+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82EF1F42E899118006A5E43 /* URL+.swift */; };
+		C82EF1F92E89A5C9006A5E43 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82EF1F82E89A5C9006A5E43 /* ToastView.swift */; };
+		C82EF1FA2E89A5C9006A5E43 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82EF1F82E89A5C9006A5E43 /* ToastView.swift */; };
+		C82EF1FB2E89A5C9006A5E43 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82EF1F82E89A5C9006A5E43 /* ToastView.swift */; };
 		C84FC47E2E6A232500E13B7A /* HitTipsSwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84FC4752E6A232500E13B7A /* HitTipsSwiftUIApp.swift */; };
 		C84FC47F2E6A232500E13B7A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84FC4782E6A232500E13B7A /* ContentView.swift */; };
 		C84FC4802E6A232500E13B7A /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84FC4792E6A232500E13B7A /* HistoryView.swift */; };
@@ -177,6 +180,7 @@
 		C82EF1E62E872B54006A5E43 /* SubscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionView.swift; sourceTree = "<group>"; };
 		C82EF1F02E898F05006A5E43 /* SafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
 		C82EF1F42E899118006A5E43 /* URL+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+.swift"; sourceTree = "<group>"; };
+		C82EF1F82E89A5C9006A5E43 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		C84FC4332E6A13A900E13B7A /* HitTipsSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HitTipsSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C84FC4452E6A13AA00E13B7A /* HitTipsSwiftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HitTipsSwiftUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C84FC44F2E6A13AA00E13B7A /* HitTipsSwiftUIUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HitTipsSwiftUIUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -275,6 +279,7 @@
 			isa = PBXGroup;
 			children = (
 				C82EF1E62E872B54006A5E43 /* SubscriptionView.swift */,
+				C82EF1F82E89A5C9006A5E43 /* ToastView.swift */,
 			);
 			path = Subscription;
 			sourceTree = "<group>";
@@ -641,6 +646,7 @@
 				C852C27F2E6BD2E700168117 /* APIService.swift in Sources */,
 				C852C2DA2E772C1A00168117 /* HistoryListItemView.swift in Sources */,
 				C852C2832E6E0AF200168117 /* TipCalculationViewModel.swift in Sources */,
+				C82EF1F92E89A5C9006A5E43 /* ToastView.swift in Sources */,
 				C8016CAB2E82463400E852AA /* DrawerView.swift in Sources */,
 				C852C2AB2E713C3C00168117 /* ViewModifiers.swift in Sources */,
 				C852C2D22E74D28800168117 /* TipDetailView.swift in Sources */,
@@ -689,6 +695,7 @@
 				C852C2D82E74D4FB00168117 /* ReceiptRow.swift in Sources */,
 				C8DB239A2E7763D900F852FF /* InterstitialAdManager.swift in Sources */,
 				C82EF1D42E85FADC006A5E43 /* PersonaCardView.swift in Sources */,
+				C82EF1FA2E89A5C9006A5E43 /* ToastView.swift in Sources */,
 				C82EF1F12E898F05006A5E43 /* SafariView.swift in Sources */,
 				C84FC4852E6A232500E13B7A /* ContentView.swift in Sources */,
 				C852C2902E6FAF5900168117 /* HTPickerView.swift in Sources */,
@@ -712,6 +719,7 @@
 				C8016CA92E82463400E852AA /* DrawerView.swift in Sources */,
 				C852C2842E6E0AF200168117 /* TipCalculationViewModel.swift in Sources */,
 				C8016CAF2E8352EA00E852AA /* RoastSettingsView.swift in Sources */,
+				C82EF1FB2E89A5C9006A5E43 /* ToastView.swift in Sources */,
 				C852C2D62E74D4FB00168117 /* ReceiptRow.swift in Sources */,
 				C8016CBA2E846ECE00E852AA /* HitTipsModel.xcdatamodeld in Sources */,
 				C852C2CD2E74CB7F00168117 /* BannerAdView.swift in Sources */,
