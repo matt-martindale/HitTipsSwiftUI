@@ -11,6 +11,7 @@ import CoreData
 struct HomeView: View {
     @Environment(\.managedObjectContext) private var context
     @EnvironmentObject var roastSettings: RoastSettings
+    @EnvironmentObject var subscriptionManager: SubscriptionManager
     @State private var drawerExpanded = false
     let viewModel = HomeViewModel()
     
@@ -28,7 +29,7 @@ struct HomeView: View {
                             Button {
                                 print("HTApp: Tapped me")
                             } label: {
-                                Text("😈")
+                                Text(subscriptionManager.isPremiumUser ? "👑" : "😈")
                                     .font(.largeTitle)
                                     .padding(2)
                                     .contentShape(Rectangle())
