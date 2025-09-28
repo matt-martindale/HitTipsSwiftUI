@@ -22,13 +22,11 @@ struct SubscriptionView: View {
                 Spacer(minLength: 20)
                 
                 // App Icon / Logo
-                Image("HitTipsLogoTransparent") // replace with your asset
+                Image("HitTipsLogoTransparent")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 120, height: 120)
-                    .shadow(radius: 10)
                 
-                // Hero Text
                 VStack(spacing: 8) {
                     Text(UIStrings.unlockPremium)
                         .font(.largeTitle)
@@ -48,7 +46,7 @@ struct SubscriptionView: View {
                     FeatureRow(icon: "theatermasks.fill",
                                text: UIStrings.premiumPerk1)
                     FeatureRow(icon: "nosign",
-                               text: UIStrings.premiumPerk1)
+                               text: UIStrings.premiumPerk2)
                     FeatureRow(icon: "brain.head.profile",
                                text: UIStrings.premiumPerk3)
                     FeatureRow(icon: "gift.fill",
@@ -72,7 +70,6 @@ struct SubscriptionView: View {
                             .foregroundStyle(.white)
                         
                         Button(action: {
-                            // trigger subscription purchase
                             subscriptionManager.purchase(pkg)
                         }) {
                             Text(UIStrings.paywallCTA)
@@ -84,7 +81,6 @@ struct SubscriptionView: View {
                                 .cornerRadius(14)
                         }
                     } else {
-                        // Fallback while offerings are loading
                         ProgressView(UIStrings.paywallLoading)
                             .foregroundStyle(.white)
                     }
@@ -120,7 +116,7 @@ struct SubscriptionView: View {
                         .foregroundStyle(.white.opacity(0.9))
                     }
                     
-                    Text(UIStrings.footerTerms)
+                    Text(String(format: UIStrings.footerTerms, subscriptionManager.price ?? "$3.99"))
                         .font(.caption2)
                         .foregroundStyle(.white.opacity(0.7))
                         .multilineTextAlignment(.center)

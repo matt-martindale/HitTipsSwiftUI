@@ -99,5 +99,5 @@ struct UIStrings {
     static let restorePurchases = "Restore Purchases"
     static let termsOfUse = "Terms of Use"
     static let privacyPolicy = "Privacy Policy"
-    static let footerTerms = "Cancel anytime. Subscription renews automatically at $3.99/month unless canceled at least 24 hours before the end of trial."
+    static let footerTerms = "Cancel anytime. Subscription renews automatically at %@/month unless canceled at least 24 hours before the end of trial."
 }

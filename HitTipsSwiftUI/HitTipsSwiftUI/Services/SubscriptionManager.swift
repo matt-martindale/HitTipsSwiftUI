@@ -12,6 +12,7 @@ import RevenueCat
 class SubscriptionManager: ObservableObject {
     @Published var offerings: Offerings?
     @Published var isPremiumUser = false
+    @Published var price: String?
 
     init() {
         fetchOfferings()
@@ -40,6 +41,10 @@ class SubscriptionManager: ObservableObject {
         Purchases.shared.getOfferings { offerings, error in
             if let offerings = offerings {
                 self.offerings = offerings
+                
+                if let package = offerings.current?.availablePackages.first {
+                    self.price = package.storeProduct.localizedPriceString
+                }
             }
         }
     }
