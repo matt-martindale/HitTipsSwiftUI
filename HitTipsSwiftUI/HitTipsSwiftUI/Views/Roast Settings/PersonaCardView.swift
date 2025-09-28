@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct PersonaCardView: View {
+    @Environment(\.colorScheme) var colorScheme
+    
     let isSelected: Bool
     let persona: Persona
     
@@ -35,7 +37,7 @@ struct PersonaCardView: View {
                 // Text content
                 VStack(spacing: 4) {
                     Text(persona.name)
-                        .foregroundStyle(.white)
+                        .foregroundStyle((colorScheme == .light && isSelected) ? .white : .primary)
                         .font(.HTBody14)
                         .fontWeight(.medium)
                         .multilineTextAlignment(.center)
@@ -45,7 +47,7 @@ struct PersonaCardView: View {
                         .frame(maxWidth: .infinity)
 
                     Text(persona.description)
-                        .foregroundStyle(.white)
+                        .foregroundStyle((colorScheme == .light && isSelected) ? .white : .primary)
                         .font(.HTBody10)
                         .multilineTextAlignment(.center)
                         .lineLimit(3)
@@ -71,23 +73,36 @@ struct PersonaCardView: View {
         .frame(width: 100, height: 200)
     }
     
-    private func fillColor() -> Color {
+    private func fillColor() -> AnyShapeStyle {
         if persona.isPremium {
-            return isSelected ? .htBlue : .htPersonaBackground
+            return isSelected ? AnyShapeStyle(LinearGradient(colors: [.purple.opacity(1), .blue.opacity(1)],startPoint: .topLeading,endPoint: .bottomTrailing)) : AnyShapeStyle(LinearGradient(colors: [.purple.opacity(0.5), .blue.opacity(0.5)],startPoint: .topLeading,endPoint: .bottomTrailing))
         } else {
-            return isSelected ? .htOrange2 : .htPersonaBackground
+            return AnyShapeStyle(
+                isSelected ? Color.htOrange2 : Color.htPersonaBackground
+            )
         }
     }
     
-    private func backgroundColor() -> Color {
+    private func backgroundColor() -> AnyShapeStyle {
         if persona.isPremium {
-            return isSelected ? .htPurple : .htPersonaBackground
+            return isSelected ? AnyShapeStyle(LinearGradient(colors: [.purple.opacity(0.4), .purple.opacity(0.4)],startPoint: .topLeading,endPoint: .bottomTrailing)) : AnyShapeStyle(LinearGradient(colors: [.purple.opacity(0.3), .blue.opacity(0.3)],startPoint: .topLeading,endPoint: .bottomTrailing))
         } else {
-            return isSelected ? .htOrange : .htPersonaBackground
+            return AnyShapeStyle(
+                isSelected ? Color.htOrange : Color.htPersonaBackground
+            )
         }
     }
 }
 
 #Preview {
-    PersonaCardView(isSelected: true, persona: Persona.all[1])
+    VStack {
+        HStack {
+            PersonaCardView(isSelected: false, persona: Persona.all[1])
+            PersonaCardView(isSelected: true, persona: Persona.all[1])
+        }
+        HStack {
+            PersonaCardView(isSelected: false, persona: Persona.all[5])
+            PersonaCardView(isSelected: true, persona: Persona.all[5])
+        }
+    }
 }
