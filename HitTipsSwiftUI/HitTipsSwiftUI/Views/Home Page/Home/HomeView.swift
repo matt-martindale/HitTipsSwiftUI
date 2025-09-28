@@ -39,7 +39,7 @@ struct HomeView: View {
                         }
                         
                         HStack {
-                            TipCalculationView(roastSettings: roastSettings)
+                            TipCalculationView(roastSettings: roastSettings, subscriptionManager: subscriptionManager)
                         }
                         
                         Spacer()

@@ -16,6 +16,7 @@ struct HistoryView: View {
     ) private var tips: FetchedResults<Tip>
     
     @State private var showingDeleteAllConfirm = false
+    @EnvironmentObject private var subscriptionManager: SubscriptionManager
     
     var body: some View {
         NavigationStack {
@@ -37,8 +38,9 @@ struct HistoryView: View {
                         }
                         Button("Cancel", role: .cancel) {}
                     }
-                
-                bannerAd
+                if !subscriptionManager.isPremiumUser {
+                    bannerAd
+                }
             }
         }
         .tint(.primary)

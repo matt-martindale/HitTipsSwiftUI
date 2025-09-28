@@ -30,7 +30,13 @@ class InterstitialAdManager: NSObject, ObservableObject, FullScreenContentDelega
         }
     }
 
-    func showAd(from root: UIViewController, onDismiss: @escaping () -> Void) {
+    func showAd(from root: UIViewController, isPremiumUser: Bool, onDismiss: @escaping () -> Void) {
+        guard !isPremiumUser else {
+            print("HTApp: Premium User, don't show ad")
+            onDismiss()
+            return
+        }
+        
         guard let interstitial = interstitial else {
             print("HTApp: ⚠️ Ad not ready")
             onDismiss()

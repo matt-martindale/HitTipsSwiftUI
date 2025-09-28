@@ -32,14 +32,17 @@ class TipCalculationViewModel: ObservableObject {
     private var context: NSManagedObjectContext
     private let adManager = InterstitialAdManager()
     private let roastService: RoastProviding
+    private let subscriptionManager: SubscriptionManager
     @ObservedObject var roastSettings: RoastSettings
     
     init(context: NSManagedObjectContext,
          roastService: RoastProviding,
-         roastSettings: RoastSettings) {
+         roastSettings: RoastSettings,
+         subscriptionManager: SubscriptionManager) {
         self.context = context
         self.roastService = roastService
         self.roastSettings = roastSettings
+        self.subscriptionManager = subscriptionManager
         loadLastTipPercentage()
         adManager.loadAd()
     }
@@ -253,7 +256,7 @@ class TipCalculationViewModel: ObservableObject {
             .flatMap({ $0.windows })
             .first(where: { $0.isKeyWindow })?.rootViewController {
             
-            adManager.showAd(from: root) {
+            adManager.showAd(from: root, isPremiumUser: subscriptionManager.isPremiumUser) {
                 // Ad dismissed → reset ad count and show sheet
                 UserDefaultsManager.shared.resetAdCount()
                 DispatchQueue.main.async {

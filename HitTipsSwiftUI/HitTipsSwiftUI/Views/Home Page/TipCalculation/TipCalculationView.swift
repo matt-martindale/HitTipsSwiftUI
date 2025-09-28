@@ -24,12 +24,13 @@ struct TipCalculationView: View {
     @StateObject private var viewModel: TipCalculationViewModel
     @FocusState private var focusedField: FocusedField?
     
-    init(roastSettings: RoastSettings) {
+    init(roastSettings: RoastSettings, subscriptionManager: SubscriptionManager) {
         _viewModel = StateObject(
             wrappedValue: TipCalculationViewModel(
                 context: PersistenceController.shared.container.viewContext, // placeholder, replaced in body
                 roastService: RoastService(apiService: APIService()),
-                roastSettings: roastSettings
+                roastSettings: roastSettings,
+                subscriptionManager: subscriptionManager
             )
         )
     }
