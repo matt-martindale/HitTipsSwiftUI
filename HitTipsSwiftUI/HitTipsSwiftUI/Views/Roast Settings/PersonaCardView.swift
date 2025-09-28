@@ -26,6 +26,7 @@ struct PersonaCardView: View {
                     .scaledToFill()
                     .frame(height: 90)
                     .allowsHitTesting(false)
+                    .opacity(isSelected ? 1.0 : 0.7)
                     .background(backgroundColor())
                     .clipShape(UnevenRoundedRectangle(
                         topLeadingRadius: 16,
@@ -37,7 +38,7 @@ struct PersonaCardView: View {
                 // Text content
                 VStack(spacing: 4) {
                     Text(persona.name)
-                        .foregroundStyle((colorScheme == .light && isSelected) ? .white : .primary)
+                        .foregroundStyle(textColor())
                         .font(.HTBody14)
                         .fontWeight(.medium)
                         .multilineTextAlignment(.center)
@@ -47,7 +48,7 @@ struct PersonaCardView: View {
                         .frame(maxWidth: .infinity)
 
                     Text(persona.description)
-                        .foregroundStyle((colorScheme == .light && isSelected) ? .white : .primary)
+                        .foregroundStyle(textColor())
                         .font(.HTBody10)
                         .multilineTextAlignment(.center)
                         .lineLimit(3)
@@ -73,9 +74,17 @@ struct PersonaCardView: View {
         .frame(width: 100, height: 200)
     }
     
+    private func textColor() -> Color {
+        if isSelected {
+            colorScheme == .dark ? .primary : .white
+        } else {
+            colorScheme == .dark ? .primary.opacity(0.7) : .black.opacity(0.7)
+        }
+    }
+    
     private func fillColor() -> AnyShapeStyle {
         if persona.isPremium {
-            return isSelected ? AnyShapeStyle(LinearGradient(colors: [.purple.opacity(1), .blue.opacity(1)],startPoint: .topLeading,endPoint: .bottomTrailing)) : AnyShapeStyle(LinearGradient(colors: [.purple.opacity(0.5), .blue.opacity(0.5)],startPoint: .topLeading,endPoint: .bottomTrailing))
+            return isSelected ? AnyShapeStyle(LinearGradient(colors: [.purple.opacity(0.8), .blue.opacity(0.8)],startPoint: .topLeading,endPoint: .bottomTrailing)) : AnyShapeStyle(LinearGradient(colors: [.purple.opacity(0.2), .blue.opacity(0.2)],startPoint: .topLeading,endPoint: .bottomTrailing))
         } else {
             return AnyShapeStyle(
                 isSelected ? Color.htOrange2 : Color.htPersonaBackground
@@ -85,7 +94,7 @@ struct PersonaCardView: View {
     
     private func backgroundColor() -> AnyShapeStyle {
         if persona.isPremium {
-            return isSelected ? AnyShapeStyle(LinearGradient(colors: [.purple.opacity(0.4), .purple.opacity(0.4)],startPoint: .topLeading,endPoint: .bottomTrailing)) : AnyShapeStyle(LinearGradient(colors: [.purple.opacity(0.3), .blue.opacity(0.3)],startPoint: .topLeading,endPoint: .bottomTrailing))
+            return isSelected ? AnyShapeStyle(LinearGradient(colors: [.purple.opacity(0.3), .purple.opacity(0.3)],startPoint: .topLeading,endPoint: .bottomTrailing)) : AnyShapeStyle(LinearGradient(colors: [.purple.opacity(0.2), .blue.opacity(0.2)],startPoint: .topLeading,endPoint: .bottomTrailing))
         } else {
             return AnyShapeStyle(
                 isSelected ? Color.htOrange : Color.htPersonaBackground
