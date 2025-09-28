@@ -15,7 +15,7 @@ struct PersonaCardView: View {
         ZStack(alignment: .top) {
             // Card background
             RoundedRectangle(cornerRadius: 16)
-                .fill(isSelected ? .htOrange2 : .htPersonaBackground)
+                .fill(fillColor())
                 .frame(width: 100, height: 180)
             
             VStack(spacing: 6) {
@@ -24,7 +24,7 @@ struct PersonaCardView: View {
                     .scaledToFill()
                     .frame(height: 90)
                     .allowsHitTesting(false)
-                    .background(isSelected ? .htOrange : .htPersonaBackground)
+                    .background(backgroundColor())
                     .clipShape(UnevenRoundedRectangle(
                         topLeadingRadius: 16,
                         bottomLeadingRadius: 0,
@@ -69,6 +69,22 @@ struct PersonaCardView: View {
                 .frame(width: 100, height: 180)
         }
         .frame(width: 100, height: 200)
+    }
+    
+    private func fillColor() -> Color {
+        if persona.isPremium {
+            return isSelected ? .htBlue : .htPersonaBackground
+        } else {
+            return isSelected ? .htOrange2 : .htPersonaBackground
+        }
+    }
+    
+    private func backgroundColor() -> Color {
+        if persona.isPremium {
+            return isSelected ? .htPurple : .htPersonaBackground
+        } else {
+            return isSelected ? .htOrange : .htPersonaBackground
+        }
     }
 }
 

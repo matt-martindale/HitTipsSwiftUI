@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SubscriptionView: View {
     @EnvironmentObject var subscriptionManager: SubscriptionManager
+    @State private var selectedURL: URL?
     
     var body: some View {
         ZStack {
@@ -100,7 +101,7 @@ struct SubscriptionView: View {
                             .foregroundStyle(.white.opacity(0.8))
                         
                         Button(UIStrings.termsOfUse) {
-                            subscriptionManager.restorePurchases()
+                            selectedURL = URL(string: UIStrings.termsOfUseURL)
                         }
                         .font(.footnote)
                         .foregroundStyle(.white.opacity(0.9))
@@ -110,7 +111,7 @@ struct SubscriptionView: View {
                             .foregroundStyle(.white.opacity(0.8))
                         
                         Button(UIStrings.privacyPolicy) {
-                            subscriptionManager.restorePurchases()
+                            selectedURL = URL(string: UIStrings.privacyPolicyURL)
                         }
                         .font(.footnote)
                         .foregroundStyle(.white.opacity(0.9))
@@ -127,6 +128,9 @@ struct SubscriptionView: View {
             }
             .padding(.horizontal, 24)
             .padding(.bottom, 40)
+        }
+        .sheet(item: $selectedURL) { url in
+            SafariView(url: url)
         }
     }
 }

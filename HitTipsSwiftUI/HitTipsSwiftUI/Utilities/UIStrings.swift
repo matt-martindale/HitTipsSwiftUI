@@ -98,6 +98,8 @@ struct UIStrings {
     static let paywallLoading = "Loading plans…"
     static let restorePurchases = "Restore Purchases"
     static let termsOfUse = "Terms of Use"
+    static let termsOfUseURL = "https://matt-martindale.github.io/terms.html"
     static let privacyPolicy = "Privacy Policy"
+    static let privacyPolicyURL = "https://matt-martindale.github.io/privacy.html"
     static let footerTerms = "Cancel anytime. Subscription renews automatically at %@/month unless canceled at least 24 hours before the end of trial."
 }
