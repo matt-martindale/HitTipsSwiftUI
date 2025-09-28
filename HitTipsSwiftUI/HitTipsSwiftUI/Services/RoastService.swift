@@ -20,14 +20,20 @@ final class RoastService: RoastProviding {
     }
     
     func fetchRoast(settings: RoastSettings, completion: @escaping (String?) -> Void) {
-        let prompt = """
-        Give me a \(settings.roastStyle) style roast.
-        Tip tier: \(settings.tipTier).
-        In the tone of a \(settings.selectedPersona?.name ?? "sarcastic comedian")
+        let userPrompt = """
+        Respond in 1–2 sentences.
         """
         
-        print("HTApp: prompt - \(prompt)")
-        apiService.callFirebaseApi(prompt: prompt) { roast in
+        let parameters: [String: Any] = [
+            "prompt": userPrompt,
+            "persona": settings.selectedPersona?.name ?? "Sarcastic Comedian",
+            "roastType": settings.roastStyle.rawValue,
+            "tipTier": settings.tipTier.rawValue
+        ]
+        
+        print("HTApp: parameters - \(parameters)")
+        
+        apiService.callFirebaseApi(parameters: parameters) { roast in
             completion(roast)
         }
     }

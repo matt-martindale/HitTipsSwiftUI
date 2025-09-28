@@ -21,6 +21,7 @@ struct HitTipsSwiftUIApp: App {
     init() {
         MobileAds.shared.start()
         FirebaseApp.configure()
+        FirestoreManager.init()
         Purchases.configure(withAPIKey: "appl_cFPlNfjDUUqYIMjgmzrWWAFWSWp")
         Purchases.logLevel = .debug
         UITabBar.setSolidBackground()

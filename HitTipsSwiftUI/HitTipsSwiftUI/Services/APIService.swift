@@ -11,9 +11,11 @@ import FirebaseAuth
 
 class APIService: ObservableObject {
     
-    func callFirebaseApi(prompt: String, completion: @escaping (String?) -> Void) {
+    func callFirebaseApi(parameters: [String: Any], completion: @escaping (String?) -> Void) {
         let model = UserDefaultsManager.shared.aiModel
-        let prompt = String(format: "roast a %@ tip I left at a restaurant", prompt)
+        
+        var updatedParams = parameters
+        updatedParams["model"] = model
         
         if Auth.auth().currentUser == nil {
                 Auth.auth().signInAnonymously { result, error in
@@ -23,19 +25,19 @@ class APIService: ObservableObject {
                     }
                     print("HTApp: Signed in anonymously")
                     // Call the function after signing in
-                    self.callApiAfterSignIn(prompt: prompt, model: model) { response in
+                    self.callApiAfterSignIn(parameters: updatedParams) { response in
                         completion(response)
                     }
                 }
             } else {
                 // Already signed in
-                callApiAfterSignIn(prompt: prompt, model: model) { response in
+                callApiAfterSignIn(parameters: updatedParams) { response in
                     completion(response)
                 }
             }
     }
     
-    private func callApiAfterSignIn(prompt: String, model: String, completion: @escaping (String?) -> Void) {
+    private func callApiAfterSignIn(parameters: [String: Any], completion: @escaping (String?) -> Void) {
 #if DEBUG
         let functionName = "callExternalApiDev"   // dev version
         let functions = Functions.functions(region: "us-central1")
@@ -45,12 +47,7 @@ class APIService: ObservableObject {
         let functions = Functions.functions(region: "us-central1")
 #endif
         
-        let data: [String: Any] = [
-            "prompt": prompt,
-            "model": model
-        ]
-        
-        functions.httpsCallable(functionName).call(data) { result, error in
+        functions.httpsCallable(functionName).call(parameters) { result, error in
             if let error = error {
                 print("HTApp: Error: \(error.localizedDescription)")
                 completion(nil)
@@ -58,6 +55,8 @@ class APIService: ObservableObject {
             }
             if let response = result?.data as? String {
                 completion(response)
+            } else {
+                completion(nil)
             }
         }
     }
