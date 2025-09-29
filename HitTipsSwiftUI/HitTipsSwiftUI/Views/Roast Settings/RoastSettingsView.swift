@@ -14,47 +14,48 @@ struct RoastSettingsView: View {
     @State private var selectedStyle: SelectedRoastStyle = .roast
     
     var body: some View {
-        VStack() {
-            if !drawerExpanded {
-                Text(UIStrings.roastSettings)
-                    .font(.HTBody18)
-                    .fontWeight(.medium)
-                    .padding(.bottom, 20)
-            } else {
+        ScrollView {
+            VStack {
+                if !drawerExpanded {
+                    Text(UIStrings.roastSettings)
+                        .font(.HTBody18)
+                        .fontWeight(.medium)
+                        .padding(.bottom, 20)
+                } else {
+                    Spacer()
+                        .frame(height: 30)
+                }
+                // Roast style buttons
+                roastTypeView
+                
+                // Roast style description
+                Text(roastSettings.roastStyle == .roast ? UIStrings.roastMeDescription : UIStrings.hypeMeDescription)
+                    .multilineTextAlignment(.center)
+                    .font(.HTBody14)
+                    .padding(12)
+                
                 Spacer()
                     .frame(height: 30)
+                
+                // Persona scroll picker
+                PersonaPickerView()
+                
+                Spacer()
+                
+//                Button(drawerExpanded ? "Close" : "Expand") {
+//                    drawerExpanded.toggle()
+//                }
+//                .padding()
+//                .background(.htOrange)
+//                .foregroundColor(.white)
+//                .appCornerRadius()
+                
             }
-            // Roast style buttons
-            roastTypeView
-            
-            // Roast style description
-            //            Text(selected == .roast ? UIStrings.roastMeDescription : UIStrings.hypeMeDescription)
-            //                .multilineTextAlignment(.center)
-            //                .font(.HTBody16)
-            //                .padding()
-            
-            Spacer()
-                .frame(height: 40)
-            
-            // Persona scroll picker
-            PersonaPickerView()
-            
-            Spacer()
-            
-            Button(drawerExpanded ? "Collapse" : "Expand") {
-                drawerExpanded.toggle()
-            }
-            .padding()
-            .background(Color.blue)
-            .foregroundColor(.white)
-            .cornerRadius(10)
-            
-//            Spacer()
-        }
-        .padding(.bottom)
-        .onChange(of: drawerExpanded) { expanded in
-            if expanded {
-                subscriptionManager.refreshCustomerInfo()
+            .padding(.bottom)
+            .onChange(of: drawerExpanded) { expanded in
+                if expanded {
+                    subscriptionManager.refreshCustomerInfo()
+                }
             }
         }
     }

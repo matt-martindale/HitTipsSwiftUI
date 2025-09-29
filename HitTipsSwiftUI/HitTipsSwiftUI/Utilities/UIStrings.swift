@@ -69,6 +69,7 @@ struct UIStrings {
     static let hypeMe = "🌟 Hype Me"
     static let roastMeDescription = "Get a playful burn with a light-hearted insult."
     static let hypeMeDescription = "Ridiculously flattering hype to boost your ego."
+    static let choosePersona = "Choose Your Persona:"
     
     // Tip detail
     static let billAmountLowercase = "Bill Amount"

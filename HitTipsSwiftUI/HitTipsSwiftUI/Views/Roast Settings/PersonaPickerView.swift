@@ -17,27 +17,23 @@ struct PersonaPickerView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Choose Your Persona")
+            Text(UIStrings.choosePersona)
                 .font(.headline)
                 .padding(.horizontal)
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 16) {
                     ForEach(personas) { persona in
-                        personaCard(for: persona) // ✅ keep ForEach clean
+                        personaCard(for: persona)
                     }
                 }
                 .padding(.horizontal)
             }
+            
         }
         .sheet(isPresented: $showUpgradeSheet) {
             SubscriptionView()
         }
-//        .onChange(of: subscriptionManager.isPremiumUser) { isPremium in
-//            if isPremium {
-//                showUpgradeSheet = false // ✅ auto-dismiss
-//            }
-//        }
     }
     
     // MARK: - Card Builder
