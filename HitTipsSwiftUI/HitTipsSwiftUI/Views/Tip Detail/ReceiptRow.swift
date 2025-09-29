@@ -33,7 +33,7 @@ struct ReceiptRow: View {
                 .bold(isHighlight)
         }
         .padding(.horizontal)
-        .padding(.vertical, 2)
+//        .padding(.vertical, 2)
     }
 }
 

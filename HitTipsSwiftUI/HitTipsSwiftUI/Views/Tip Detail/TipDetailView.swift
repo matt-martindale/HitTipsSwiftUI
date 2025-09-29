@@ -97,8 +97,7 @@ struct TipDetailView: View {
     
     // MARK: - Receipt Section
     private var receiptSection: some View {
-        VStack(spacing: 8) {
-//            ReceiptRow(title: "Roast Style", value: tip.roastStyle)
+        VStack(spacing: 4) {
             ReceiptRow(title: UIStrings.billAmountLowercase, value: "$\(tip.billAmount)")
             ReceiptRow(title: UIStrings.tipAmountLowercase, value: "$\(String(format: "%.2f", tip.tipAmount))")
             ReceiptRow(title: UIStrings.tipPercentLowercase, value: "\(tip.tipPercentage)%")
