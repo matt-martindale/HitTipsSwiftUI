@@ -41,7 +41,7 @@ class APIService: ObservableObject {
 #if DEBUG
         let functionName = "callExternalApiDev"   // dev version
         let functions = Functions.functions(region: "us-central1")
-//        functions.useEmulator(withHost: "127.0.0.1", port: 5001)
+        functions.useEmulator(withHost: "127.0.0.1", port: 5001)
 #else
         let functionName = "callExternalApi"      // prod version
         let functions = Functions.functions(region: "us-central1")

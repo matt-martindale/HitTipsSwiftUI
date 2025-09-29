@@ -55,6 +55,12 @@
 		C82EF1F92E89A5C9006A5E43 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82EF1F82E89A5C9006A5E43 /* ToastView.swift */; };
 		C82EF1FA2E89A5C9006A5E43 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82EF1F82E89A5C9006A5E43 /* ToastView.swift */; };
 		C82EF1FB2E89A5C9006A5E43 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82EF1F82E89A5C9006A5E43 /* ToastView.swift */; };
+		C82EF1FD2E89FE19006A5E43 /* UUID+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82EF1FC2E89FE19006A5E43 /* UUID+.swift */; };
+		C82EF1FE2E89FE19006A5E43 /* UUID+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82EF1FC2E89FE19006A5E43 /* UUID+.swift */; };
+		C82EF1FF2E89FE19006A5E43 /* UUID+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82EF1FC2E89FE19006A5E43 /* UUID+.swift */; };
+		C82EF2012E8A0058006A5E43 /* SpeechBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82EF2002E8A0058006A5E43 /* SpeechBubbleView.swift */; };
+		C82EF2022E8A0059006A5E43 /* SpeechBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82EF2002E8A0058006A5E43 /* SpeechBubbleView.swift */; };
+		C82EF2032E8A0059006A5E43 /* SpeechBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82EF2002E8A0058006A5E43 /* SpeechBubbleView.swift */; };
 		C84FC47E2E6A232500E13B7A /* HitTipsSwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84FC4752E6A232500E13B7A /* HitTipsSwiftUIApp.swift */; };
 		C84FC47F2E6A232500E13B7A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84FC4782E6A232500E13B7A /* ContentView.swift */; };
 		C84FC4802E6A232500E13B7A /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84FC4792E6A232500E13B7A /* HistoryView.swift */; };
@@ -181,6 +187,8 @@
 		C82EF1F02E898F05006A5E43 /* SafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
 		C82EF1F42E899118006A5E43 /* URL+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+.swift"; sourceTree = "<group>"; };
 		C82EF1F82E89A5C9006A5E43 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
+		C82EF1FC2E89FE19006A5E43 /* UUID+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UUID+.swift"; sourceTree = "<group>"; };
+		C82EF2002E8A0058006A5E43 /* SpeechBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechBubbleView.swift; sourceTree = "<group>"; };
 		C84FC4332E6A13A900E13B7A /* HitTipsSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HitTipsSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C84FC4452E6A13AA00E13B7A /* HitTipsSwiftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HitTipsSwiftUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C84FC44F2E6A13AA00E13B7A /* HitTipsSwiftUIUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HitTipsSwiftUIUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -391,6 +399,7 @@
 				C852C2DF2E772CE800168117 /* Date+.swift */,
 				C82EF1F02E898F05006A5E43 /* SafariView.swift */,
 				C82EF1F42E899118006A5E43 /* URL+.swift */,
+				C82EF1FC2E89FE19006A5E43 /* UUID+.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -450,6 +459,7 @@
 			children = (
 				C852C2D12E74D28800168117 /* TipDetailView.swift */,
 				C852C2D52E74D4FB00168117 /* ReceiptRow.swift */,
+				C82EF2002E8A0058006A5E43 /* SpeechBubbleView.swift */,
 			);
 			path = "Tip Detail";
 			sourceTree = "<group>";
@@ -622,6 +632,7 @@
 				C852C2992E6FBD0100168117 /* CustomPickerWheel.swift in Sources */,
 				C82EF1D52E85FADC006A5E43 /* PersonaCardView.swift in Sources */,
 				C852C28B2E6FACD400168117 /* Color+.swift in Sources */,
+				C82EF1FD2E89FE19006A5E43 /* UUID+.swift in Sources */,
 				C84FC47E2E6A232500E13B7A /* HitTipsSwiftUIApp.swift in Sources */,
 				C8016CD22E8471D900E852AA /* RoastSettings.swift in Sources */,
 				C8016CD02E8471C000E852AA /* AppSettings+CoreData.swift in Sources */,
@@ -630,6 +641,7 @@
 				C8DB239E2E77922100F852FF /* HTAdManager.swift in Sources */,
 				C84FC4972E6A3E3600E13B7A /* TipCalculationView.swift in Sources */,
 				C84FC4912E6A32A400E13B7A /* HomeViewModel.swift in Sources */,
+				C82EF2012E8A0058006A5E43 /* SpeechBubbleView.swift in Sources */,
 				C852C2A32E71229200168117 /* UIStrings.swift in Sources */,
 				C82EF1D12E85F4D4006A5E43 /* Persona.swift in Sources */,
 				C852C2E02E772CE800168117 /* Date+.swift in Sources */,
@@ -668,11 +680,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C82EF2022E8A0059006A5E43 /* SpeechBubbleView.swift in Sources */,
 				C852C2E22E772CE800168117 /* Date+.swift in Sources */,
 				C8016CB92E846ECE00E852AA /* HitTipsModel.xcdatamodeld in Sources */,
 				C8016CB32E83628700E852AA /* RoastService.swift in Sources */,
 				C82EF1CE2E85F22F006A5E43 /* PersonaPickerView.swift in Sources */,
 				C852C2932E6FB53400168117 /* Font+.swift in Sources */,
+				C82EF1FF2E89FE19006A5E43 /* UUID+.swift in Sources */,
 				C852C2882E6E0EA700168117 /* HTTextField.swift in Sources */,
 				C852C2A42E71229200168117 /* UIStrings.swift in Sources */,
 				C852C2AD2E713C3C00168117 /* ViewModifiers.swift in Sources */,
@@ -713,6 +727,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C82EF1CD2E85F22F006A5E43 /* PersonaPickerView.swift in Sources */,
+				C82EF2032E8A0059006A5E43 /* SpeechBubbleView.swift in Sources */,
 				C8016CB42E83628700E852AA /* RoastService.swift in Sources */,
 				C84FC4862E6A232500E13B7A /* HomeView.swift in Sources */,
 				C84FC4932E6A32A400E13B7A /* HomeViewModel.swift in Sources */,
@@ -742,6 +757,7 @@
 				C82EF1D32E85FADC006A5E43 /* PersonaCardView.swift in Sources */,
 				C852C28F2E6FAF5900168117 /* HTPickerView.swift in Sources */,
 				C852C2BF2E74B08D00168117 /* LoaderView.swift in Sources */,
+				C82EF1FE2E89FE19006A5E43 /* UUID+.swift in Sources */,
 				C852C2D42E74D28800168117 /* TipDetailView.swift in Sources */,
 				C82EF1E92E872B54006A5E43 /* SubscriptionView.swift in Sources */,
 				C82EF1F22E898F05006A5E43 /* SafariView.swift in Sources */,

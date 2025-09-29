@@ -50,16 +50,38 @@ struct TipDetailView: View {
                         .multilineTextAlignment(.leading)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
-                .frame(maxWidth: .infinity)
-                .overlay(alignment: .bottom) {   // ✅ Floating card
-                    receiptSection
-                        .padding(.vertical, 20)
-                        .padding(.horizontal)
-                        .frame(maxWidth: 600)
-                        .background(.clear)
-//                        .shadow(radius: 4)
-                        .padding(.bottom, 8) // keeps above home indicator
+                .frame(maxWidth: .infinity)  // ✅ Floating card
+                .padding(12)
+                .padding(.bottom, 20)
+                .background(
+                    SpeechBubbleView() // SpeechBubbleView(tails: [.left, .right]) For Fusion Feature
+                        .fill(Color.htGray)
+                        .shadow(radius: 4)
+                )
+                .padding(.top, 10)
+                .padding(.bottom, 90)
+                .overlay(alignment: .bottomLeading) {
+                    Image(tip.persona?.imageName ?? "")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 100, height: 100)
+                        .offset(x: -10, y: 10)
                 }
+                // Keep for Fusion Feature
+//                .overlay(alignment: .bottomTrailing) {
+//                    Image("news anchor")
+//                        .resizable()
+//                        .aspectRatio(contentMode: .fit)
+//                        .frame(width: 100, height: 100)
+//                        .offset(x: 10, y: 10)
+//                }
+
+                receiptSection
+                    .padding(.vertical, 20)
+                    .padding(.horizontal)
+                    .frame(maxWidth: 600)
+                    .background(.clear)
+                    .padding(.bottom, 8) // keeps above home indicator
             }
             .frame(maxWidth: 600)
             .padding(.horizontal)
@@ -76,7 +98,7 @@ struct TipDetailView: View {
     // MARK: - Receipt Section
     private var receiptSection: some View {
         VStack(spacing: 8) {
-            ReceiptRow(title: "Roast Style", value: tip.roastStyle)
+//            ReceiptRow(title: "Roast Style", value: tip.roastStyle)
             ReceiptRow(title: UIStrings.billAmountLowercase, value: "$\(tip.billAmount)")
             ReceiptRow(title: UIStrings.tipAmountLowercase, value: "$\(String(format: "%.2f", tip.tipAmount))")
             ReceiptRow(title: UIStrings.tipPercentLowercase, value: "\(tip.tipPercentage)%")

@@ -19,7 +19,7 @@ final class RoastSettings: ObservableObject {
 }
 
 enum SelectedRoastStyle: String {
-    case roast, uplifting, none
+    case roast, hype, none
 }
 
 enum TipTier: String {

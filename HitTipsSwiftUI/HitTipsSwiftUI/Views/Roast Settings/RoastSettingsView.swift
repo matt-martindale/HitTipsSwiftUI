@@ -77,15 +77,15 @@ struct RoastSettingsView: View {
             
             Button {
                 print("HTApp: tapped Hype Me")
-                selectedStyle = .uplifting
-                roastSettings.roastStyle = SelectedRoastStyle.uplifting
+                selectedStyle = .hype
+                roastSettings.roastStyle = SelectedRoastStyle.hype
             } label: {
                 Text(UIStrings.hypeMe)
                     .fontWeight(.medium)
             }
             .padding(.horizontal, 20)
             .padding(.vertical, 12)
-            .background(selectedStyle == .uplifting ? .htOrange : .htPersonaBackground)
+            .background(selectedStyle == .hype ? .htOrange : .htPersonaBackground)
             .foregroundColor(.white)
             .appCornerRadius()
         }
