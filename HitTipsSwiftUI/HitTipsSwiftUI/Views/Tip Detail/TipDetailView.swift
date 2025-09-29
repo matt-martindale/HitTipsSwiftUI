@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import StoreKit
 
 enum TipDetailEntryPoint {
     case sheet
@@ -90,6 +91,13 @@ struct TipDetailView: View {
             view.toolbar {
                 ToolbarItemGroup(placement: .topBarTrailing) {
                     topButtons
+                }
+            }
+        }
+        .onAppear {
+            if UserDefaultsManager.shared.shouldShowRateApp() && entryPoint == .sheet {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                    requestAppRating()
                 }
             }
         }
@@ -183,6 +191,13 @@ struct TipDetailView: View {
             }
             
             topController.present(activityVC, animated: true)
+        }
+    }
+    
+    private func requestAppRating() {
+        if let scene = UIApplication.shared.connectedScenes
+            .first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
+            AppStore.requestReview(in: scene)
         }
     }
     

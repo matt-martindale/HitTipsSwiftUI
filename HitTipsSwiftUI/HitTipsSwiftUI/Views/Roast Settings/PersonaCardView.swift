@@ -103,7 +103,7 @@ struct PersonaCardView: View {
         if isSelected {
             colorScheme == .dark ? .primary : .white
         } else {
-            colorScheme == .dark ? .primary.opacity(0.8) : .black.opacity(0.8)
+            colorScheme == .dark ? .primary : .black
         }
     }
     

@@ -15,6 +15,7 @@ class UserDefaultsManager {
     private let aiModelKey = "aiModel"
     private let adFrequencyKey = "adFrequency"
     private let adCountKey = "adCount"
+    private let rateAppKey = "rateApp"
     
     private init() {}
     
@@ -37,10 +38,16 @@ class UserDefaultsManager {
         set { userDefaults.set(newValue, forKey: adFrequencyKey) }
     }
     
+    var rateAppCount: Int {
+        get { userDefaults.integer(forKey: rateAppKey) }
+        set { userDefaults.set(newValue, forKey: rateAppKey) }
+    }
+    
     // MARK: Helpers
     func incrementAdCount() {
         adCount += 1
         print("HTApp: Ad count: \(adCount), Ad frequency: \(adFrequency)")
+        incrementTipCount()
     }
     
     func shouldShowAd() -> Bool {
@@ -54,5 +61,17 @@ class UserDefaultsManager {
     
     func adCountErrorMessage() -> String {
         return "HTApp: Error: Ad count \(adCount), Ad frequency \(adFrequency)"
+    }
+    
+    func incrementTipCount() {
+        rateAppCount += 1
+        print("HTApp: Rate app count \(rateAppCount)")
+        }
+    
+    func shouldShowRateApp() -> Bool {
+        if [5, 15, 30].contains(rateAppCount) {
+            return true
+        }
+        return false
     }
 }
