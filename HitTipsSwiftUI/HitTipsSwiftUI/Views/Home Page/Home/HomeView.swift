@@ -52,6 +52,9 @@ struct HomeView: View {
                         RoastSettingsView(drawerExpanded: $drawerExpanded)
                     }
                 }
+                .onAppear {
+                    drawerExpanded = false
+                }
             }
         }
     }
