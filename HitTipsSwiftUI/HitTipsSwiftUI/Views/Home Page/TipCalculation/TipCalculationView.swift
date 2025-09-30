@@ -43,7 +43,7 @@ struct TipCalculationView: View {
                     partyTipPickers
                     billOutputView
                     Spacer()
-                        .frame(height: 40)
+                        .frame(height: 20)
                     confirmButton
                     Spacer()
                 }
