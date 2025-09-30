@@ -83,33 +83,49 @@ struct TipCalculationView: View {
             viewModel.setContext(context)
             viewModel.calculateTip()
         }
+        .onReceive(NotificationCenter.default.publisher(for: .keyboardDoneTapped)) { _ in
+            viewModel.formatBillAmount()
+            viewModel.calculateTip()
+            focusedField = nil
+        }
+
     }
     
     // MARK: - Subviews
     
     private var billAmountField: some View {
-        HTTextField(title: UIStrings.billAmountCap, value: $viewModel.billAmount, keyboardType: .decimalPad)
-            .focused($focusedField, equals: .billAmount)
-            .onChange(of: focusedField) { newFocus in
-                if newFocus == .billAmount && viewModel.billAmount == "0.00" {
+        HTTextField(
+            title: UIStrings.billAmountCap,
+            value: $viewModel.billAmount,
+            keyboardType: .decimalPad
+        )
+        .focused($focusedField, equals: .billAmount)
+        .withDoneToolbar()
+        .onChange(of: focusedField) { newFocus in
+            if newFocus == .billAmount {
+                if viewModel.billAmount == "0.00" {
                     viewModel.billAmount = ""
-                } else if newFocus != .billAmount && viewModel.billAmount.isEmpty {
-                    viewModel.billAmount = "0.00"
                 }
+            } else if newFocus != .billAmount, viewModel.billAmount.isEmpty {
+                viewModel.billAmount = "0.00"
             }
-            .padding(.top)
+        }
+        .padding(.top)
     }
+
     
     private var partyTipPickers: some View {
         HStack {
             HTPickerView(selectedNumber: $viewModel.party, upperLimit: 99, icon: "person.2.fill", iconLeading: true)
                 .focused($focusedField, equals: .party)
+                .withDoneToolbar()
                 .onChange(of: viewModel.party) { _ in viewModel.calculateTip() }
             
             AnimatedNumberView(value: viewModel.tipAmount, title: UIStrings.tipAmountCap, hasBackground: false)
             
             HTPickerView(selectedNumber: $viewModel.tipPercent, upperLimit: 99, icon: "percent", iconLeading: false)
                 .focused($focusedField, equals: .tipPercent)
+                .withDoneToolbar()
                 .onChange(of: viewModel.tipPercent) { _ in viewModel.calculateTip() }
         }
     }
