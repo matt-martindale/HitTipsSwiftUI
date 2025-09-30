@@ -65,6 +65,9 @@
 		C82EF2062E8B6993006A5E43 /* Keyboard+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82EF2042E8B6993006A5E43 /* Keyboard+.swift */; };
 		C82EF2072E8B6993006A5E43 /* Keyboard+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82EF2042E8B6993006A5E43 /* Keyboard+.swift */; };
 		C82EF20A2E8B6A3E006A5E43 /* SwiftUIIntrospect in Frameworks */ = {isa = PBXBuildFile; productRef = C82EF2092E8B6A3E006A5E43 /* SwiftUIIntrospect */; };
+		C82EF2122E8C2E94006A5E43 /* TabBar+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82EF2112E8C2E94006A5E43 /* TabBar+.swift */; };
+		C82EF2132E8C2E94006A5E43 /* TabBar+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82EF2112E8C2E94006A5E43 /* TabBar+.swift */; };
+		C82EF2142E8C2E94006A5E43 /* TabBar+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82EF2112E8C2E94006A5E43 /* TabBar+.swift */; };
 		C84FC47E2E6A232500E13B7A /* HitTipsSwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84FC4752E6A232500E13B7A /* HitTipsSwiftUIApp.swift */; };
 		C84FC47F2E6A232500E13B7A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84FC4782E6A232500E13B7A /* ContentView.swift */; };
 		C84FC4802E6A232500E13B7A /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84FC4792E6A232500E13B7A /* HistoryView.swift */; };
@@ -194,6 +197,7 @@
 		C82EF1FC2E89FE19006A5E43 /* UUID+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UUID+.swift"; sourceTree = "<group>"; };
 		C82EF2002E8A0058006A5E43 /* SpeechBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechBubbleView.swift; sourceTree = "<group>"; };
 		C82EF2042E8B6993006A5E43 /* Keyboard+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Keyboard+.swift"; sourceTree = "<group>"; };
+		C82EF2112E8C2E94006A5E43 /* TabBar+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TabBar+.swift"; sourceTree = "<group>"; };
 		C84FC4332E6A13A900E13B7A /* HitTipsSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HitTipsSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C84FC4452E6A13AA00E13B7A /* HitTipsSwiftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HitTipsSwiftUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C84FC44F2E6A13AA00E13B7A /* HitTipsSwiftUIUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HitTipsSwiftUIUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -407,6 +411,7 @@
 				C82EF1F42E899118006A5E43 /* URL+.swift */,
 				C82EF1FC2E89FE19006A5E43 /* UUID+.swift */,
 				C82EF2042E8B6993006A5E43 /* Keyboard+.swift */,
+				C82EF2112E8C2E94006A5E43 /* TabBar+.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -677,6 +682,7 @@
 				C852C2BE2E74B08D00168117 /* LoaderView.swift in Sources */,
 				C8016CB52E83628700E852AA /* RoastService.swift in Sources */,
 				C8016CB82E846ECE00E852AA /* HitTipsModel.xcdatamodeld in Sources */,
+				C82EF2142E8C2E94006A5E43 /* TabBar+.swift in Sources */,
 				C84FC48D2E6A2F7200E13B7A /* SplashScreenView.swift in Sources */,
 				C852C2892E6E0EA700168117 /* HTTextField.swift in Sources */,
 				C852C2912E6FAF5900168117 /* HTPickerView.swift in Sources */,
@@ -724,6 +730,7 @@
 				C84FC4852E6A232500E13B7A /* ContentView.swift in Sources */,
 				C852C2902E6FAF5900168117 /* HTPickerView.swift in Sources */,
 				C8016CA52E7E08A000E852AA /* UserDefaultsManager.swift in Sources */,
+				C82EF2132E8C2E94006A5E43 /* TabBar+.swift in Sources */,
 				C84FC4922E6A32A400E13B7A /* HomeViewModel.swift in Sources */,
 				C852C2972E6FBD0100168117 /* CustomPickerWheel.swift in Sources */,
 				C82EF1F62E899118006A5E43 /* URL+.swift in Sources */,
@@ -750,6 +757,7 @@
 				C8016CBA2E846ECE00E852AA /* HitTipsModel.xcdatamodeld in Sources */,
 				C852C2CD2E74CB7F00168117 /* BannerAdView.swift in Sources */,
 				C852C2AC2E713C3C00168117 /* ViewModifiers.swift in Sources */,
+				C82EF2122E8C2E94006A5E43 /* TabBar+.swift in Sources */,
 				C852C2982E6FBD0100168117 /* CustomPickerWheel.swift in Sources */,
 				C82EF2072E8B6993006A5E43 /* Keyboard+.swift in Sources */,
 				C852C2A92E71234F00168117 /* BillOutputView.swift in Sources */,

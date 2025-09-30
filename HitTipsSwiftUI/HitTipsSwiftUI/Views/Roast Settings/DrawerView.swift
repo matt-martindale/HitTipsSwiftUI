@@ -31,7 +31,14 @@ struct DrawerView<Content: View>: View {
     }
 
     private var collapsedOffset: CGFloat {
-        maxHeight - peekHeight - safeInsets.bottom
+        let screenHeight = UIScreen.main.bounds.height
+        
+        if screenHeight <= 667 {
+            return maxHeight - (peekHeight + UITabBar.height - 97)
+        }
+        
+        // Default for all other iPhones
+        return maxHeight - (peekHeight + UITabBar.height)
     }
 
     var body: some View {

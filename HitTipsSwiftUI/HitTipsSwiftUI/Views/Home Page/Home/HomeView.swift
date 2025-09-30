@@ -48,9 +48,11 @@ struct HomeView: View {
                     .tint(.primary)
                     
                     // --- Drawer overlay ---
+                    let maxHeight = UIScreen.main.bounds.height * 0.9
+                    let peekHeight = CGFloat(UIDevice.current.userInterfaceIdiom == .pad ? 350 : 65)
                     DrawerView(
-                            maxHeight: UIScreen.main.bounds.height * 0.9,
-                            peekHeight: 22,
+                        maxHeight: maxHeight,
+                        peekHeight: peekHeight,
                             isExpanded: $drawerExpanded
                         ) {
                             RoastSettingsView(drawerExpanded: $drawerExpanded)
