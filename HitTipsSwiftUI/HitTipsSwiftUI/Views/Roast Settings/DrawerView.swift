@@ -11,13 +11,13 @@ struct DrawerView<Content: View>: View {
     let maxHeight: CGFloat        // expanded height
     let peekHeight: CGFloat       // how much is visible when collapsed
     let content: Content
-
+    
     @Binding var isExpanded: Bool
     @State private var offset: CGFloat = 0
     @State private var lastOffset: CGFloat = 0
     
     @Environment(\.safeAreaInsets) private var safeInsets
-
+    
     init(
         maxHeight: CGFloat,
         peekHeight: CGFloat = 22, // just the handle visible
@@ -29,7 +29,7 @@ struct DrawerView<Content: View>: View {
         self._isExpanded = isExpanded
         self.content = content()
     }
-
+    
     private var collapsedOffset: CGFloat {
         let screenHeight = UIScreen.main.bounds.height
         
@@ -40,7 +40,7 @@ struct DrawerView<Content: View>: View {
         // Default for all other iPhones
         return maxHeight - (peekHeight + UITabBar.height)
     }
-
+    
     var body: some View {
         GeometryReader { geo in
             ZStack(alignment: .bottom) {
@@ -49,13 +49,13 @@ struct DrawerView<Content: View>: View {
                         .ignoresSafeArea()
                         .onTapGesture { collapse() }
                 }
-
+                
                 VStack(spacing: 0) {
                     Capsule()
                         .fill(Color.gray.opacity(0.6))
                         .frame(width: 40, height: 6)
                         .padding(.vertical, 8)
-
+                    
                     content
                         .frame(maxHeight: .infinity, alignment: .top)
                 }
@@ -72,17 +72,32 @@ struct DrawerView<Content: View>: View {
                 .gesture(
                     DragGesture()
                         .onChanged { value in
+                            // Continuous drag follow
                             let newOffset = lastOffset + value.translation.height
                             offset = min(max(newOffset, 0), collapsedOffset)
                         }
                         .onEnded { value in
+                            let dragVelocity = value.predictedEndTranslation.height - value.translation.height
                             let mid = collapsedOffset / 2
+                            let flickThreshold: CGFloat = 250 // tweak sensitivity
+                            
                             withAnimation(.spring(response: 0.35, dampingFraction: 0.85)) {
-                                if offset < mid { expand() } else { collapse() }
+                                if dragVelocity < -flickThreshold {
+                                    // strong upward flick → expand
+                                    expand()
+                                } else if dragVelocity > flickThreshold {
+                                    // strong downward flick → collapse
+                                    collapse()
+                                } else {
+                                    // settle to nearest state
+                                    if offset < mid { expand() }
+                                    else { collapse() }
+                                }
                             }
                             lastOffset = offset
                         }
                 )
+                
                 .onTapGesture {
                     withAnimation(.spring(response: 0.35, dampingFraction: 0.85)) {
                         if isExpanded { collapse() } else { expand() }
@@ -92,12 +107,12 @@ struct DrawerView<Content: View>: View {
         }
         .ignoresSafeArea(edges: .bottom)
     }
-
+    
     private func expand() {
         offset = 0
         isExpanded = true
     }
-
+    
     private func collapse() {
         offset = collapsedOffset
         isExpanded = false
