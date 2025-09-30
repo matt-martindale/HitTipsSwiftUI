@@ -31,16 +31,6 @@ class SubscriptionManager: ObservableObject {
                     self.isPremiumUser = false
                 }
             }
-//            if let info = info {
-//                print("RevenueCat App User ID: \(Purchases.shared.appUserID)")
-//                print("Entitlements: \(info.entitlements.active.keys)") // shows active entitlements
-//                if info.entitlements["Premium Features"]?.isActive == true {
-//                    self.isPremiumUser = true
-//                    print("✅ User has premium access")
-//                } else {
-//                    print("❌ User does not have premium access")
-//                }
-//            }
         }
     }
 
