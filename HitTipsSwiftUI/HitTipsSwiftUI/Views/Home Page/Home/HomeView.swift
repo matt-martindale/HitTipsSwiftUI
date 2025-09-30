@@ -48,9 +48,13 @@ struct HomeView: View {
                     .tint(.primary)
                     
                     // --- Drawer overlay ---
-                    DrawerView(minHeight: 60, maxHeight: 800, isExpanded: $drawerExpanded) {
-                        RoastSettingsView(drawerExpanded: $drawerExpanded)
-                    }
+                    DrawerView(
+                            maxHeight: UIScreen.main.bounds.height * 0.9,
+                            peekHeight: 22,
+                            isExpanded: $drawerExpanded
+                        ) {
+                            RoastSettingsView(drawerExpanded: $drawerExpanded)
+                        }
                 }
                 .onAppear {
                     drawerExpanded = false
