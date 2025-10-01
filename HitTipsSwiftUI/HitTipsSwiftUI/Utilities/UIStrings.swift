@@ -70,6 +70,7 @@ struct UIStrings {
     static let roastMeDescription = "Get a playful burn with a light-hearted insult."
     static let hypeMeDescription = "Ridiculously flattering hype to boost your ego."
     static let choosePersona = "Choose Your Persona:"
+    static let moreComingSoon = "More coming soon..."
     
     // Tip detail
     static let billAmountLowercase = "Bill Amount"

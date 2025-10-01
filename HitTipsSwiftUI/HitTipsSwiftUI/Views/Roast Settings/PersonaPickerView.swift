@@ -26,6 +26,7 @@ struct PersonaPickerView: View {
                     ForEach(personas) { persona in
                         personaCard(for: persona)
                     }
+                    PersonaMoreComingView()
                 }
                 .padding(.horizontal)
             }
