@@ -5,13 +5,6 @@
 //  Created by Matt Martindale on 9/4/25.
 //
 
-//
-//  TipCalculationView.swift
-//  HitTipsSwiftUI
-//
-//  Created by Matt Martindale on 9/4/25.
-//
-
 import SwiftUI
 import CoreData
 
@@ -38,37 +31,48 @@ struct TipCalculationView: View {
     var body: some View {
         LoaderView(isLoading: $viewModel.isLoading, message: $viewModel.loaderMessage) {
             NavigationStack {
-                VStack {
-                    billAmountField
-                    partyTipPickers
-                    billOutputView
-                    Spacer()
-                        .frame(height: 20)
-                    confirmButton
-                    Spacer()
-                }
-                .padding(.horizontal)
-                .appCornerRadius()
-                .toolbar { keyboardToolbar }
-                .alert(
-                    viewModel.alertTitle ?? "",
-                    isPresented: Binding(
-                        get: { viewModel.alertTitle != nil },
-                        set: { if !$0 {
+                ZStack {
+                    // Tap layer behind content
+                    Color.clear
+                        .ignoresSafeArea()
+                        .contentShape(Rectangle())
+                        .onTapGesture { dismissKeyboardAndCalculate() }
+                    
+                    VStack {
+                        billAmountField
+                        partyTipPickers
+                        billOutputView
+                        Spacer().frame(height: 20)
+                        confirmButton
+                        Spacer()
+                    }
+                    .padding(.horizontal)
+                    .appCornerRadius()
+                    .alert(
+                        viewModel.alertTitle ?? "",
+                        isPresented: Binding(
+                            get: { viewModel.alertTitle != nil },
+                            set: { if !$0 {
+                                viewModel.alertTitle = nil
+                                viewModel.alertMessage = nil
+                            }}
+                        )
+                    ) {
+                        Button(UIStrings.ok, role: .cancel) {
                             viewModel.alertTitle = nil
                             viewModel.alertMessage = nil
-                        }}
-                    )
-                ) {
-                    Button(UIStrings.ok, role: .cancel) {
-                        viewModel.alertTitle = nil
-                        viewModel.alertMessage = nil
-                    }
-                } message: {
-                    if let message = viewModel.alertMessage {
-                        Text(message)
+                        }
+                    } message: {
+                        if let message = viewModel.alertMessage {
+                            Text(message)
+                        }
                     }
                 }
+                .simultaneousGesture(
+                    DragGesture(minimumDistance: 1).onChanged { _ in
+                        if focusedField != nil { dismissKeyboardAndCalculate() }
+                    }
+                )
             }
             // Tip Detail Sheet controlled by VM
             .sheet(isPresented: $viewModel.showTipDetailScreen) {
@@ -85,10 +89,12 @@ struct TipCalculationView: View {
         }
         .onReceive(NotificationCenter.default.publisher(for: .keyboardDoneTapped)) { _ in
             viewModel.formatBillAmount()
-            viewModel.calculateTip()
+            // Defer to ensure any focus-driven mutations (like setting "0.00") land first
             focusedField = nil
+            DispatchQueue.main.async {
+                viewModel.calculateTip()
+            }
         }
-
     }
     
     // MARK: - Subviews
@@ -100,33 +106,48 @@ struct TipCalculationView: View {
             keyboardType: .decimalPad
         )
         .focused($focusedField, equals: .billAmount)
-        .withDoneToolbar()
         .onChange(of: focusedField) { newFocus in
             if newFocus == .billAmount {
                 if viewModel.billAmount == "0.00" {
                     viewModel.billAmount = ""
                 }
             } else if newFocus != .billAmount, viewModel.billAmount.isEmpty {
+                // When losing focus with an empty value, normalize to "0.00"
                 viewModel.billAmount = "0.00"
             }
         }
+        // ✅ Recalculate whenever billAmount changes (covers "0.00" being set later)
+        .onChange(of: viewModel.billAmount) { _ in
+            viewModel.calculateTip()
+        }
         .padding(.top)
     }
-
     
     private var partyTipPickers: some View {
         HStack {
-            HTPickerView(selectedNumber: $viewModel.party, upperLimit: 99, icon: "person.2.fill", iconLeading: true)
-                .focused($focusedField, equals: .party)
-                .withDoneToolbar()
-                .onChange(of: viewModel.party) { _ in viewModel.calculateTip() }
+            HTPickerView(
+                selectedNumber: $viewModel.party,
+                upperLimit: 99,
+                icon: "person.2.fill",
+                iconLeading: true
+            )
+            .focused($focusedField, equals: .party)
+            .onChange(of: viewModel.party) { _ in viewModel.calculateTip() }
             
-            AnimatedNumberView(value: viewModel.tipAmount, title: UIStrings.tipAmountCap, hasBackground: false)
+            AnimatedNumberView(
+                value: viewModel.tipAmount,
+                title: UIStrings.tipAmountCap,
+                hasBackground: false
+            )
             
-            HTPickerView(selectedNumber: $viewModel.tipPercent, upperLimit: 99, icon: "percent", iconLeading: false)
-                .focused($focusedField, equals: .tipPercent)
-                .withDoneToolbar()
-                .onChange(of: viewModel.tipPercent) { _ in viewModel.calculateTip() }
+            HTPickerView(
+                selectedNumber: $viewModel.tipPercent,
+                upperLimit: 99,
+                icon: "percent",
+                iconLeading: false
+            )
+            .focused($focusedField, equals: .tipPercent)
+            .onChange(of: viewModel.tipPercent) { _ in viewModel.calculateTip() }
         }
     }
     
@@ -156,16 +177,18 @@ struct TipCalculationView: View {
         .padding()
     }
     
-    private var keyboardToolbar: some ToolbarContent {
-        ToolbarItemGroup(placement: .keyboard) {
-            Spacer()
-            Button(UIStrings.done) {
-                viewModel.formatBillAmount()
-                focusedField = nil
-                withAnimation(.easeInOut(duration: 0.3)) {
-                    viewModel.calculateTip()
-                }
-            }
+    // MARK: - Helpers
+    private func dismissKeyboardAndCalculate() {
+        guard focusedField != nil else { return }
+        // If the bill text is empty while dismissing, normalize it before calculating
+        if focusedField == .billAmount && viewModel.billAmount.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            viewModel.billAmount = "0.00"
+        }
+        viewModel.formatBillAmount()
+        focusedField = nil
+        // Defer so any .onChange(focusedField) mutations are applied first
+        DispatchQueue.main.async {
+            viewModel.calculateTip()
         }
     }
 }
